@@ -8,7 +8,8 @@ project(main)
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(serial)
+
+find_package(serial) # this line is needed for the work-around to find the MANUALLY installed serial library
 find_package(catkin REQUIRED COMPONENTS serial)
 
 ## System dependencies are found with CMake's conventions
