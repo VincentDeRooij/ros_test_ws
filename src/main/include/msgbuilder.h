@@ -9,7 +9,7 @@
 #define MSG_HF_3 'c'
 #define MSG_HF_4 'd'
 
-// A EXR message is build up of 15 bytes, where:
+// An EXR message is build up of 15 bytes, where:
 // > 4 bytes in total seperate makes the header fields
 // > 2 bytes in total makes the the serial id field
 // > 8 bytes in total makes the payload fields
@@ -37,7 +37,6 @@ public:
 private:
     ExrMessage msg;
     void calcCrc();
-
 };
 
 #endif // __MSGBUILDER_H__

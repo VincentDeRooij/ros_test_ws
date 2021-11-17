@@ -5,7 +5,8 @@
 
 // SERIAL DEFINITIONS
 #define EX_EXR_PORT "/dev/ttyS5"                        // the serial port file location of the EXR 
-#define EX_EXR_BAUDRATE 115200                          // the baud/transfer rate of the EXR serial  
+#define EX_EXR_BAUDRATE 115200                          // the baud/transfer rate of the EXR serial
+#define EX_MSG_SIZE 15                                  // the serial msg size, which must always be 15 bytes in total
 
 // EXR DEFINITIONS - Motherboard/Mainboard (Intel)
 #define EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE 0x220       // serial address to get the feedback message

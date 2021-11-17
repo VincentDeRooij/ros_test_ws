@@ -19,8 +19,7 @@ ExrMessage* MsgBuilder::GetExRMessage()
 
 // calculate the checksum of the message
 void MsgBuilder::calcCrc()
-{  
-    
+{      
     this->msg.crc  =  this->msg.header[0];
     this->msg.crc ^=  this->msg.header[1];
     this->msg.crc ^=  this->msg.header[2];

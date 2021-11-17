@@ -38,7 +38,7 @@ int run(int argc, char **argv)
 
     std::string test = "Hello World"; 
 
-    size_t result = my_serial.write((uint8_t*) 1000, test.size());
+    size_t result = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE);
   }
   return 0;
 }
