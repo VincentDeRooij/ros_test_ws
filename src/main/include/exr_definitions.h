@@ -3,8 +3,17 @@
 
 // See the ALL_CAN_COMMANDS.* document for all possible command types, and their fields
 
+// PAYLOAD MSG SIZE
+#define PAYLOAD_MSG_SIZE sizeof(uint8_t)*8 // max size of 8 bytes / 8*uint8
+
+// SERIAL MSG HEADER FIELDS
+#define MSG_HF_1 'a'
+#define MSG_HF_2 'b'
+#define MSG_HF_3 'c'
+#define MSG_HF_4 'd'
+
 // SERIAL DEFINITIONS
-#define EX_EXR_PORT "/dev/ttyS5"                        // the serial port file location of the EXR 
+#define EX_EXR_SERIAL_PORT "/dev/ttyS5"                        // the serial port file location of the EXR 
 #define EX_EXR_BAUDRATE 115200                          // the baud/transfer rate of the EXR serial
 #define EX_MSG_SIZE 15                                  // the serial msg size, which must always be 15 bytes in total
 

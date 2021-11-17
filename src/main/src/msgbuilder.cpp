@@ -1,7 +1,8 @@
 #include "msgbuilder.h"
-#include <cstdint>
+#include "exr_definitions.h"
+#include <string.h>
 
-MsgBuilder::MsgBuilder(std::uint16_t serialId, std::uint8_t payload[8])
+MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])
 {
     // fill the headers
     this->msg.header[0] = MSG_HF_1;
@@ -11,15 +12,14 @@ MsgBuilder::MsgBuilder(std::uint16_t serialId, std::uint8_t payload[8])
 
     this->msg.serialId = serialId;
 
-    this->msg.payload = payload;
+    mempcpy(&this->msg.payload, &payload, sizeof(PAYLOAD_MSG_SIZE)); // copies the data from payload to the msgbuilder struct // returns pointer of destination
 
     calcCrc();
-
 }
 
 ExrMessage* MsgBuilder::GetExRMessage()
 {
-    return &this->msg;    
+    return &this->msg;
 }
 
 // calculate the checksum of the message
@@ -28,7 +28,7 @@ void MsgBuilder::calcCrc()
     this->msg.crc  =  this->msg.header[0];
     this->msg.crc ^=  this->msg.header[1];
     this->msg.crc ^=  this->msg.header[2];
-    this->msg.crc ^=  this->msg.header[3];    
+    this->msg.crc ^=  this->msg.header[3];
     this->msg.crc ^= (this->msg.serialId & 0x00ff);
     this->msg.crc ^= (this->msg.serialId & 0xff00) >> 8;
     

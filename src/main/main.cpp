@@ -19,9 +19,9 @@
 int run(int argc, char **argv)
 {
   // prepare the serial com link with serial address ttyS5, and baudrate 112500. Where Timeout is 1 second (1000ms) 
-  serial::Serial my_serial(EX_EXR_PORT, EX_EXR_BAUDRATE, serial::Timeout::simpleTimeout(1000));
+  serial::Serial my_serial(EX_EXR_SERIAL_PORT, EX_EXR_BAUDRATE, serial::Timeout::simpleTimeout(1000));
 
-  std::uint8_t pl[8];
+  uint8_t pl[8] = {}; // initialize an empty 
 
   MsgBuilder b(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl); 
 
@@ -38,7 +38,7 @@ int run(int argc, char **argv)
 
     std::string test = "Hello World"; 
 
-    size_t result = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE);
+    size_t result = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE); // send empty motherboard info request message
   }
   return 0;
 }
