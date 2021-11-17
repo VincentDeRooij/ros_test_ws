@@ -10,6 +10,11 @@ MsgBuilder::MsgBuilder(std::uint16_t serialId, std::uint8_t payload[8])
     this->msg.header[3] = MSG_HF_4;
 
     this->msg.serialId = serialId;
+
+    this->msg.payload = payload;
+
+    calcCrc();
+
 }
 
 ExrMessage* MsgBuilder::GetExRMessage()
