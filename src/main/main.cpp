@@ -38,7 +38,7 @@ int run(int argc, char **argv)
 
     std::string test = "Hello World"; 
 
-    size_t result = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE); // send empty motherboard info request message
+    size_t bytesWritten = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE); // send empty motherboard info request message, returns number of bytes written
   }
   return 0;
 }

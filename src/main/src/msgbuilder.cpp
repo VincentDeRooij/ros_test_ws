@@ -1,5 +1,4 @@
 #include "msgbuilder.h"
-#include "exr_definitions.h"
 #include <string.h>
 
 MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])

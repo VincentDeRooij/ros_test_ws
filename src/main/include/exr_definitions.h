@@ -1,6 +1,21 @@
 #ifndef __EXR_DEFINITIONS_H__
 #define __EXR_DEFINITIONS_H__
 
+#include <stdint.h>
+
+// An EXR message is build up of 15 bytes, where:
+// > 4 bytes in total seperate makes the header fields
+// > 2 bytes in total makes the the serial id field
+// > 8 bytes in total makes the payload fields
+// > 1 byte makes the crc field
+struct ExrMessage // 
+{
+    uint8_t header[4]; // 4 header fields of each 8 bits / 1 byte
+    uint16_t serialId; // serial address
+    uint8_t payload[8]; // 8 payload data fields of each 8 bits / 1 byte
+    int8_t crc; // checksum to check if message is complete
+};
+
 // See the ALL_CAN_COMMANDS.* document for all possible command types, and their fields
 
 // PAYLOAD MSG SIZE
@@ -13,8 +28,9 @@
 #define MSG_HF_4 'd'
 
 // SERIAL DEFINITIONS
-#define EX_EXR_SERIAL_PORT "/dev/ttyS5"                        // the serial port file location of the EXR 
+#define EX_EXR_SERIAL_PORT "/dev/ttyS5"                 // the serial port file location of the EXR 
 #define EX_EXR_BAUDRATE 115200                          // the baud/transfer rate of the EXR serial
+#define EX_EXR_SERIAL_TMOUT_MS 2500                     // the time-out rate in ms    
 #define EX_MSG_SIZE 15                                  // the serial msg size, which must always be 15 bytes in total
 
 // EXR DEFINITIONS - Motherboard/Mainboard (Intel)
