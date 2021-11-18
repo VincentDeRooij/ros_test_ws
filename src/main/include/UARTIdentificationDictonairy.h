@@ -13,10 +13,10 @@ class UARTIdentificationDictonairy
 			 std::map<uint16_t, Payload> m ={
 				{EX_MOTHER_PORT_OUTPUT_SET_TYPE, Payload()}
 			 };
+
 	public:
 
-		UARTIdentificationDictonairy();
-		~UARTIdentificationDictonairy();
+
 
 };
 #endif
