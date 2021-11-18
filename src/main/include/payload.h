@@ -8,21 +8,21 @@
 class Payload
 {
 	private:
-     uint8_t pl_0;
-     uint8_t pl_1;
-     uint8_t pl_2;
-     uint8_t pl_3;
-     uint8_t pl_4;
-     uint8_t pl_5;
-     uint8_t pl_6;
-     uint8_t pl_7;
+        uint8_t pl_0;
+        uint8_t pl_1;
+        uint8_t pl_2;
+        uint8_t pl_3;
+        uint8_t pl_4;
+        uint8_t pl_5;
+        uint8_t pl_6;
+        uint8_t pl_7;
 
-     uint8_t[8] pl_full;
+        uint8_t pl_full[8];
 	public:
-    Payload();
-    getPayloadFull();
-    getPayloadRow(int row);
-    setPayloadRow(int row, uint8_t data);
-    replacePayload(Payload Payload);
+        Payload();
+        Payload* getPayloadFull();
+        int getPayloadRow(int row);
+        void setPayloadRow(int row, uint8_t data);
+        replacePayload(Payload Payload);
 };
 #endif

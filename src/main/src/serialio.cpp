@@ -13,7 +13,6 @@ SerialIO::SerialIO()
 bool SerialIO::SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8])
 {
     MsgBuilder builder(serialAddress, payload);
-
     this->queue.push( builder.GetExRMessage() );
 
     return false;
@@ -24,10 +23,9 @@ bool SerialIO::SerialWrite()
     ExrMessage* msgInQueue = this->queue.front();
 
     if (sizeof(msgInQueue) == EX_MSG_SIZE)
-    {
-        
-
-        return true; // if serial write is succesfully completed
+    { 
+        size_t bytesSend = this->uartCommunicator.write((uint8_t*) msgInQueue, EX_MSG_SIZE);        
+        return true; 
     }
     else
     {
@@ -38,5 +36,12 @@ bool SerialIO::SerialWrite()
 
 bool SerialIO::SerialRead(ExrMessage &message)
 {
+    // read serial message
+    if (this->uartCommunicator.read(uint8_t*) message, EX_MSG_SIZE) == EX_MSG_SIZE)
+    {
+        
+    }
+    
+
     return false;
 }
