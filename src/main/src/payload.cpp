@@ -1,38 +1,22 @@
+#include <iostream>
 #include "payload.h"
 
-Payload:Payload()
+Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
 {
     //setup payload object
-     this->pl_0 = '';
-     this->pl_1 = '';
-     this->pl_2 = '';
-     this->pl_3 = '';
-     this->pl_4 = '';
-     this->pl_5 = '';
-     this->pl_6 = '';
-     this->pl_7 = '';
-
-     this->pl_full = {};
-}
-
-Payload:Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
-{
-    //setup payload object
-     this->pl_0 = 0;
-     this->pl_1 = 1;
-     this->pl_2 = 2;
-     this->pl_3 = 3;
-     this->pl_4 = 4;
-     this->pl_5 = 5;
-     this->pl_6 = 6;
-     this->pl_7 = 7;
-
-     this->pl_full = {};
+    this->pl_0 = pay_0;
+    this->pl_1 = pay_1;
+    this->pl_2 = pay_2;
+    this->pl_3 = pay_3;
+    this->pl_4 = pay_4;
+    this->pl_5 = pay_5;
+    this->pl_6 = pay_6;
+    this->pl_7 = pay_7;
     
 }
 
 //Combining all 8 bytes into one full payload
-Payload:combinePayload()
+void Payload::combinePayload()
 {
     this->pl_full[0] = this->pl_0;
     this->pl_full[1] = this->pl_1;
@@ -45,21 +29,21 @@ Payload:combinePayload()
 
 }
 /*  returns the full Payload in uint8_t array form */
-Payload* Payload:getPayloadFull()
+uint8_t* Payload::getPayloadFull()
 {
     combinePayload();
     return this->pl_full;
 }
 
 // returns a certain row of the payload
-uint8_t Payload:getPayloadRow(int row)
+uint8_t Payload::getPayloadRow(int row)
 {
     switch (row)
     {
     case 0:
-       return this->pl_0;
+        return this->pl_0;
     case 1:
-        return this->pl_;
+        return this->pl_1;
     case 2:
         return this->pl_2;
     case 3:
@@ -79,7 +63,7 @@ uint8_t Payload:getPayloadRow(int row)
 }
 
 // changes the data of a certain row to the user's provided data
-Payload:setPayloadRow(int row, uint8_t data)
+void Payload::setPayloadRow(int row, uint8_t data)
 {
     switch (row)
     {

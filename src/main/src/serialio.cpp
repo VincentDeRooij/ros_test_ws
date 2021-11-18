@@ -34,14 +34,15 @@ bool SerialIO::SerialWrite()
     }    
 }
 
-bool SerialIO::SerialRead(ExrMessage &message)
+ExrMessage* SerialIO::SerialRead()
 {
+    ExrMessage* messagePtr;
+
     // read serial message
-    if (this->uartCommunicator.read(uint8_t*) message, EX_MSG_SIZE) == EX_MSG_SIZE)
+    if (this->uartCommunicator.read((uint8_t*) &messagePtr, EX_MSG_SIZE) == EX_MSG_SIZE)
     {
         
-    }
-    
+    }  
 
-    return false;
+    return messagePtr;
 }

@@ -17,7 +17,7 @@ public:
 
     bool SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8]);
     bool SerialWrite();
-    bool SerialRead(ExrMessage &message);
+    ExrMessage* SerialRead();
 
 private:
     serial::Serial uartCommunicator;
