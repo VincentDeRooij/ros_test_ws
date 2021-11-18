@@ -1,11 +1,4 @@
+// system includes
+
+// created includes
 #include "UARTIdentificationDictonairy.h"  
-	
-UARTIdentificationDictonairy::UARTIdentificationDictonairy()
-{
-	
-}
-	
-UARTIdentificationDictonairy::~UARTIdentificationDictonairy()
-{
-	
-}

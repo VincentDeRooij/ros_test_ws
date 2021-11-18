@@ -1,6 +1,9 @@
 #ifndef __MSGBUILDER_H__
 #define __MSGBUILDER_H__
 
+// system includes
+
+// created includes
 #include "exr_definitions.h"
 
 class MsgBuilder 
@@ -17,7 +20,6 @@ public:
 
 private:
     ExrMessage msg;
-    void calcCrc();
 };
 
 #endif // __MSGBUILDER_H__

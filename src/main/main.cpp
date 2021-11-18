@@ -1,4 +1,4 @@
-#include "include/msgbuilder.h"
+// system includes
 #include <cstdint>
 #include <string>
 #include <iostream>
@@ -11,34 +11,34 @@
 #include <unistd.h>
 #endif
 
-#include "exr_definitions.h" // the include works, but only shows unvalid errors
-#include "msgbuilder.h"
+// serial lib
+#include <serial/serial.h>
 
-#include "serial/serial.h"
+// created includes
+#include "serialio.h"
+#include "payload.h"
+
 
 int run(int argc, char **argv)
 {
-  // prepare the serial com link with serial address ttyS5, and baudrate 112500. Where Timeout is 1 second (1000ms) 
-  serial::Serial my_serial(EX_EXR_SERIAL_PORT, EX_EXR_BAUDRATE, serial::Timeout::simpleTimeout(1000));
+  Payload pl; // initialize an empty 
 
-  uint8_t pl[8] = {}; // initialize an empty 
+  SerialIO sio;
 
-  MsgBuilder b(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl); 
-
+  // example which 
+  sio.SerialMsgAdd(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl.getPayloadFull());
   // write to serial address  
 
-  std::cout << "Port is available";
-  if(my_serial.isOpen())
+  std::cout << "Port is available"; // checks if the serial port is available, or if the port is occupied 
+  if(sio.isSerialOpen())
   {
       std::cout << " Yes." << std::endl;
   }
-  else
+  else 
   {
     std::cout << " No." << std::endl;
 
-    std::string test = "Hello World"; 
-
-    size_t bytesWritten = my_serial.write((uint8_t*) b.GetExRMessage(), EX_MSG_SIZE); // send empty motherboard info request message, returns number of bytes written
+    sio.SerialWrite(); // write messages from the buffer
   }
   return 0;
 }

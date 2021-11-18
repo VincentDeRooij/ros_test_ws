@@ -1,8 +1,13 @@
 #ifndef __EXR_DEFINITIONS_H__
 #define __EXR_DEFINITIONS_H__
 
+// systems includes
 #include <stdint.h>
-#include <payload.h> // ADd payload later-on
+
+// created includes
+
+// >> NOTE This cannot be added later on, ExrMessage structure is static so it cannot be changed. STM handling requires certain structure to function
+// #include "payload.h" // ADd payload later-on 
 
 
 // An EXR message is build up of 15 bytes, where:
@@ -15,7 +20,7 @@ struct ExrMessage //
     uint8_t header[4]; // 4 header fields of each 8 bits / 1 byte
     uint16_t serialId; // serial address
     uint8_t payload[8]; // 8 payload data fields of each 8 bits / 1 byte
-    int8_t crc; // checksum to check if message is complete
+    uint8_t crc; // checksum to check if message is complete
 };
 
 // See the ALL_CAN_COMMANDS.* document for all possible command types, and their fields

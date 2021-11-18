@@ -12,5 +12,6 @@ include_directories(${catkin_INCLUDE_DIRS})
 add_executable(main_node main.cpp ${SRC_FILES})
 
 target_include_directories(main_node PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)
+target_include_directories(main_node PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include/exceptions) # need to look for a proper way to include all the things
 
 target_link_libraries(main_node ${catkin_LIBRARIES})

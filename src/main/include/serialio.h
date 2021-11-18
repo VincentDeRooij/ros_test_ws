@@ -1,11 +1,14 @@
 #ifndef __SERIALIO_H__
 #define __SERIALIO_H__
 
-#include "serial/serial.h"
-#include "exr_definitions.h"
+// system includes
+#include <serial/serial.h>
 #include <queue>
 
-class SerialIO
+// created includes
+#include "exr_definitions.h"
+
+class SerialIO // make this a singleton pattern, this class must be instantiated only once
 {
 public:
     SerialIO();
@@ -15,13 +18,15 @@ public:
     SerialIO &operator=(const SerialIO &) = default;
     ~SerialIO() = default;
 
-    bool SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8]);
+    void SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8]);
     bool SerialWrite();
     ExrMessage* SerialRead();
+    bool isSerialOpen();
 
 private:
     serial::Serial uartCommunicator;
     std::queue <ExrMessage*> queue;    
+    bool validateHeaders(ExrMessage* receivedMsg);
 };
 
 #endif // __SERIALIO_H__
