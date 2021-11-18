@@ -3,6 +3,7 @@
 
 #include "serial/serial.h"
 #include "exr_definitions.h"
+#include <queue>
 
 class SerialIO
 {
@@ -14,12 +15,13 @@ public:
     SerialIO &operator=(const SerialIO &) = default;
     ~SerialIO() = default;
 
-    void SerialWriter();
-    void SerialRead();
+    bool SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8]);
+    bool SerialWrite();
+    bool SerialRead(ExrMessage &message);
 
 private:
     serial::Serial uartCommunicator;
-    
+    std::queue <ExrMessage> queue;    
 };
 
 #endif // __SERIALIO_H__
