@@ -21,6 +21,7 @@ class Payload
 	public:
     Payload();
     combinePayload();
+    Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7);
     getPayloadFull();
     getPayloadRow(int row);
     setPayloadRow(int row, uint8_t data);

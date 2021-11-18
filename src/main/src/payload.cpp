@@ -12,7 +12,22 @@ Payload:Payload()
      this->pl_6 = '';
      this->pl_7 = '';
 
-    this->pl_full = {};
+     this->pl_full = {};
+}
+
+Payload:Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
+{
+    //setup payload object
+     this->pl_0 = 0;
+     this->pl_1 = 1;
+     this->pl_2 = 2;
+     this->pl_3 = 3;
+     this->pl_4 = 4;
+     this->pl_5 = 5;
+     this->pl_6 = 6;
+     this->pl_7 = 7;
+
+     this->pl_full = {};
     
 }
 
@@ -32,6 +47,7 @@ Payload:combinePayload()
 /*  returns the full Payload in uint8_t array form */
 Payload* Payload:getPayloadFull()
 {
+    combinePayload();
     return this->pl_full;
 }
 
