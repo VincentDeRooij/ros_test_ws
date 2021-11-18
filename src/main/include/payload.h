@@ -20,9 +20,9 @@ class Payload
      uint8_t[8] pl_full;
 	public:
     Payload();
+    combinePayload();
     getPayloadFull();
     getPayloadRow(int row);
     setPayloadRow(int row, uint8_t data);
-    replacePayload(Payload Payload);
 };
 #endif
