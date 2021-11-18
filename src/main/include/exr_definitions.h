@@ -2,7 +2,6 @@
 #define __EXR_DEFINITIONS_H__
 
 #include <stdint.h>
-
 // An EXR message is build up of 15 bytes, where:
 // > 4 bytes in total seperate makes the header fields
 // > 2 bytes in total makes the the serial id field

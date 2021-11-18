@@ -13,25 +13,30 @@ SerialIO::SerialIO()
 bool SerialIO::SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8])
 {
     MsgBuilder builder(serialAddress, payload);
-    this->queue.push(builder.GetExRMessage());
+
+    this->queue.push( builder.GetExRMessage() );
+
+    return false;
 }
 
-bool SerialIO::SerialWrite(const uint16_t serialAddress, const uint8_t payload[8])
+bool SerialIO::SerialWrite()
 {
-    MsgBuilder builder(serialAddress, payload);
-    size_t bytesWritten = this->uartCommunicator.write((uint8_t*) builder.GetExRMessage(), EX_MSG_SIZE);
+    ExrMessage* msgInQueue = this->queue.front();
 
-    if (bytesWritten == EX_MSG_SIZE)
+    if (sizeof(msgInQueue) == EX_MSG_SIZE)
     {
+        
+
         return true; // if serial write is succesfully completed
     }
     else
     {
         // error handling
+        return false;
     }    
 }
 
 bool SerialIO::SerialRead(ExrMessage &message)
 {
-    
+    return false;
 }
