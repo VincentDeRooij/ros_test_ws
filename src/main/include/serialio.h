@@ -21,7 +21,7 @@ public:
 
 private:
     serial::Serial uartCommunicator;
-    std::queue <ExrMessage> queue;    
+    std::queue <ExrMessage*> queue;    
 };
 
 #endif // __SERIALIO_H__
