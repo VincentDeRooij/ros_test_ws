@@ -5,7 +5,11 @@ project(main)
 file(GLOB_RECURSE SRC_FILES CONFIGURE_DEPENDS src/*.cpp)
 
 find_package(serial) # this line is needed for the work-around to find the MANUALLY installed serial library
-find_package(catkin REQUIRED COMPONENTS serial)
+find_package(catkin REQUIRED COMPONENTS 
+    serial 
+    roscpp
+    rosconsole
+)
 
 include_directories(${catkin_INCLUDE_DIRS})
 

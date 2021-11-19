@@ -1,6 +1,10 @@
 // system includes
 #include <iostream> // console include, std::cout, std::endl, etc...
 
+// ROS includes
+#include <ros/ros.h>
+#include <ros/console.h>
+
 // created includes
 #include "serialio.h" 
 #include "msgbuilder.h"
@@ -52,6 +56,8 @@ bool SerialIO::SerialWrite()
 {
     ExrMessage* msgInQueue = this->queue.front(); // takes the First-In First-Out item from the queue
 
+
+    ros::Duration(0.002).sleep();
 
     if (sizeof(msgInQueue) == EX_MSG_SIZE)
     { 
