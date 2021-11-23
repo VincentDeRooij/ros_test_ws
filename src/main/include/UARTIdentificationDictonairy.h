@@ -10,6 +10,7 @@
 #include "exr_definitions.h"
 #include "payload.h"
 
+//A class with all the UART messages defined, ready to sent when you call them. 
 class UARTIdentificationDictonairy  
 {
 	private:
