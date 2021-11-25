@@ -29,18 +29,17 @@ int run(int argc, char **argv)
   sio.SerialMsgAdd(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl.getPayloadFull());
   // write to serial address  
 
-  std::cout << "Port is available"; // checks if the serial port is available, or if the port is occupied 
-  if(sio.isSerialOpen())
-  {
-      std::cout << " Yes." << std::endl;
-  }
-  else 
-  {
-    std::cout << " No." << std::endl;
+  std::cout << "Port is available" << std::endl; // checks if the serial port is available, or if the port is occupied 
+  
+  sio.SerialWrite();
 
-    sio.SerialWrite(); // write messages from the buffer
-  }
-  return 0;
+  std::cout << "Message written" << std::endl; // checks if the serial port is available, or if the port is occupied 
+  
+  sio.SerialRead(); // write messages from the buffer
+
+  std::cout << "Message read" << std::endl; // checks if the serial port is available, or if the port is occupied 
+
+  return 0;  
 }
 
 int main(int argc, char **argv) {

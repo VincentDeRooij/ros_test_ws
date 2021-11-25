@@ -1,5 +1,6 @@
 #ifndef __SERIALIO_H__
 #define __SERIALIO_H__
+#pragma once
 
 // system includes
 #include <serial/serial.h>

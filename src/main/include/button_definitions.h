@@ -1,6 +1,6 @@
 #ifndef __BUTTON_DEFINITIONS_H__
 #define __BUTTON_DEFINITIONS_H__
-#pragma
+#pragma once
 
 // systems includes
 #include <stdint.h>
@@ -12,7 +12,7 @@
 #define A 0
 #define B 1
 #define START 7 
-#define BACK 6
+#define BACK 6 
 #define MODE //DEFECT
 #define LB 4
 #define RB 5

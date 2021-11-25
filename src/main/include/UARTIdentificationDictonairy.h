@@ -17,7 +17,7 @@ class UARTIdentificationDictonairy
 	//In the map m you'll find the BITDATA that alligns with the Serial adress that's given.
 		std::map<uint16_t, Payload> m = // sample for getting the motherboard information
 		{
-			{EX_MOTHER_PORT_OUTPUT_SET_TYPE, Payload()}
+			{EX_MOTHER_PORT_OUTPUT_SET_TYPE, Payload()} // empty payload
 		};
 
 	public:

@@ -7,7 +7,6 @@
 #include "msgbuilder.h"
 #include "tooling.h"
 
-
 MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])
 {
     // fill the headers
@@ -24,11 +23,19 @@ MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])
 
     if (CalcCRCFromExRMessage(&this->msg) == true)
     {
-        std::cout << "/* message */" << std::endl;
-    }
+        }
 }
 
-ExrMessage* MsgBuilder::GetExRMessage()
+ExrMessage *MsgBuilder::GetExRMessage()
 {
-    return &this->msg;
+    std::cout << "SizeOf Payload: LCheck: " << sizeof(this->msg.payload) << std::endl;
+    std::cout << "SizeOf Header: LCheck: " << sizeof(this->msg.header) << std::endl;
+    std::cout << "SizeOf CRC: LCheck: " << sizeof(this->msg.crc) << std::endl;
+    std::cout << "SizeOf SER-ID: LCheck: " << sizeof(this->msg.serialId) << std::endl;
+
+    if (sizeof(this->msg) == EX_MSG_SIZE)
+    {
+        return &this->msg;
+    }
+    return NULL;
 }

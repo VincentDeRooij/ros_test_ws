@@ -1,5 +1,6 @@
 #ifndef __CONVERTER_H__
 #define __CONVERTER_H__
+#pragma once
 
 // system includes
 #include <cstdint>

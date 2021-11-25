@@ -1,12 +1,13 @@
 #ifndef __MSGBUILDER_H__
 #define __MSGBUILDER_H__
+#pragma once
 
 // system includes
 
 // created includes
 #include "exr_definitions.h"
 
-class MsgBuilder 
+class MsgBuilder
 {
 public:
     MsgBuilder(const uint16_t serialId, const uint8_t payload[8]);
@@ -16,7 +17,7 @@ public:
     MsgBuilder &operator=(const MsgBuilder &) = default;
     ~MsgBuilder() = default;
 
-    ExrMessage* GetExRMessage();
+    ExrMessage *GetExRMessage();
 
 private:
     ExrMessage msg;

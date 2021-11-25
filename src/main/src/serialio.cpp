@@ -6,7 +6,7 @@
 #include <ros/console.h>
 
 // created includes
-#include "serialio.h" 
+#include "serialio.h"
 #include "msgbuilder.h"
 #include "tooling.h"
 
@@ -19,7 +19,7 @@ SerialIO::SerialIO()
     // setup uartComm object
     this->uartCommunicator.setBaudrate(EX_EXR_BAUDRATE);
     this->uartCommunicator.setPort(EX_EXR_SERIAL_PORT);
-    serial::Timeout t_out = serial::Timeout::simpleTimeout(EX_EXR_SERIAL_TMOUT_MS); // set time-out 
+    serial::Timeout t_out = serial::Timeout::simpleTimeout(EX_EXR_SERIAL_TMOUT_MS); // set time-out
     this->uartCommunicator.setTimeout(t_out);
 }
 
@@ -31,7 +31,12 @@ SerialIO::SerialIO()
  */
 bool SerialIO::isSerialOpen()
 {
-    return this->uartCommunicator.isOpen();
+    if (this->uartCommunicator.isOpen())
+    {
+        return true;
+    }
+    this->uartCommunicator.open();
+    return false;
 }
 
 /**
@@ -43,7 +48,7 @@ bool SerialIO::isSerialOpen()
 void SerialIO::SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[8])
 {
     MsgBuilder builder(serialAddress, payload);
-    this->queue.push( builder.GetExRMessage() );
+    this->queue.push(builder.GetExRMessage());
 }
 
 /**
@@ -54,21 +59,28 @@ void SerialIO::SerialMsgAdd(const uint16_t serialAddress, const uint8_t payload[
  */
 bool SerialIO::SerialWrite()
 {
-    ExrMessage* msgInQueue = this->queue.front(); // takes the First-In First-Out item from the queue
+    ExrMessage *msgInQueue = this->queue.front(); // takes the First-In First-Out item from the queue
 
+    // ros::Duration(0.002).sleep(); // delay is needed, STM & UART need processesing time -- NEEDS IMPLEMENT
 
-    ros::Duration(0.002).sleep();
+    // DEBUG
+    std::cout << "Ready for writing..." << std::endl;
 
-    if (sizeof(msgInQueue) == EX_MSG_SIZE)
-    { 
-        size_t bytesSend = this->uartCommunicator.write((uint8_t*) msgInQueue, EX_MSG_SIZE);        
-        return true; 
-    }
-    else
+    this->uartCommunicator.open(); // opens the serial port connection
+    if (isSerialOpen())
     {
-        // error handling
-        return false;
-    }    
+        // DEBUG MSG TEST
+        std::cout << "Writing..." << std::endl;
+
+        size_t bytesSend = this->uartCommunicator.write((uint8_t *)msgInQueue, EX_MSG_SIZE);
+
+        std::cout << bytesSend << std::endl;
+
+        this->uartCommunicator.close(); // closes port after writing
+
+        return true;
+    }
+    return false;
 }
 
 /**
@@ -76,19 +88,23 @@ bool SerialIO::SerialWrite()
  * Serial read message
  * @return ExrMessage* : the object which was created for reading the serial port 
  */
-ExrMessage* SerialIO::SerialRead()
+ExrMessage *SerialIO::SerialRead()
 {
-    ExrMessage* messagePtr;
+    ExrMessage *messagePtr;
+
+    this->uartCommunicator.open();
 
     // read serial message
-    if (this->uartCommunicator.read((uint8_t*) &messagePtr, EX_MSG_SIZE) == EX_MSG_SIZE)
+    if (this->uartCommunicator.read((uint8_t *)&messagePtr, EX_MSG_SIZE) == EX_MSG_SIZE)
     {
         if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
         {
+            std::cout << "Message Size" << sizeof(messagePtr) << std::endl;
+
             // do something with message
-            std::cout << "Message received is valid... continuing to process" << std::endl; 
-        }       
-    }  
+            std::cout << "Message received is valid... continuing to process" << std::endl;
+        }
+    }
     else
     {
         // ERROR CATCHING?
@@ -104,8 +120,7 @@ ExrMessage* SerialIO::SerialRead()
  * @return true if message headers are valid
  * @return false if message headers are invalid
  */
-bool SerialIO::validateHeaders(ExrMessage* receivedMsg)
+bool SerialIO::validateHeaders(ExrMessage *receivedMsg)
 {
-    return receivedMsg->header[0] == MSG_HF_1 && receivedMsg->header[1] == MSG_HF_2 
-            && receivedMsg->header[2] == MSG_HF_3 && receivedMsg->header[3] == MSG_HF_4;    
+    return receivedMsg->header[0] == MSG_HF_1 && receivedMsg->header[1] == MSG_HF_2 && receivedMsg->header[2] == MSG_HF_3 && receivedMsg->header[3] == MSG_HF_4;
 }
