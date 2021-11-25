@@ -18,34 +18,32 @@
 #include "serialio.h"
 #include "payload.h"
 
-
 int run(int argc, char **argv)
 {
-  Payload pl; // initialize an empty 
+  Payload pl; // initialize an empty
 
   SerialIO sio;
 
-  // example which 
-  sio.SerialMsgAdd(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl.getPayloadFull());
-  // write to serial address  
+  // examples which - Note almost all the Request types cannot be send on their own, but get received as feedback msg
+  sio.SerialMsgAdd(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, pl, false); //  non-prio-type
+  sio.SerialMsgAdd(EX_MOTOR_RIGHT_MOSFET_TEMP_REQ_TYPE, pl, false); //  non-prio-type
+  sio.SerialMsgAdd(EX_MOTOR_LEFT_DRIVE_STATUS_REQ_TYPE, pl, true);  //  non-prio-type
+  sio.SerialMsgAdd(EX_MOTOR_RIGHT_SPEED_TORQUE_REQ_TYPE, pl, true); //  non-prio-type
 
-  std::cout << "Port is available" << std::endl; // checks if the serial port is available, or if the port is occupied 
-  
-  sio.SerialWrite();
+  // process the message Queue
+  sio.ProcessSerialMessages();
 
-  std::cout << "Message written" << std::endl; // checks if the serial port is available, or if the port is occupied 
-  
-  sio.SerialRead(); // write messages from the buffer
-
-  std::cout << "Message read" << std::endl; // checks if the serial port is available, or if the port is occupied 
-
-  return 0;  
+  return 0;
 }
 
-int main(int argc, char **argv) {
-  try {
+int main(int argc, char **argv)
+{
+  try
+  {
     return run(argc, argv);
-  } catch (std::exception &e) {
+  }
+  catch (std::exception &e)
+  {
     std::cerr << "Unhandled Exception: " << e.what() << std::endl;
   }
 }

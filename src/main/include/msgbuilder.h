@@ -10,7 +10,7 @@
 class MsgBuilder
 {
 public:
-    MsgBuilder(const uint16_t serialId, const uint8_t payload[8]);
+    MsgBuilder(const uint16_t serialId, const Payload payload);
     MsgBuilder(MsgBuilder &&) = default;
     MsgBuilder(const MsgBuilder &) = default;
     MsgBuilder &operator=(MsgBuilder &&) = default;

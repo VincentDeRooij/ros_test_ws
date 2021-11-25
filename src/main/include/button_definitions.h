@@ -11,8 +11,8 @@
 #define Y 3
 #define A 0
 #define B 1
-#define START 7 
-#define BACK 6 
+#define START 7
+#define BACK 6
 #define MODE //DEFECT
 #define LB 4
 #define RB 5

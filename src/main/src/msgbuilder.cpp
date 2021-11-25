@@ -1,13 +1,16 @@
 // system includes
 #include <iostream>
-#include <unistd.h>
+#include <stdint.h>
 #include <string.h>
 
 // created includes
 #include "msgbuilder.h"
 #include "tooling.h"
 
-MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])
+// debug
+#include "debugging_tools.h" // include > enables the ifdef DEBUG
+
+MsgBuilder::MsgBuilder(const uint16_t serialId, const Payload payload)
 {
     // fill the headers
     this->msg.header[0] = MSG_HF_1;
@@ -23,15 +26,21 @@ MsgBuilder::MsgBuilder(const uint16_t serialId, const uint8_t payload[8])
 
     if (CalcCRCFromExRMessage(&this->msg) == true)
     {
-        }
+        // LOG CRC CORRECT
+    }
 }
 
 ExrMessage *MsgBuilder::GetExRMessage()
 {
+#ifdef DEBUG // debugging enable / disable
+
     std::cout << "SizeOf Payload: LCheck: " << sizeof(this->msg.payload) << std::endl;
     std::cout << "SizeOf Header: LCheck: " << sizeof(this->msg.header) << std::endl;
     std::cout << "SizeOf CRC: LCheck: " << sizeof(this->msg.crc) << std::endl;
     std::cout << "SizeOf SER-ID: LCheck: " << sizeof(this->msg.serialId) << std::endl;
+    std::cout << std::endl;
+
+#endif // DEBUG
 
     if (sizeof(this->msg) == EX_MSG_SIZE)
     {

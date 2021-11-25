@@ -4,6 +4,8 @@
 // created includes
 #include "payload.h"
 
+// debug
+#include "debugging_tools.h" // include > enables the ifdef DEBUG
 
 Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
 {
@@ -16,16 +18,21 @@ Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uin
     this->pl_full[5] = pay_5;
     this->pl_full[6] = pay_6;
     this->pl_full[7] = pay_7;
-    
+
+#ifdef DEBUG
+
+    DebuggerPrintPayloadInfo(pl_full);
+
+#endif // DEBUG
 }
 
 /*  returns the full Payload in uint8_t array form */
-uint8_t* Payload::getPayloadFull()
+uint8_t *Payload::getPayloadFull()
 {
     return this->pl_full;
 }
 
-// returns a certain row of the payload 
+// returns a certain row of the payload
 uint8_t Payload::getPayloadRow(int row)
 {
     switch (row)
@@ -48,7 +55,7 @@ uint8_t Payload::getPayloadRow(int row)
         return this->pl_full[7];
     default:
         std::cout << "The provided row isn't present" << std::endl;
-        return 0;  
+        return 0;
     }
 }
 
