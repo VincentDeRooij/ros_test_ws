@@ -11,27 +11,27 @@
  * @return true: if a check was made, and the CRC field was calculated, or was equal to a previous value
  * @return false if an error occured/CRC field invalid
  */
-bool CalcCRCFromExRMessage(ExrMessage *msg)
+bool CalcCRCFromExRMessage(ExrMessage &msg)
 {
-    uint8_t currentCRC = msg->crc; // sets the current CRC value for checking, if a current value was already found
+    uint8_t currentCRC = msg.crc; // sets the current CRC value for checking, if a current value was already found
 
-    msg->crc = msg->header[0];
-    msg->crc ^= msg->header[1];
-    msg->crc ^= msg->header[2];
-    msg->crc ^= msg->header[3];
-    msg->crc ^= (msg->serialId & 0x00ff);
-    msg->crc ^= (msg->serialId & 0xff00) >> 8;
+    msg.crc = msg.header[0];
+    msg.crc ^= msg.header[1];
+    msg.crc ^= msg.header[2];
+    msg.crc ^= msg.header[3];
+    msg.crc ^= (msg.serialId & 0x00ff);
+    msg.crc ^= (msg.serialId & 0xff00) >> 8;
 
     // fill the payload with empty data
     for (uint8_t index = 0; index < 8; index++)
     {
-        msg->crc ^= msg->payload[index];
+        msg.crc ^= msg.payload[index];
     }
 
     // checks the CALC type based on the currentCRC field
     if (currentCRC != CRC_NULL_VALUE) // if the current CRC value is not 'NULL' (0)
     {
-        if (currentCRC == msg->crc) // if equal to current crc
+        if (currentCRC == msg.crc) // if equal to current crc
         {
             //
             return true; // equal, message received is correct

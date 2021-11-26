@@ -20,20 +20,20 @@ public:
     ~SerialIO() = default;
 
     // Public methods
-    void SerialMsgAdd(const uint16_t serialAddress, const Payload payload, bool isPriorityMsg);
-    void ProcessSerialMessages();
+    void SerialMsgAdd(const uint16_t &serialAddress, const Payload &payload, const bool &isPriorityMsg);
+    void ProcessSerialMessageQueues();
     bool isSerialPortAvailable();
 
 private:
     serial::Serial uartCommunicator;
-    std::queue<ExrMessage *> std_queue;  // std_queue
-    std::queue<ExrMessage *> prio_queue; // prio_queue
+    std::queue<ExrMessage> std_queue;  // std_queue
+    std::queue<ExrMessage> prio_queue; // prio_queue
 
     // private methods
     void serialRead();
-    bool validateHeaders(ExrMessage *receivedMsg);
-    void handleFullQueue(std::queue<ExrMessage *> &queueToProcess);
-    void handleSingleQueueItem(std::queue<ExrMessage *> &queueToProcess);
+    bool validateHeaders(ExrMessage &receivedMsg);
+    void processQueue(std::queue<ExrMessage> &queue);
+    void processItem(std::queue<ExrMessage> &queue);
 };
 
 #endif // __SERIALIO_H__

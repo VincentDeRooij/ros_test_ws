@@ -15,8 +15,7 @@
 #include "debugging_tools.h" // include > enables the ifdef DEBUG
 
 /**
- * @brief Construct a new SerialIO::SerialIO object
- * 
+ * @brief Construct a new SerialIO::SerialIO object 
  */
 SerialIO::SerialIO()
 {
@@ -50,7 +49,7 @@ bool SerialIO::isSerialPortAvailable()
  * @param payload the loaded payload of the serial/UART message
  * @param isPriorityMsg bool to signal whether the incoming msg is of prio-type
  */
-void SerialIO::SerialMsgAdd(const uint16_t serialAddress, const Payload payload, bool isPriorityMsg)
+void SerialIO::SerialMsgAdd(const uint16_t &serialAddress, const Payload &payload, const bool &isPriorityMsg)
 {
     // build the msg
     MsgBuilder builder(serialAddress, payload);
@@ -65,71 +64,52 @@ void SerialIO::SerialMsgAdd(const uint16_t serialAddress, const Payload payload,
     }
 }
 
-void SerialIO::handleSingleQueueItem(std::queue<ExrMessage *> &queueToProcess)
+void SerialIO::processItem(std::queue<ExrMessage> &queue)
 {
-    if (queueToProcess.empty() == false) // loops while the message queue contains more messages
+    // check if the given queue is empty
+    if (queue.empty() == false) // loops while the message queue contains more messages
     {
-#if SERIAL_MODE
+        // opens the serial connection --> Check which way is better --> Always open, or open/close principle
+        this->uartCommunicator.open();
         // opens the serial comm on the specified serial port
-        this->uartCommunicator.open(); // opens the serial port connection
         if (isSerialPortAvailable())
         {
-            // write message from the queue to the
-            if (this->uartCommunicator.write((uint8_t *)queueToProcess.front(), EX_MSG_SIZE != EX_MSG_SIZE)) // if the messageLength is not equal to the required size
+            size_t size = this->uartCommunicator.write((uint8_t *)&queue.front(), EX_MSG_SIZE);
+            std::cout << "MSG_SIZE_WRITTEN: " << size << std::endl;
+
+            if (size == EX_MSG_SIZE) // if the messageLength is not equal to the required size
             {
-                // LOG RESULTS - INVALID ENTRY / DO SOMETHING?
-                return;
-            }
-#endif
-            // LOG RESULTS - QUEUE ITEM PROCESSED
-            // removes the entry from the queue
-            queueToProcess.pop();
-
-            // read and process incoming msg
-
-#if SERIAL_MODE
-
-            this->uartCommunicator.close(); // closes port after processing the message
-        }
-#endif // DEBUG
-
-        // gets the message
-    }
-}
-
-void SerialIO::handleFullQueue(std::queue<ExrMessage *> &queueToProcess)
-{
-    if (queueToProcess.empty() == false)
-    {
-        std::cout << "Message Queue not empty - Walking through the queue...." << std::endl;
-        while (queueToProcess.empty() == false) // loops while the message queue contains more messages
-        {
-#if SERIAL_MODE
-            // opens the serial comm on the specified serial port
-            this->uartCommunicator.open(); // opens the serial port connection
-            if (isSerialPortAvailable())
-            {
-                // get message from the queue
-
-                if (this->uartCommunicator.write((uint8_t *)queueToProcess.front(), EX_MSG_SIZE != EX_MSG_SIZE)) // if the messageLength is not equal to the required size
-                {
-                    // LOG RESULTS - INVALID ENTRY / DO SOMETHING?
-                    return;
-                }
-#endif
                 // LOG RESULTS - QUEUE ITEM PROCESSED
-                // removes the entry from the queue
-                queueToProcess.pop();
 
                 // read and process incoming msg
                 serialRead();
-
-#if SERIAL_MODE
-
-                this->uartCommunicator.close(); // closes port after processing the message
             }
-#endif // DEBUG
+            else
+            {
+                // LOG RESULTS - INVALID ENTRY / DO SOMETHING?
+            }
+            // removes the entry from the queue
+            queue.pop();
         }
+        else
+        {
+            std::cout << "SERIAL_PORT_UNAVAILABLE" << std::endl;
+        }
+        // closes port after processing the message
+        this->uartCommunicator.close();
+    }
+}
+
+void SerialIO::processQueue(std::queue<ExrMessage> &queue)
+{
+    // LOGGER processing which queue
+    // process the selected queue
+    while (queue.empty() == false)
+    {
+        // process item
+        processItem(queue);
+
+        std::cout << std::endl;
     }
 }
 
@@ -137,13 +117,15 @@ void SerialIO::handleFullQueue(std::queue<ExrMessage *> &queueToProcess)
  * @brief 
  * Writes the Serial messages from the queues, which are FIFO based
  */
-void SerialIO::ProcessSerialMessages()
+void SerialIO::ProcessSerialMessageQueues()
 {
+    // if any critical / prio messages are found, proceed to process these first
     if (this->prio_queue.empty() == false)
     {
-        handleFullQueue(this->prio_queue);
+        processQueue(this->prio_queue);
     }
-    handleSingleQueueItem(this->std_queue); // handle a single queue item
+    // process message in the queue - one by one
+    processItem(this->std_queue); // handle a single queue item
 }
 
 /**
@@ -153,22 +135,36 @@ void SerialIO::ProcessSerialMessages()
  */
 void SerialIO::serialRead()
 {
-    ExrMessage *messagePtr;
-
-    // read serial message
-    if (this->uartCommunicator.read((uint8_t *)&messagePtr, EX_MSG_SIZE) == EX_MSG_SIZE)
+    if (isSerialPortAvailable() == true)
     {
-        if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
+        ExrMessage messagePtr;
+
+        size_t msgSize = this->uartCommunicator.read((uint8_t *)&messagePtr, EX_MSG_SIZE);
+
+        std::cout << "MSG_SIZE_RETURN: " << msgSize << std::endl;
+        // read serial message
+        if (msgSize == EX_MSG_SIZE)
         {
-            // do something with message
-            std::cout << "Message received is valid... continuing to process" << std::endl;
-            // UartProcessor(); // ?
+            if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
+            {
+                // LOGGER - MESSAGE READ / PROCESSING
+                // UartProcessor(); // ?
+            }
+            else
+            {
+                // LOGGER - MESSAGE HEADER / CRC invalid, log received message contents?
+            }
+        }
+        else
+        {
+            // ERROR CATCHING / HANDLING?
+            //throw std::exception;
         }
     }
     else
     {
-        // ERROR CATCHING?
-        //throw std::exception;
+        // LOGGER - SERIAL_OFFLINE / Exception, or error handling
+        std::cout << "SERIAL_OFFLINE:" << std::endl;
     }
 }
 
@@ -179,7 +175,7 @@ void SerialIO::serialRead()
  * @return true if message headers are valid
  * @return false if message headers are invalid
  */
-bool SerialIO::validateHeaders(ExrMessage *receivedMsg)
+bool SerialIO::validateHeaders(ExrMessage &receivedMsg)
 {
-    return receivedMsg->header[0] == MSG_HF_1 && receivedMsg->header[1] == MSG_HF_2 && receivedMsg->header[2] == MSG_HF_3 && receivedMsg->header[3] == MSG_HF_4;
+    return receivedMsg.header[0] == MSG_HF_1 && receivedMsg.header[1] == MSG_HF_2 && receivedMsg.header[2] == MSG_HF_3 && receivedMsg.header[3] == MSG_HF_4;
 }

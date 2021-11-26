@@ -10,26 +10,26 @@
 Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
 {
     //setup payload object
-    this->pl_full[0] = pay_0;
-    this->pl_full[1] = pay_1;
-    this->pl_full[2] = pay_2;
-    this->pl_full[3] = pay_3;
-    this->pl_full[4] = pay_4;
-    this->pl_full[5] = pay_5;
-    this->pl_full[6] = pay_6;
-    this->pl_full[7] = pay_7;
+    this->payFull[0] = pay_0;
+    this->payFull[1] = pay_1;
+    this->payFull[2] = pay_2;
+    this->payFull[3] = pay_3;
+    this->payFull[4] = pay_4;
+    this->payFull[5] = pay_5;
+    this->payFull[6] = pay_6;
+    this->payFull[7] = pay_7;
 
 #ifdef DEBUG
 
-    DebuggerPrintPayloadInfo(pl_full);
+    DebuggerPrintPayloadInfo(payFull);
 
 #endif // DEBUG
 }
 
 /*  returns the full Payload in uint8_t array form */
-uint8_t *Payload::getPayloadFull()
+uint8_t *Payload::getPayload()
 {
-    return this->pl_full;
+    return this->payFull;
 }
 
 // returns a certain row of the payload
@@ -38,21 +38,21 @@ uint8_t Payload::getPayloadRow(int row)
     switch (row)
     {
     case 0:
-        return this->pl_full[0];
+        return this->payFull[0];
     case 1:
-        return this->pl_full[1];
+        return this->payFull[1];
     case 2:
-        return this->pl_full[2];
+        return this->payFull[2];
     case 3:
-        return this->pl_full[3];
+        return this->payFull[3];
     case 4:
-        return this->pl_full[4];
+        return this->payFull[4];
     case 5:
-        return this->pl_full[5];
+        return this->payFull[5];
     case 6:
-        return this->pl_full[6];
+        return this->payFull[6];
     case 7:
-        return this->pl_full[7];
+        return this->payFull[7];
     default:
         std::cout << "The provided row isn't present" << std::endl;
         return 0;
@@ -65,31 +65,31 @@ void Payload::setPayloadRow(int row, uint8_t data)
     switch (row)
     {
     case 0:
-        this->pl_full[0] = data;
+        this->payFull[0] = data;
         break;
     case 1:
-        this->pl_full[1] = data;
+        this->payFull[1] = data;
         break;
     case 2:
-        this->pl_full[2] = data;
+        this->payFull[2] = data;
         break;
     case 3:
-        this->pl_full[3] = data;
+        this->payFull[3] = data;
         break;
     case 4:
-        this->pl_full[4] = data;
+        this->payFull[4] = data;
         break;
     case 5:
-        this->pl_full[5] = data;
+        this->payFull[5] = data;
         break;
     case 6:
-        this->pl_full[6] = data;
+        this->payFull[6] = data;
         break;
     case 7:
-        this->pl_full[7] = data;
+        this->payFull[7] = data;
         break;
     default:
-        std::cout << "The row cannot be changed" << std::endl;
+        std::cout << "The row cannot be changed, or isn't present" << std::endl;
         break;
     }
 }

@@ -9,6 +9,6 @@
 
 #define CRC_NULL_VALUE 0
 
-bool CalcCRCFromExRMessage(ExrMessage* msg);
+bool CalcCRCFromExRMessage(ExrMessage &msg);
 
 #endif

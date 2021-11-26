@@ -6,7 +6,7 @@
 #include <iostream>
 
 #define DEBUG // status which can be used to debug files
-#define SERIAL_MODE false
+#define SERIAL_MODE true
 
 void DebuggerPrintSimple(std::string txt);
 void DebuggerPrintPayloadInfo(const uint8_t pl[8]);

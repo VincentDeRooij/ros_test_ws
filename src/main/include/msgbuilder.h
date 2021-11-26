@@ -17,7 +17,7 @@ public:
     MsgBuilder &operator=(const MsgBuilder &) = default;
     ~MsgBuilder() = default;
 
-    ExrMessage *GetExRMessage();
+    ExrMessage GetExRMessage();
 
 private:
     ExrMessage msg;

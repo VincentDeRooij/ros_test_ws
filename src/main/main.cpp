@@ -31,7 +31,7 @@ int run(int argc, char **argv)
   sio.SerialMsgAdd(EX_MOTOR_RIGHT_SPEED_TORQUE_REQ_TYPE, pl, true); //  non-prio-type
 
   // process the message Queue
-  sio.ProcessSerialMessages();
+  sio.ProcessSerialMessageQueues();
 
   return 0;
 }

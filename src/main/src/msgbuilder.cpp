@@ -24,27 +24,30 @@ MsgBuilder::MsgBuilder(const uint16_t serialId, const Payload payload)
 
     mempcpy(&this->msg.payload, &payload, sizeof(PAYLOAD_MSG_SIZE)); // copies the data from payload to the msgbuilder struct // returns pointer of destination
 
-    if (CalcCRCFromExRMessage(&this->msg) == true)
+    // uses call-by-ref to calc, and bind/check the crc field
+    if (CalcCRCFromExRMessage(this->msg) == true)
     {
         // LOG CRC CORRECT
     }
 }
 
-ExrMessage *MsgBuilder::GetExRMessage()
+ExrMessage MsgBuilder::GetExRMessage()
 {
 #ifdef DEBUG // debugging enable / disable
 
-    std::cout << "SizeOf Payload: LCheck: " << sizeof(this->msg.payload) << std::endl;
-    std::cout << "SizeOf Header: LCheck: " << sizeof(this->msg.header) << std::endl;
-    std::cout << "SizeOf CRC: LCheck: " << sizeof(this->msg.crc) << std::endl;
-    std::cout << "SizeOf SER-ID: LCheck: " << sizeof(this->msg.serialId) << std::endl;
-    std::cout << std::endl;
+    std::cout << "Payload: ALLO_MEM Size Check: " << sizeof(this->msg.payload) << std::endl;
+    std::cout << "Header: ALLO_MEM Size Check: " << sizeof(this->msg.header) << std::endl;
+    std::cout << "CRC: ALLO_MEM Size Check: " << sizeof(this->msg.crc) << std::endl;
+    std::cout << "SER-ID: ALLO_MEM Size Check: " << sizeof(this->msg.serialId) << std::endl;
+
+    std::cout << "MSG_CONTENT: ";
+    for (size_t index = 0; index < sizeof(msg); index++)
+    {
+        std::cout << ((uint8_t *)&msg)[index] << " ";
+    }
+    std::cout << std::endl
+              << std::endl;
 
 #endif // DEBUG
-
-    if (sizeof(this->msg) == EX_MSG_SIZE)
-    {
-        return &this->msg;
-    }
-    return NULL;
+    return this->msg;
 }
