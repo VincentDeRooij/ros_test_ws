@@ -146,20 +146,28 @@ void SerialIO::serialRead()
         // read serial message
         if (msgSize == EX_MSG_SIZE)
         {
+            for (size_t i = 0; i < sizeof(messagePtr.payload); i++)
+            {
+                std::cout << unsigned(((uint8_t *)&messagePtr.payload)[i]) << " ";
+            }
+            std::cout << std::endl;
+
+            std::cout << "CRC:" << unsigned(messagePtr.crc) << unsigned(messagePtr.crc) << std::endl;
+
+            std::cout << messagePtr.header[0] << " - ";
+            std::cout << messagePtr.header[1] << " - ";
+            std::cout << messagePtr.header[2] << " - ";
+            std::cout << messagePtr.header[3] << " - " << std::endl;
+
             if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
             {
                 std::cout << "MESSAGE_VALID" << std::endl;
                 // LOGGER - MESSAGE READ / PROCESSING
                 // UartProcessor(); // ?
-
-                for (size_t i = 0; i < sizeof(messagePtr.payload); i++)
-                {
-                    std::cout << unsigned(((uint8_t *)&messagePtr.payload)[i]) << " ";
-                }
-                std::cout << std::endl;
             }
             else
             {
+                std::cout << "INVALID!" << std::endl;
                 // LOGGER - MESSAGE HEADER / CRC invalid, log received message contents?
             }
         }
@@ -185,5 +193,10 @@ void SerialIO::serialRead()
  */
 bool SerialIO::validateHeaders(ExrMessage &receivedMsg)
 {
-    return receivedMsg.header[0] == MSG_HF_1 && receivedMsg.header[1] == MSG_HF_2 && receivedMsg.header[2] == MSG_HF_3 && receivedMsg.header[3] == MSG_HF_4;
+    std::cout << "VALIDATING...." << std::endl;
+
+    bool valid = receivedMsg.header[0] == MSG_HF_1 && receivedMsg.header[1] == MSG_HF_2 && receivedMsg.header[2] == MSG_HF_3 && receivedMsg.header[3] == MSG_HF_4;
+
+    std::cout << valid << std::endl;
+    return valid;
 }
