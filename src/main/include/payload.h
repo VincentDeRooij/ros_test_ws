@@ -9,7 +9,7 @@ class Payload
 {
 public:
         Payload() = default;
-        Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7);
+        Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_2, const uint8_t &pay_3, const uint8_t &pay_4, const uint8_t &pay_5, const uint8_t &pay_6, const uint8_t &pay_7);
 
         uint8_t *getPayload();
         uint8_t getPayloadRow(int row);

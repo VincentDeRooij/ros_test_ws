@@ -7,9 +7,17 @@
 // debug
 #include "debugging_tools.h" // include > enables the ifdef DEBUG
 
-Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uint8_t pay_4, uint8_t pay_5, uint8_t pay_6, uint8_t pay_7)
+struct ExrMessage //
 {
-    //setup payload object
+    uint8_t header[4];  // 4 header fields of each 8 bits / 1 byte
+    uint16_t serialId;  // serial address
+    uint8_t payload[8]; // 8 payload data fields of each 8 bits / 1 byte
+    uint8_t crc;        // checksum to check if message is complete
+};
+
+Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_2, const uint8_t &pay_3, const uint8_t &pay_4, const uint8_t &pay_5, const uint8_t &pay_6, const uint8_t &pay_7)
+{
+    // //setup payload object
     this->payFull[0] = pay_0;
     this->payFull[1] = pay_1;
     this->payFull[2] = pay_2;
@@ -21,7 +29,7 @@ Payload::Payload(uint8_t pay_0, uint8_t pay_1, uint8_t pay_2, uint8_t pay_3, uin
 
 #ifdef DEBUG
 
-    DebuggerPrintPayloadInfo(payFull);
+    DebuggerPrintPayloadInfo(this->payFull);
 
 #endif // DEBUG
 }

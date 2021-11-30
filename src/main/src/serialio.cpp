@@ -9,7 +9,6 @@
 #include "serialio.h"
 #include "msgbuilder.h" // includes exr_definitions.h
 #include "tooling.h"
-#include "UartProcessor.h"
 
 // debugging
 #include "debugging_tools.h" // include > enables the ifdef DEBUG
@@ -81,6 +80,8 @@ void SerialIO::processItem(std::queue<ExrMessage> &queue)
             {
                 // LOG RESULTS - QUEUE ITEM PROCESSED
 
+                //
+                usleep((1000) * 200); // sleep for 200ms
                 // read and process incoming msg
                 serialRead();
             }
@@ -147,8 +148,15 @@ void SerialIO::serialRead()
         {
             if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
             {
+                std::cout << "MESSAGE_VALID" << std::endl;
                 // LOGGER - MESSAGE READ / PROCESSING
                 // UartProcessor(); // ?
+
+                for (size_t i = 0; i < sizeof(messagePtr.payload); i++)
+                {
+                    std::cout << unsigned(((uint8_t *)&messagePtr.payload)[i]) << " ";
+                }
+                std::cout << std::endl;
             }
             else
             {

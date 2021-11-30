@@ -40,11 +40,12 @@ ExrMessage MsgBuilder::GetExRMessage()
     std::cout << "CRC: ALLO_MEM Size Check: " << sizeof(this->msg.crc) << std::endl;
     std::cout << "SER-ID: ALLO_MEM Size Check: " << sizeof(this->msg.serialId) << std::endl;
 
-    std::cout << "MSG_CONTENT: ";
-    for (size_t index = 0; index < sizeof(msg); index++)
+    std::cout << "MSG_CONTENT_SEND: ";
+    for (size_t index = 0; index < sizeof(msg.payload); index++)
     {
-        std::cout << ((uint8_t *)&msg)[index] << " ";
+        std::cout << unsigned(msg.payload[index]) << " ";
     }
+
     std::cout << std::endl
               << std::endl;
 
