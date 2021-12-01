@@ -46,15 +46,36 @@ ExrMessage MsgBuilder::GetExRMessage()
     }
     std::cout << std::endl;
 
-    std::cout << "CRC:" << unsigned(msg.crc) << unsigned(msg.crc) << std::endl;
+    std::cout << "CRC:" << unsigned(msg.crc) << std::endl;
 
     std::cout << msg.header[0] << " - ";
     std::cout << msg.header[1] << " - ";
     std::cout << msg.header[2] << " - ";
     std::cout << msg.header[3] << " - " << std::endl;
 
-    std::cout << std::endl
-              << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "BUILDED MESSAGE CONTENTS:" << std::endl;
+
+    // uint8_t buffer[15];
+
+    // memcpy(&buffer[15], (uint8_t *)&msg, 15);
+
+    // std::cout << "BUFFER TYPE VALUES:" << std::endl; // causes buffer overflow error
+    // for (int ii = 0; ii < sizeof(msg); ii++)
+    // {
+    //     printf("0x%02X \t", (uint8_t)(buffer[ii] & 0xff));
+    // }
+    // printf("\n");
+
+    std::cout << "MSG-PRINTING TYPE VALUES:" << std::endl; // causes no problems, but displays different outcome?
+    // print HEX values and remove last reserved byte
+    for (int ii = 0; ii < sizeof(msg) - sizeof(uint8_t); ii++)
+    {
+        uint8_t val = (uint8_t)(((uint8_t *)&msg)[ii] & 0xFF);
+        printf("0x%02X \t", val);
+    }
+    printf("\n");
 
 #endif // DEBUG
     return this->msg;

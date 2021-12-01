@@ -7,13 +7,6 @@
 // debug
 #include "debugging_tools.h" // include > enables the ifdef DEBUG
 
-struct ExrMessage //
-{
-    uint8_t header[4];  // 4 header fields of each 8 bits / 1 byte
-    uint16_t serialId;  // serial address
-    uint8_t payload[8]; // 8 payload data fields of each 8 bits / 1 byte
-    uint8_t crc;        // checksum to check if message is complete
-};
 
 Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_2, const uint8_t &pay_3, const uint8_t &pay_4, const uint8_t &pay_5, const uint8_t &pay_6, const uint8_t &pay_7)
 {

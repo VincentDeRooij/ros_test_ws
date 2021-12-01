@@ -55,12 +55,17 @@ void SerialIO::SerialMsgAdd(const uint16_t &serialAddress, const Payload &payloa
 
     if (isPriorityMsg == true)
     {
+        std::cout << "ADDING_PRIO_MSG..." << std::endl;
         this->prio_queue.push(builder.GetExRMessage());
+        std::cout << "PRIO_MSG_ADDED!" << std::endl;
     }
     else
     {
+        std::cout << "ADDING_NORMAL_MSG..." << std::endl;
         this->std_queue.push(builder.GetExRMessage()); // adds the message to the queue
+        std::cout << "NORMAL_MSG_ADDED!" << std::endl;
     }
+    std::cout << std::endl;
 }
 
 void SerialIO::processItem(std::queue<ExrMessage> &queue)
@@ -99,6 +104,7 @@ void SerialIO::processItem(std::queue<ExrMessage> &queue)
         // closes port after processing the message
         this->uartCommunicator.close();
     }
+    std::cout << std::endl;
 }
 
 void SerialIO::processQueue(std::queue<ExrMessage> &queue)
@@ -138,6 +144,7 @@ void SerialIO::serialRead()
 {
     if (isSerialPortAvailable() == true)
     {
+
         ExrMessage messagePtr;
 
         size_t msgSize = this->uartCommunicator.read((uint8_t *)&messagePtr, EX_MSG_SIZE);
@@ -152,12 +159,20 @@ void SerialIO::serialRead()
             }
             std::cout << std::endl;
 
-            std::cout << "CRC:" << unsigned(messagePtr.crc) << unsigned(messagePtr.crc) << std::endl;
+            std::cout << "CRC:" << unsigned(messagePtr.crc) << std::endl;
 
             std::cout << messagePtr.header[0] << " - ";
             std::cout << messagePtr.header[1] << " - ";
             std::cout << messagePtr.header[2] << " - ";
             std::cout << messagePtr.header[3] << " - " << std::endl;
+
+            for (int ii = 0; ii < sizeof(messagePtr) - sizeof(uint8_t); ii++)
+            {
+                uint8_t val = (uint8_t)((uint8_t *)&messagePtr)[ii] & 0xFF;
+                printf("0x%02X \t", val);
+                //printf("0x%02X \t", (uint8_t)(buffer[ii] & 0xff));
+            }
+            printf("\n");
 
             if (validateHeaders(messagePtr) == true && CalcCRCFromExRMessage(messagePtr) == true)
             {
@@ -182,6 +197,7 @@ void SerialIO::serialRead()
         // LOGGER - SERIAL_OFFLINE / Exception, or error handling
         std::cout << "SERIAL_OFFLINE:" << std::endl;
     }
+    std::cout << std::endl;
 }
 
 /**

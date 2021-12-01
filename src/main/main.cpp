@@ -35,6 +35,33 @@ int run(int argc, char **argv)
   // process the message Queue
   sio.ProcessSerialMessageQueues();
 
+  // std::cout << "Serial: " << unsigned(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE) << std::endl;
+
+  // uint8_t crc = 0x220 & 0x00FF;
+
+  // std::cout << "Serial: " << unsigned(crc) << std::endl;
+
+  // std::cout << "Serial_s2:" << unsigned(crc & 0xff00) << std::endl;
+
+  // crc = 0;
+
+  // crc = MSG_HF_1;
+  // crc ^= MSG_HF_2;
+  // crc ^= MSG_HF_3;
+  // crc ^= MSG_HF_4;
+  // crc ^= (EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE & 0x00ff);
+  // crc ^= (EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE & 0xff00) >> 8;
+
+  // std::cout << "Serial_Pre: " << unsigned(crc) << std::endl;
+
+  // // fill the payload with empty data
+  // for (uint8_t index = 0; index < 8; index++)
+  // {
+  //   crc ^= 0;
+  // }
+
+  // std::cout << "Serial_Aft: " << unsigned(crc) << std::endl;
+
   return 0;
 }
 
