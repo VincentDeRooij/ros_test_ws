@@ -5,10 +5,10 @@
 // system includes
 
 // created includes
-#include "exr_definitions.h"
+#include "ExRDefinitions.h"
 
 #define CRC_NULL_VALUE 0
 
-bool CalcCRCFromExRMessage(ExrMessage &msg);
+bool CalcCRCFromExRMessage(ExRMessage &msg);
 
 #endif

@@ -6,12 +6,12 @@
 #include <ros/console.h>
 
 // created includes
-#include "serialio.h"
-#include "msgbuilder.h" // includes exr_definitions.h
-#include "tooling.h"
+#include "SerialIO.h"
+#include "MsgBuilder.h" // includes exr_definitions.h
+#include "Tooling.h"
 
 // debugging
-#include "debugging_tools.h" // include > enables the ifdef DEBUG
+#include "Debugging.h" // include > enables the ifdef DEBUG
 
 /**
  * @brief Construct a new SerialIO::SerialIO object 
@@ -68,7 +68,7 @@ void SerialIO::SerialMsgAdd(const uint16_t &serialAddress, const Payload &payloa
     std::cout << std::endl;
 }
 
-void SerialIO::processItem(std::queue<ExrMessage> &queue)
+void SerialIO::processItem(std::queue<ExRMessage> &queue)
 {
     // check if the given queue is empty
     if (queue.empty() == false) // loops while the message queue contains more messages
@@ -86,9 +86,10 @@ void SerialIO::processItem(std::queue<ExrMessage> &queue)
                 // LOG RESULTS - QUEUE ITEM PROCESSED
 
                 //
-                usleep((1000) * 200); // sleep for 200ms
+                usleep((1000) * 5); // sleep for 5ms // Check if value is fine
                 // read and process incoming msg
-                serialRead();
+
+                serialRead(); // Make it seperate
             }
             else
             {
@@ -107,7 +108,7 @@ void SerialIO::processItem(std::queue<ExrMessage> &queue)
     std::cout << std::endl;
 }
 
-void SerialIO::processQueue(std::queue<ExrMessage> &queue)
+void SerialIO::processQueue(std::queue<ExRMessage> &queue)
 {
     // LOGGER processing which queue
     // process the selected queue
@@ -138,14 +139,13 @@ void SerialIO::ProcessSerialMessageQueues()
 /**
  * @brief 
  * Serial read message
- * @return ExrMessage* : the object which was created for reading the serial port 
+ * @return ExRMessage* : the object which was created for reading the serial port 
  */
 void SerialIO::serialRead()
 {
     if (isSerialPortAvailable() == true)
     {
-
-        ExrMessage messagePtr;
+        ExRMessage messagePtr;
 
         size_t msgSize = this->uartCommunicator.read((uint8_t *)&messagePtr, EX_MSG_SIZE);
 
@@ -179,6 +179,8 @@ void SerialIO::serialRead()
                 std::cout << "MESSAGE_VALID" << std::endl;
                 // LOGGER - MESSAGE READ / PROCESSING
                 // UartProcessor(); // ?
+
+                std::cout << "SERIAL_ADDR_RECEIVED:" << unsigned(messagePtr.serialId) << std::endl;
             }
             else
             {
@@ -207,7 +209,7 @@ void SerialIO::serialRead()
  * @return true if message headers are valid
  * @return false if message headers are invalid
  */
-bool SerialIO::validateHeaders(ExrMessage &receivedMsg)
+bool SerialIO::validateHeaders(ExRMessage &receivedMsg)
 {
     std::cout << "VALIDATING...." << std::endl;
 

@@ -1,4 +1,4 @@
-#include "debugging_tools.h"
+#include "Debugging.h"
 
 void DebuggerPrintSimple(std::string txt)
 {

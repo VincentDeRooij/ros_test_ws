@@ -7,7 +7,7 @@
 #include <queue>
 
 // created includes
-#include "exr_definitions.h"
+#include "ExRDefinitions.h"
 
 class SerialIO // make this a singleton pattern, this class must be instantiated only once
 {
@@ -26,14 +26,14 @@ public:
 
 private:
     serial::Serial uartCommunicator;
-    std::queue<ExrMessage> std_queue;  // std_queue
-    std::queue<ExrMessage> prio_queue; // prio_queue
+    std::queue<ExRMessage> std_queue;  // std_queue
+    std::queue<ExRMessage> prio_queue; // prio_queue
 
     // private methods
     void serialRead();
-    bool validateHeaders(ExrMessage &receivedMsg);
-    void processQueue(std::queue<ExrMessage> &queue);
-    void processItem(std::queue<ExrMessage> &queue);
+    bool validateHeaders(ExRMessage &receivedMsg);
+    void processQueue(std::queue<ExRMessage> &queue);
+    void processItem(std::queue<ExRMessage> &queue);
 };
 
 #endif // __SERIALIO_H__

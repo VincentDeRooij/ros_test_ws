@@ -2,13 +2,13 @@
 #include <iostream>
 
 // created includes
-#include "payload.h"
+#include "Payload.h"
 
 // debug
-#include "debugging_tools.h" // include > enables the ifdef DEBUG
+#include "Debugging.h" // include > enables the ifdef DEBUG
 
-
-Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_2, const uint8_t &pay_3, const uint8_t &pay_4, const uint8_t &pay_5, const uint8_t &pay_6, const uint8_t &pay_7)
+Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_2, const uint8_t &pay_3,
+                 const uint8_t &pay_4, const uint8_t &pay_5, const uint8_t &pay_6, const uint8_t &pay_7)
 {
     // //setup payload object
     this->payFull[0] = pay_0;

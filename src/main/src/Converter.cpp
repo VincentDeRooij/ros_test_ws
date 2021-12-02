@@ -1,7 +1,7 @@
 // system includes
 
 // created includes
-#include "converter.h"
+#include "Converter.h"
 
 uint32_fixed_t IntToFixed(int32_t inputValue, std::uint8_t iqValue)
 {

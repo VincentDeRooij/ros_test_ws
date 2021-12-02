@@ -5,7 +5,7 @@
 // system includes
 
 // created includes
-#include "exr_definitions.h"
+#include "ExRDefinitions.h"
 
 class MsgBuilder
 {
@@ -17,10 +17,10 @@ public:
     MsgBuilder &operator=(const MsgBuilder &) = default;
     ~MsgBuilder() = default;
 
-    ExrMessage GetExRMessage();
+    ExRMessage GetExRMessage();
 
 private:
-    ExrMessage msg;
+    ExRMessage msg;
 };
 
 #endif // __MSGBUILDER_H__

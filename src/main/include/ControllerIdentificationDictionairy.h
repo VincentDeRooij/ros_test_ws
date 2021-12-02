@@ -7,8 +7,8 @@
 #include <map>
 
 // created includes
-#include "exr_definitions.h"
-#include "button_definitions.h"
+#include "ExRDefinitions.h"
+#include "ButtonDefinitions.h"
 
 class ControllerIdentificationDictionairy
 {

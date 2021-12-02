@@ -4,11 +4,11 @@
 #include <string.h>
 
 // created includes
-#include "msgbuilder.h"
-#include "tooling.h"
+#include "MsgBuilder.h"
+#include "Tooling.h"
 
 // debug
-#include "debugging_tools.h" // include > enables the ifdef DEBUG
+#include "Debugging.h" // include > enables the ifdef DEBUG
 
 MsgBuilder::MsgBuilder(const uint16_t serialId, const Payload payload)
 {
@@ -31,7 +31,7 @@ MsgBuilder::MsgBuilder(const uint16_t serialId, const Payload payload)
     }
 }
 
-ExrMessage MsgBuilder::GetExRMessage()
+ExRMessage MsgBuilder::GetExRMessage()
 {
 #ifdef DEBUG // debugging enable / disable
 
@@ -76,6 +76,8 @@ ExrMessage MsgBuilder::GetExRMessage()
         printf("0x%02X \t", val);
     }
     printf("\n");
+
+    std::cout << "SERIAL_ADDR_BUILDED:" << unsigned(msg.serialId) << std::endl;
 
 #endif // DEBUG
     return this->msg;

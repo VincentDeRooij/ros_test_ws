@@ -21,11 +21,11 @@
 //     uint16_t serialId;
 //     uint8_t payload[8];
 //     uint8_t crc;
-// } ExrMessage;
+// } ExRMessage;
 
 main(int argc, char **argv)
 {
-    ExrMessage msgInQueue; // = this->queue.front(); // takes the First-In First-Out item from the queue
+    ExRMessage msgInQueue; // = this->queue.front(); // takes the First-In First-Out item from the queue
 
     msgInQueue.header[0] = 'a';
     msgInQueue.header[1] = 'b';
@@ -105,7 +105,7 @@ main(int argc, char **argv)
 
                 // std::cout << bytesSend << std::endl;
 
-                // ExrMessage msg;
+                // ExRMessage msg;
 
                 // std::cout << "READING" << std::endl;
                 // auto result = s_port.read((uint8_t *)&msg, EX_MSG_SIZE);

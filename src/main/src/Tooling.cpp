@@ -3,16 +3,16 @@
 #include <iostream>
 
 // created includes
-#include "tooling.h"
+#include "Tooling.h"
 
 /**
  * @brief 
  *  Checks the CRC or Calculates the CRC, this changes based on the starting value of the CRC field
- * @param msg This is the ExrMessage Object, use call-by-ref when assigning an ExrMessage variable inside the method
+ * @param msg This is the ExRMessage Object, use call-by-ref when assigning an ExRMessage variable inside the method
  * @return true: if a check was made, and the CRC field was calculated, or was equal to a previous value
  * @return false if an error occured/CRC field invalid
  */
-bool CalcCRCFromExRMessage(ExrMessage &msg)
+bool CalcCRCFromExRMessage(ExRMessage &msg)
 {
     std::cout << "CALCING...." << std::endl;
     uint8_t currentCRC = msg.crc; // sets the current CRC value for checking, if a current value was already found

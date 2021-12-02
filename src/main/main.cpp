@@ -15,8 +15,8 @@
 #include <serial/serial.h>
 
 // created includes
-#include "serialio.h"
-#include "payload.h"
+#include "SerialIO.h"
+#include "Payload.h"
 
 int run(int argc, char **argv)
 {

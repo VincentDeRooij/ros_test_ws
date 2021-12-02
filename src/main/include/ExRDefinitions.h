@@ -6,9 +6,9 @@
 #include <stdint.h>
 
 // created includes
-#include "payload.h"
+#include "Payload.h"
 
-// >> NOTE This cannot be added later on, ExrMessage structure is static so it cannot be changed. STM handling requires certain structure to function
+// >> NOTE This cannot be added later on, ExRMessage structure is static so it cannot be changed. STM handling requires certain structure to function
 // #include "payload.h" // ADd payload later-on
 
 // An EXR message is build up of 15 bytes, where:
@@ -16,7 +16,7 @@
 // > 2 bytes in total makes the the serial id field
 // > 8 bytes in total makes the payload fields
 // > 1 byte makes the crc field
-struct ExrMessage //
+struct ExRMessage //
 {
     uint8_t header[4];  // 4 header fields of each 8 bits / 1 byte
     uint16_t serialId;  // serial address
