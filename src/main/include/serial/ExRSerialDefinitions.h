@@ -3,44 +3,25 @@
 #pragma once
 
 // systems includes
-#include <stdint.h>
-
-// created includes
-#include "Payload.h"
-
-// >> NOTE This cannot be added later on, ExRMessage structure is static so it cannot be changed. STM handling requires certain structure to function
-// #include "payload.h" // ADd payload later-on
-
-// An EXR message is build up of 15 bytes, where:
-// > 4 bytes in total seperate makes the header fields
-// > 2 bytes in total makes the the serial id field
-// > 8 bytes in total makes the payload fields
-// > 1 byte makes the crc field
-struct ExRMessage //
-{
-    uint8_t header[4];  // 4 header fields of each 8 bits / 1 byte
-    uint16_t serialId;  // serial address
-    uint8_t payload[8]; // 8 payload data fields of each 8 bits / 1 byte
-    uint8_t crc;        // checksum to check if message is complete
-};
 
 // See the ALL_CAN_COMMANDS.* document for all possible command types, and their fields
 
-// PAYLOAD MSG SIZE
-#define PAYLOAD_MSG_SIZE sizeof(uint8_t) * 8 // max size of 8 bytes / 8*uint8
+// SERIAL DEFINITIONS // ttyS5
+#define EX_EXR_SERIAL_PORT "/dev/ttyS5"         // the serial port file location of the EXR
+#define EX_EXR_SERIAL_PORT_DEBUG "/dev/ttyUSB0" // the debug serial port file location
+
+#define EX_EXR_BAUDRATE 115200      // the baud/transfer rate of the EXR serial
+#define EX_EXR_SERIAL_TMOUT_MS 1000 // the time-out rate in ms
+#define EX_MSG_SIZE 15              // the serial msg size, which must always be 15 bytes in total
+
+// Standard CRC Value
+#define CRC_NULL_VALUE 0
 
 // SERIAL MSG HEADER FIELDS
 #define MSG_HF_1 'a'
 #define MSG_HF_2 'b'
 #define MSG_HF_3 'c'
 #define MSG_HF_4 'd'
-
-// SERIAL DEFINITIONS // ttyS5
-#define EX_EXR_SERIAL_PORT "/dev/ttyUSB0" // the serial port file location of the EXR
-
-#define EX_EXR_BAUDRATE 115200      // the baud/transfer rate of the EXR serial
-#define EX_EXR_SERIAL_TMOUT_MS 1000 // the time-out rate in ms
-#define EX_MSG_SIZE 15              // the serial msg size, which must always be 15 bytes in total
 
 // EXR DEFINITIONS - Motherboard/Mainboard (Intel)
 #define EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE 0x220 // serial address to get the feedback message

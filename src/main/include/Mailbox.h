@@ -1,14 +1,15 @@
 #ifndef __MAILBOX_INTERFACE_H__
 #define __MAILBOX_INTERFACE_H__
 
-#include "ExRDefinitions.h"
+//#include "ExRDefinitions.h"
 
 class Mailbox
 {
 protected:
-    ExRMessage msg;
+    //ExRMessage msg;
 
-public: //USE VIRTUAL WHEN INHERITING THESE METHODS!!!! 
+public: //USE VIRTUAL WHEN INHERITING THESE METHODS!!!!
+    Mailbox() = default;
     virtual ~Mailbox() = default;
     virtual void Write() = 0;
     virtual void Read() = 0;

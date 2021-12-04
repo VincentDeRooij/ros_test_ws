@@ -1,5 +1,5 @@
-#ifndef DRIVESETTINGS_H
-#define DRIVESETTINGS_H
+#ifndef MBOXDRIVESETTINGS_H
+#define MBOXDRIVESETTINGS_H
 
 #include "Mailbox.h"
 
@@ -13,7 +13,7 @@ public:
 	~MBoxDriveSettings();
 
 	// inherit the method from mailbox, allowing our own method implementations
-	virtual void Read();
-	virtual void Write();
+	virtual void Read() override;
+	virtual void Write() override;
 };
 #endif

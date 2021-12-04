@@ -5,6 +5,9 @@
 // system includes
 #include <stdint.h>
 
+// PAYLOAD MSG SIZE
+#define PAYLOAD_MSG_SIZE sizeof(uint8_t) * 8 // max size of 8 bytes / 8*uint8
+
 class Payload
 {
 public:

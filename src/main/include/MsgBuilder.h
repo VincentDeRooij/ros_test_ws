@@ -5,12 +5,13 @@
 // system includes
 
 // created includes
-#include "ExRDefinitions.h"
+#include "ExRMsgStructures.h"
+#include "Payload.h"
 
 class MsgBuilder
 {
 public:
-    MsgBuilder(const uint16_t serialId, const Payload payload);
+    MsgBuilder(const uint16_t &serialId, const Payload &payload);
     MsgBuilder(MsgBuilder &&) = default;
     MsgBuilder(const MsgBuilder &) = default;
     MsgBuilder &operator=(MsgBuilder &&) = default;

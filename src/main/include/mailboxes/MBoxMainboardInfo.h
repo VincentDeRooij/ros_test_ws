@@ -1,5 +1,5 @@
-#ifndef MAINBOARDINFO_H
-#define MAINBOARDINFO_H
+#ifndef MBOXMAINBOARDINFO_H
+#define MBOXMAINBOARDINFO_H
 
 #include "Mailbox.h"
 

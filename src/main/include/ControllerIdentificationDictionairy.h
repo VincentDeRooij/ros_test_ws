@@ -7,7 +7,7 @@
 #include <map>
 
 // created includes
-#include "ExRDefinitions.h"
+#include "ExRSerialDefinitions.h"
 #include "ButtonDefinitions.h"
 
 class ControllerIdentificationDictionairy

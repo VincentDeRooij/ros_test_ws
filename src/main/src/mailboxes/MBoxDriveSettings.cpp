@@ -2,17 +2,20 @@
 
 MBoxDriveSettings::MBoxDriveSettings()
 {
+
 }
 
 MBoxDriveSettings::~MBoxDriveSettings()
 {
+    
 }
 
 void MBoxDriveSettings::Write()
 {
-    
+
 }
 
 void MBoxDriveSettings::Read()
 {
+
 }

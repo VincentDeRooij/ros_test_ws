@@ -5,12 +5,13 @@
 
 // created includes
 #include "MsgBuilder.h"
-#include "Tooling.h"
+#include "SerialValidationUtils.h"
+#include "ExRSerialDefinitions.h"
 
 // debug
 #include "Debugging.h" // include > enables the ifdef DEBUG
 
-MsgBuilder::MsgBuilder(const uint16_t serialId, const Payload payload)
+MsgBuilder::MsgBuilder(const uint16_t &serialId, const Payload &payload)
 {
     // fill the headers
     this->msg.header[0] = MSG_HF_1;

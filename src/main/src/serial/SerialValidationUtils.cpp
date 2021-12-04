@@ -3,7 +3,8 @@
 #include <iostream>
 
 // created includes
-#include "Tooling.h"
+#include "SerialValidationUtils.h"
+#include "ExRSerialDefinitions.h"
 
 /**
  * @brief 
@@ -47,4 +48,21 @@ bool CalcCRCFromExRMessage(ExRMessage &msg)
 
     // a simple check was made
     return true;
+}
+
+/**
+ * @brief 
+ * first check which validates the Headers to check if the message
+ * @param receivedMsg the received UART/Serial message to check
+ * @return true if message headers are valid
+ * @return false if message headers are invalid
+ */
+bool ValidateHeaders(ExRMessage &receivedMsg)
+{
+    std::cout << "VALIDATING...." << std::endl;
+
+    bool valid = receivedMsg.header[0] == MSG_HF_1 && receivedMsg.header[1] == MSG_HF_2 && receivedMsg.header[2] == MSG_HF_3 && receivedMsg.header[3] == MSG_HF_4;
+
+    std::cout << valid << std::endl;
+    return valid;
 }
