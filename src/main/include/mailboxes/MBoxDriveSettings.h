@@ -8,12 +8,14 @@
 class MBoxDriveSettings : public Mailbox
 {
 private:
+	bool engineIsEnabled = false;
+
 public:
-	MBoxDriveSettings();
+	MBoxDriveSettings(const bool &engineEnabled);
 	~MBoxDriveSettings();
 
 	// inherit the method from mailbox, allowing our own method implementations
 	virtual void Read() override;
-	virtual void Write() override;
+	virtual Payload Write() override;
 };
 #endif

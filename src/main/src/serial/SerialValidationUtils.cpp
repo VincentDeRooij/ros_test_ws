@@ -63,6 +63,6 @@ bool ValidateHeaders(ExRMessage &receivedMsg)
 
     bool valid = receivedMsg.header[0] == MSG_HF_1 && receivedMsg.header[1] == MSG_HF_2 && receivedMsg.header[2] == MSG_HF_3 && receivedMsg.header[3] == MSG_HF_4;
 
-    std::cout << valid << std::endl;
+    std::cout << "MESSAGE_VAL_RESULT:" << valid << std::endl;
     return valid;
 }

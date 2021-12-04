@@ -22,7 +22,7 @@ Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_
 
 #ifdef DEBUG
 
-    DebuggerPrintPayloadInfo(this->payFull);
+    PrintPayload();
 
 #endif // DEBUG
 }
@@ -34,7 +34,7 @@ uint8_t *Payload::getPayload()
 }
 
 // returns a certain row of the payload
-uint8_t Payload::getPayloadRow(int row)
+uint8_t Payload::getPayloadRow(const uint8_t &row)
 {
     switch (row)
     {
@@ -61,7 +61,7 @@ uint8_t Payload::getPayloadRow(int row)
 }
 
 // changes the data of a certain row to the user's provided data
-void Payload::setPayloadRow(int row, uint8_t data)
+void Payload::setPayloadRow(const uint8_t &row, const uint8_t &data)
 {
     switch (row)
     {
@@ -93,4 +93,13 @@ void Payload::setPayloadRow(int row, uint8_t data)
         std::cout << "The row cannot be changed, or isn't present" << std::endl;
         break;
     }
+}
+
+void Payload::PrintPayload()
+{
+    for (size_t i = 0; i < 8; i++)
+    {
+        std::cout << "PAYLOAD_CONTENT" << unsigned(this->payFull[i]) << " ";
+    }
+    std::cout << std::endl;
 }

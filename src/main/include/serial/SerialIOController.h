@@ -5,6 +5,7 @@
 // system includes
 #include <serial/serial.h>
 #include <queue>
+#include <iostream> // console include, std::cout, std::endl, etc...
 
 // OS Specific sleep
 #ifdef _WIN32
