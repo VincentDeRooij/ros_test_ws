@@ -3,23 +3,16 @@
 #pragma once
 
 #include <string>
+#include "ExROutputStructures.h"
 
+template <typename OutType>
 class ExROutput
 {
-private:
 public:
-	ExROutput(std::string type)
-	{
-		this->type = type;
-	}
+	ExROutput() = default;
 	virtual ~ExROutput() = default;
 
-	std::string GetType()
-	{
-		return this->type;
-	}
-
 protected:
-	std::string type;
+	OutType *oType; // the type of output structure given
 };
 #endif

@@ -2,10 +2,11 @@
 #define MBOXDRIVESETTINGS_H
 
 #include "Mailbox.h"
+#include "ExROutput.h"
 
 #pragma once
 
-class MBoxDriveSettings : public Mailbox
+class MBoxDriveSettings : public Mailbox, ExROutput<ExRDataStructureTypeUInt>
 {
 private:
 	bool engineIsEnabled = false;

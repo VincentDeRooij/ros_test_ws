@@ -10,7 +10,7 @@ class Mailbox
 {
 protected:
     // ExRMessage msg;
-    // Payload payload;
+    // Payload payload;  
 
     /**
      * @brief Set the Bit On Pos object
@@ -27,9 +27,8 @@ protected:
         }
     }
 
-public: //USE VIRTUAL WHEN INHERITING THESE METHODS!!!!
-    Mailbox() = default;
-    virtual ~Mailbox() = default;
+public:
+    //USE VIRTUAL WHEN INHERITING THESE METHODS!!!!
     virtual Payload Write() = 0; // pure virtual
     virtual void Read() = 0;     // pure virtual
 };

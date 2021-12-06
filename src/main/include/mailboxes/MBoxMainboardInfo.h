@@ -2,12 +2,16 @@
 #define MBOXMAINBOARDINFO_H
 
 #include "Mailbox.h"
+#include "ExROutput.h"
 
 #pragma once
 
-class MBoxMainboardInfo : public Mailbox
+//template <typename OutType>
+class MBoxMainboardInfo : public Mailbox, ExROutput<ExRDataStructureTypeUInt>
 {
 private:
+	//OutType *oType;
+
 	bool lightIOPortOneIsEnabled = false;
 	bool lightIOPortTwoIsEnabled = false;
 	bool engineIOPortIsEnabled = false;

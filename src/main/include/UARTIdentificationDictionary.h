@@ -20,15 +20,19 @@
 class UARTIdentificationDictionary
 {
 private:
-	// std::vector<std::shared_ptr<Mailbox>> vec;
+	struct UARTIDDictionaryEntry
+	{
+		uint16_t address;
+		Mailbox *box;
+	};
 
 	//In the map m you'll find the BITDATA that alligns with the Serial adress that's given.
-	std::map<uint16_t, std::shared_ptr<Mailbox *>> m;
+	std::vector<UARTIDDictionaryEntry> m;
 
 public:
 	UARTIdentificationDictionary() = default;
 	~UARTIdentificationDictionary() = default;
 
-	void AddToMap(const uint16_t &sA, Mailbox &mBox);
+	void AddToMap(const uint16_t &sA, Mailbox *mBox);
 };
 #endif
