@@ -19,19 +19,4 @@ struct ExRMessage //
     uint8_t crc;        // checksum to check if message is complete
 };
 
-struct ExRDataField //
-{
-    uint8_t byte;
-    uint8_t bit;
-    std::string field;
-    std::string type;
-    int value;
-    //uint16_t description;
-};
-
-// struct ExROutput //
-// {
-//     ExRDataField ExROutputData[];
-// };
-
 #endif // __EXRMSGSTRUCTURES_H__

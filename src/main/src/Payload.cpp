@@ -22,7 +22,7 @@ Payload::Payload(const uint8_t &pay_0, const uint8_t &pay_1, const uint8_t &pay_
 
 #ifdef DEBUG
 
-    PrintPayload();
+    //PrintPayload();
 
 #endif // DEBUG
 }
@@ -99,7 +99,7 @@ void Payload::PrintPayload()
 {
     for (size_t i = 0; i < 8; i++)
     {
-        std::cout << "PAYLOAD_CONTENT" << unsigned(this->payFull[i]) << " ";
+        std::cout << "PAYLOAD_CONTENT: " << unsigned(this->payFull[i]) << " ";
     }
     std::cout << std::endl;
 }

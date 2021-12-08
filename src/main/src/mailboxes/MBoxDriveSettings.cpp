@@ -52,6 +52,23 @@ Payload MBoxDriveSettings::Write()
     return payload;
 }
 
-void MBoxDriveSettings::Read()
+void MBoxDriveSettings::Read(Payload &p)
 {
+    // first TRAJECTORY SPEED
+    this->dataFields.TRAJECT_SPEED = p.getPayloadRow(0);
+    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 8;
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(1);
+    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 16;
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(2);
+    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 24;
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(3);
+
+    // second FIRMWARE VER
+    this->dataFields.FIRMWARE_VER = p.getPayloadRow(4);
+    // third AMPERE RATING
+    this->dataFields.AMPERE_RATING = p.getPayloadRow(5);
+    // fourth INFO STATE
+    this->dataFields.INFO_STATES = p.getPayloadRow(6);
+    // fifth ENGINE STATE TOGGLES
+    this->dataFields.ENGINE_STATE_TOGGLES = p.getPayloadRow(7);
 }

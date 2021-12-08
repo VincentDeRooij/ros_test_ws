@@ -2,16 +2,12 @@
 #define __MAILBOX_H__
 
 #include <stdint.h>
+#include <vector>
 #include <iostream>
-
-#include "Payload.h"
 
 class Mailbox
 {
 protected:
-    // ExRMessage msg;
-    // Payload payload;  
-
     /**
      * @brief Set the Bit On Pos object
      * 
@@ -23,14 +19,13 @@ protected:
     {
         if (enable == true)
         {
-            (1 << pos) | byte;
+            byte |= (1 << pos);
         }
     }
 
 public:
     //USE VIRTUAL WHEN INHERITING THESE METHODS!!!!
-    virtual Payload Write() = 0; // pure virtual
-    virtual void Read() = 0;     // pure virtual
+    //std::vector<enum>
 };
 
 #endif // __MAILBOX_H__
