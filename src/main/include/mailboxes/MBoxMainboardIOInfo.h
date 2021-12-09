@@ -11,11 +11,10 @@
 
 #pragma once
 
-//template <typename OutType>
-class MBoxMainboardInfo : public Mailbox, public IMBoxRead, public IMBoxWrite //ExROutput<ExRDataStructureTypeUInt>
+class MBoxMainboardIOInfo : public Mailbox, public IMBoxRead, public IMBoxWrite
 {
 private:
-	struct MBoxOutStructureMBInfo
+	struct MBoxOutStructureMBIOInfo
 	{
 		uint16_t BAT_VOLTAGE;
 		uint16_t BAT_CHARGE_PERCENTAGE;
@@ -24,15 +23,15 @@ private:
 		uint8_t IO_EXPANDER_STATUS;
 	};
 
-	MBoxOutStructureMBInfo dataFields;
+	MBoxOutStructureMBIOInfo dataFields;
 
 	bool lightIOPortOneIsEnabled = false;
 	bool lightIOPortTwoIsEnabled = false;
 	bool engineIOPortIsEnabled = false;
 
 public:
-	MBoxMainboardInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort);
-	~MBoxMainboardInfo() = default;
+	MBoxMainboardIOInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort);
+	~MBoxMainboardIOInfo() = default;
 
 	// inherit the method from mailbox, allowing our own method implementations
 	virtual void Read(Payload &p) override;

@@ -5,7 +5,7 @@
 // system includes
 
 // created includes
-#include "ExRMsgStructures.h"
+#include "ExRMsgStructure.h"
 #include "Payload.h"
 
 class MsgBuilder

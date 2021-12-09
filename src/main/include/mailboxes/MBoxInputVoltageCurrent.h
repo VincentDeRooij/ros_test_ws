@@ -11,13 +11,13 @@
 class MBoxInputVoltageCurrent : public Mailbox, public IMBoxRead //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
-	struct MBoxOutStructure
+	struct MBoxOutStructureVCInfo
 	{
 		uint32_t VDCBUS_KV;
 		uint32_t IQREF_A;
 	};
 
-	MBoxOutStructure dataFields;
+	MBoxOutStructureVCInfo dataFields;
 
 public:
 	// Overrides from Mailbox

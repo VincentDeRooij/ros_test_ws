@@ -21,11 +21,11 @@
 #include "ExRSerialDefinitions.h"
 //#include "ExRMsgStructures.h"
 
-#include "MBoxMainboardInfo.h"
+#include "MBoxMainboardIOInfo.h"
 
 int run(int argc, char **argv)
 {
-  MBoxMainboardInfo mBox(true, true, true);
+  MBoxMainboardIOInfo mBox(true, true, true);
 
   //ExROutputStructure a;
 

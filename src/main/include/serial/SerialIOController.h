@@ -17,7 +17,7 @@
 // created includes
 //#include "ExRDefinitions.h"
 #include "ExRSerialDefinitions.h"
-#include "ExRMsgStructures.h"
+#include "ExRMsgStructure.h"
 #include "Payload.h"
 
 class SerialIOController // make this a singleton pattern, this class must be instantiated only once

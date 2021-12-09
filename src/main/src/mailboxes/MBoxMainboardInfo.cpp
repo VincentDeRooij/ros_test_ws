@@ -1,13 +1,13 @@
-#include "MBoxMainboardInfo.h"
+#include "MBoxMainboardIOInfo.h"
 
-MBoxMainboardInfo::MBoxMainboardInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort)
+MBoxMainboardIOInfo::MBoxMainboardIOInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort)
 {
     this->engineIOPortIsEnabled = engineIOPort;
     this->lightIOPortOneIsEnabled = lightIOPortOne;
     this->lightIOPortTwoIsEnabled = lightIOPortTwo;
 }
 
-Payload MBoxMainboardInfo::Write()
+Payload MBoxMainboardIOInfo::Write()
 {
     uint8_t byte = 0;
 
@@ -22,7 +22,7 @@ Payload MBoxMainboardInfo::Write()
     return payload;
 }
 
-void MBoxMainboardInfo::Read(Payload &p)
+void MBoxMainboardIOInfo::Read(Payload &p)
 {
     // Read the first uint16 from the payload
     this->dataFields.BAT_VOLTAGE = p.getPayloadRow(0);
@@ -43,9 +43,9 @@ void MBoxMainboardInfo::Read(Payload &p)
     this->dataFields.MAINBOARD_INFO = p.getPayloadRow(6);
     this->dataFields.IO_EXPANDER_STATUS = p.getPayloadRow(7);
 
-    // std::cout << "Volt:" << unsigned(this->dataFields.BAT_VOLTAGE) << std::endl;
-    // std::cout << "Charge:" << unsigned(this->dataFields.BAT_CHARGE_PERCENTAGE) << std::endl;
-    // std::cout << "AVR_C:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
-    // std::cout << "Info:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
-    // std::cout << "Expander:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
+    std::cout << "Volt:" << unsigned(this->dataFields.BAT_VOLTAGE) << std::endl;
+    std::cout << "Charge:" << unsigned(this->dataFields.BAT_CHARGE_PERCENTAGE) << std::endl;
+    std::cout << "AVR_C:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
+    std::cout << "Info:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
+    std::cout << "Expander:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
 }
