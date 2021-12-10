@@ -1,5 +1,4 @@
 // system includes
-#include <iostream> // console include, std::cout, std::endl, etc...
 
 // ROS includes
 #include <ros/ros.h>

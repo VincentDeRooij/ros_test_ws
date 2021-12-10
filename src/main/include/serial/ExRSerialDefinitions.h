@@ -24,7 +24,7 @@
 #define MSG_HF_4 'd'
 
 // EXR DEFINITIONS - Motherboard/Mainboard (Intel)
-#define EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE 0x220 // serial address to get the feedback message
+#define EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE 0x220 // serial address to set the feedback message
 #define EX_MOTHER_STATUS_SERIAL_ID_REC_TYPE 0x221 // serial address of the feedback message
 //
 #define EX_MOTHER_PORT_OUTPUT_SET_TYPE 0x200 // serial address to toggle the IO-expander ports of the EXR mainboard

@@ -5,6 +5,7 @@
 // system includes
 #include <serial/serial.h>
 #include <queue>
+#include <iostream> // console include, std::cout, std::endl, etc...
 
 // OS Specific sleep
 #ifdef _WIN32
@@ -16,7 +17,7 @@
 // created includes
 //#include "ExRDefinitions.h"
 #include "ExRSerialDefinitions.h"
-#include "ExRMsgStructures.h"
+#include "ExRMsgStructure.h"
 #include "Payload.h"
 
 class SerialIOController // make this a singleton pattern, this class must be instantiated only once

@@ -21,14 +21,15 @@ public:
  * 
  */
 
+	ExRMessage msg;
+
 private:
 	void processItem(std::queue<ExRMessage> &queue)
 	{
 		// RUN ROS PUB
 		if (queue.empty() == false)
 		{
-
-			/* code */
+			this->msg = queue.front();
 
 			queue.pop(); // remove item from the list
 		}

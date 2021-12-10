@@ -5,7 +5,7 @@
 // system includes
 
 // created includes
-#include "ExRMsgStructures.h"
+#include "ExRMsgStructure.h"
 
 bool ValidateHeaders(ExRMessage &receivedMsg);
 bool CalcCRCFromExRMessage(ExRMessage &msg);

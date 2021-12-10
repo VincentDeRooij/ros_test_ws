@@ -12,7 +12,7 @@ SerialReader::SerialReader()
         SerialReadMsg(); /* code */
 
         // Temporary Placed
-        usleep((1000) * 50); // sleep for 5ms // Check if value is fine
+        usleep((1000) * 5); // sleep for 5ms // Check if value is fine
     }
 }
 

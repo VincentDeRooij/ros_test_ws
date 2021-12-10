@@ -5,19 +5,17 @@
 
 uint32_fixed_t IntToFixed(int32_t inputValue, std::uint8_t iqValue)
 {
-    //Template Method
-    uint32_fixed_t uint32Fixed;
+    //int32_t limitValue = (1 << (32 - iqValue - 1)) * 1000;
 
-    return uint32Fixed;
+    double value = (double)inputValue / 1000.0;
+    return (uint32_fixed_t)inputValue * (1 << iqValue);
 }
 
 //convert float to fixed point (uint32)
 uint32_fixed_t FloatToFixed(double inputValue, std::uint8_t iqValue)
 {
     //Template Method
-    uint32_fixed_t uint32Fixed;
-
-    return uint32Fixed;
+    return (uint32_fixed_t)inputValue * (1 << iqValue);
 }
 
 //convert fixed point (uint32) to float
