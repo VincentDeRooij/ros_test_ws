@@ -57,7 +57,9 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  SerialReader reader; // Needs to be run seperate
+  // SerialReader reader; // Needs to be run seperate
+
+  usleep(2500 * (1000));
 
   //reader.ProcessSerialMessageQueues();
 
@@ -71,7 +73,11 @@ int run(int argc, char **argv)
   //           reader.msg.payload[7]);
   //mBox.Read();
 
+  MBoxMainboardIOInfo mBox_off(false, false, false);
 
+  SerialWriter writer; // The serial writer portion
+  writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox_off.Write(), false);
+  writer.ProcessSerialMessageQueues();
 
   return 0;
 }
