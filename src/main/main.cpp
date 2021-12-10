@@ -25,22 +25,22 @@
 
 int run(int argc, char **argv)
 {
-  MBoxMainboardIOInfo mBox(true, true, true);
+  MBoxMainboardIOInfo mBox(true, true, false);
 
   //ExROutputStructure a;
 
-  uint8_t bytes[2];
-  uint16_t value;
+  // uint8_t bytes[2];
+  // uint16_t value;
 
-  value = 0x1234;
+  // value = 0x1234;
 
-  bytes[0] = *((uint8_t *)&(value) + 1); //high byte (0x12)
-  bytes[1] = *((uint8_t *)&(value) + 0); //low byte  (0x34)
+  // bytes[0] = *((uint8_t *)&(value) + 1); //high byte (0x12)
+  // bytes[1] = *((uint8_t *)&(value) + 0); //low byte  (0x34)
 
-  Payload a;
+  // Payload a;
 
-  a.setPayloadRow(0, bytes[0]);
-  a.setPayloadRow(1, bytes[1]);
+  // a.setPayloadRow(0, bytes[0]);
+  // a.setPayloadRow(1, bytes[1]);
 
   // std::cout << "TEST: " << unsigned(value) << std::endl;
 
@@ -54,7 +54,7 @@ int run(int argc, char **argv)
   //std::cout << "TEST: " << unsigned(a.BAT_VOLTAGE) << std::endl;
 
   SerialWriter writer; // The serial writer portion
-  writer.AddToMsgQueue(0x201, a, false);
+  writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
   writer.ProcessSerialMessageQueues();
 
   //SerialReader reader; // Needs to be run seperate
@@ -69,7 +69,7 @@ int run(int argc, char **argv)
   //           reader.msg.payload[5],
   //           reader.msg.payload[6],
   //           reader.msg.payload[7]);
-  mBox.Read(a);
+  //mBox.Read();
 
   return 0;
 }
