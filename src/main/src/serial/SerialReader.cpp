@@ -2,6 +2,8 @@
 
 #include "SerialReader.h"
 #include "SerialValidationUtils.h"
+#include "MBoxMainboardIOInfo.h"
+#include "MsgBuilder.h"
 
 SerialReader::SerialReader()
 {
@@ -67,6 +69,20 @@ void SerialReader::SerialReadMsg()
 
                 // Implement Check to decide which serial addresses are of priotype
                 this->AddToMsgQueue(messagePtr, IsMsgPrioType(messagePtr.serialId));
+
+                MBoxMainboardIOInfo a(false, false, false);
+
+                Payload pl(
+                    messagePtr.payload[0],
+                    messagePtr.payload[1],
+                    messagePtr.payload[2],
+                    messagePtr.payload[3],
+                    messagePtr.payload[4],
+                    messagePtr.payload[5],
+                    messagePtr.payload[6],
+                    messagePtr.payload[7]);
+
+                a.Read(pl);
             }
             else
             {
