@@ -37,9 +37,9 @@ private:
 			}
 			else
 			{
-				std::cout << "SERIAL_PORT_UNAVAILABLE" << std::endl;
+				std::cout << "WRITER: SERIAL_PORT_UNAVAILABLE/CLOSED" << std::endl;
+				this->uartCommunicator.open();
 			}
-			std::cout << "SERIAL_MSG_WRITTEN CLOSING PORT";
 		}
 		std::cout << std::endl;
 	}

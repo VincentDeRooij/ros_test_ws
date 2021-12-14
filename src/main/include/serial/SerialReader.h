@@ -8,11 +8,12 @@ class SerialReader : public SerialIOController
 {
 private:
 	void SerialReadMsg();
+	void AddToMsgQueue(const ExRMessage &msg, const bool &isPrioType);
 
 public:
-	SerialReader();
+	SerialReader() = default;
 	~SerialReader() = default;
-	void AddToMsgQueue(const ExRMessage &msg, const bool &isPrioType);
+	void StartReaderProcess();
 
 	// SerialWriter implementation from the SerialIOController pure virtual
 
@@ -20,16 +21,16 @@ public:
  * @brief 
  * 
  */
-
+private:
 	ExRMessage msg;
 
-private:
 	void processItem(std::queue<ExRMessage> &queue)
 	{
 		// RUN ROS PUB
 		if (queue.empty() == false)
 		{
 			this->msg = queue.front();
+			// insert UART Dictionary
 
 			queue.pop(); // remove item from the list
 		}

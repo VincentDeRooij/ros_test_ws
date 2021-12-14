@@ -17,7 +17,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_executable(main_node main.cpp ${SRC_FILES} ${SRC_MAILBOX} ${SRC_SERIAL})
+add_executable(main_node main_writer.cpp ${SRC_FILES} ${SRC_MAILBOX} ${SRC_SERIAL})
 add_executable(main_reader main_reader.cpp ${SRC_FILES} ${SRC_MAILBOX} ${SRC_SERIAL})
 
 target_include_directories(main_node PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include)

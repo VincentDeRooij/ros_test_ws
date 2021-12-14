@@ -5,9 +5,8 @@
 #include "MBoxMainboardIOInfo.h"
 #include "MsgBuilder.h"
 
-SerialReader::SerialReader()
+void SerialReader::StartReaderProcess()
 {
-    this->uartCommunicator.open();
     while (1)
     {
         //this->uartCommunicator.open();
@@ -24,12 +23,6 @@ SerialReader::SerialReader()
  */
 void SerialReader::SerialReadMsg()
 {
-    while (IsSerialPortAvailable() == false)
-    {
-        this->uartCommunicator.open();
-        usleep((1000) * 100); // sleep for 5ms // Check if value is fine
-    }
-
     if (IsSerialPortAvailable() == true)
     {
         ExRMessage messagePtr;
@@ -98,9 +91,11 @@ void SerialReader::SerialReadMsg()
     else
     {
         // LOGGER - SERIAL_OFFLINE / Exception, or error handling
-        std::cout << "SERIAL_OFFLINE:" << std::endl;
+        std::cout << "READER: SERIAL_PORT_UNAVAILABLE/CLOSED" << std::endl;
+
+        // try to openup the serial port connection
+        this->uartCommunicator.open();
     }
-    this->uartCommunicator.close();
     std::cout << std::endl;
 }
 

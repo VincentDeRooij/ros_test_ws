@@ -33,6 +33,8 @@ public:
     void AddToMsgQueue(const uint16_t &serialAddress, const Payload &payload, const bool &isPriorityMsg);
     void ProcessSerialMessageQueues();
     bool IsSerialPortAvailable();
+    void OpenSerialPortConnection();
+    void CloseSerialPortConnection();
 
 protected:
     serial::Serial uartCommunicator;

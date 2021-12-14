@@ -30,14 +30,34 @@ void SerialIOController::initSerialController()
 
     serial::Timeout t_out = serial::Timeout::simpleTimeout(EX_EXR_SERIAL_TMOUT_MS); // set time-out
     this->uartCommunicator.setTimeout(t_out);
+}
 
-    this->uartCommunicator.open();
-
-    while (!IsSerialPortAvailable())
+void SerialIOController::OpenSerialPortConnection()
+{
+    while (IsSerialPortAvailable() == false)
     {
         this->uartCommunicator.open();
 
+        if (IsSerialPortAvailable() == true)
+        {
+            return;
+        }
+
         usleep(1000 * 500); // try again after 500ms
+    }
+}
+
+void SerialIOController::CloseSerialPortConnection()
+{
+    while (IsSerialPortAvailable() == true)
+    {
+        this->uartCommunicator.close();
+
+        if (IsSerialPortAvailable() == false)
+        {
+            return;
+        }
+        usleep(1000 * 500);
     }
 }
 

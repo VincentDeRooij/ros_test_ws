@@ -31,6 +31,7 @@ int run(int argc, char **argv)
   std::cout << "Setting up the writer..." << std::endl;
   // Serial writer
   SerialWriter writer; // The serial writer portion
+  writer.OpenSerialPortConnection();
 
   std::cout << "Enabling lights" << std::endl;
 
@@ -39,7 +40,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * (3000)); // sleep for 1 second
+  usleep(1000 * (300)); // sleep for 1 second
 
   std::cout << "Disabling lights" << std::endl;
 
@@ -47,7 +48,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox_off.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * (3000));
+  usleep(1000 * (300));
 
   std::cout << "Enabling the motor-drivers" << std::endl;
 
@@ -56,7 +57,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * (10000)); // sleep for ten sec
+  usleep(1000 * (1000)); // sleep for ten sec
 
   std::cout << "Enabling the motor-drivers" << std::endl;
 
@@ -64,6 +65,11 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MOTOR_LEFT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
   writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
   writer.ProcessSerialMessageQueues();
+
+  SerialReader r;
+  r.OpenSerialPortConnection();
+  r.StartReaderProcess();
+  r.CloseSerialPortConnection(); // never happens
 
   return 0;
 }

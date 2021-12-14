@@ -7,11 +7,11 @@
 // See the ALL_CAN_COMMANDS.* document for all possible command types, and their fields
 
 // SERIAL DEFINITIONS // ttyS5
-#define EX_EXR_SERIAL_PORT "/dev/ttyS5"       // the serial port file location of the EXR
-#define EX_EXR_SERIAL_PORT_DEBUG "/dev/ttyS5" // the debug serial port file location
+#define EX_EXR_SERIAL_PORT "/dev/ttyUSB0"       // the serial port file location of the EXR
+#define EX_EXR_SERIAL_PORT_DEBUG "/dev/ttyUSB0" // the debug serial port file location
 
 #define EX_EXR_BAUDRATE 115200      // the baud/transfer rate of the EXR serial
-#define EX_EXR_SERIAL_TMOUT_MS 1000 // the time-out rate in ms
+#define EX_EXR_SERIAL_TMOUT_MS 2500 // the time-out rate in ms
 #define EX_MSG_SIZE 15              // the serial msg size, which must always be 15 bytes in total
 
 // Standard CRC Value
