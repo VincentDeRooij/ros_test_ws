@@ -67,6 +67,8 @@ void SerialReader::SerialReadMsg()
                 // Implement Check to decide which serial addresses are of priotype
                 this->AddToMsgQueue(messagePtr, IsMsgPrioType(messagePtr.serialId));
 
+                this->processItem(this->std_queue);
+
                 // MBoxMainboardIOInfo a(false, false, false);
 
                 // Payload pl(

@@ -34,7 +34,7 @@ public:
 	~MBoxMainboardIOInfo() = default;
 
 	// inherit the method from mailbox, allowing our own method implementations
-	void Read(Payload &p) override;
-	Payload Write() override;
+	virtual void Read(Payload &p);
+	virtual Payload Write();
 };
 #endif

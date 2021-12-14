@@ -14,6 +14,8 @@ void UARTIdentificationDictionary::AddToMap(const uint16_t &sA, Mailbox *mBox, c
     a.isWriteType = type;
 
     m.push_back(a);
+
+    std::cout << "ADDREE: " << m[0].address << std::endl;
 }
 
 Mailbox *UARTIdentificationDictionary::GetMailboxBySerial(const uint16_t &sId)
@@ -23,6 +25,7 @@ Mailbox *UARTIdentificationDictionary::GetMailboxBySerial(const uint16_t &sId)
     {
         if (var.address == sId)
         {
+            std::cout << "HELLO I FOUND AN ENTRY" << std::endl;
             return var.box;
         }
     }

@@ -24,6 +24,8 @@ Payload MBoxMainboardIOInfo::Write()
 
 void MBoxMainboardIOInfo::Read(Payload &p)
 {
+    std::cout << "HELLO THERE! IAM DEBUG" << std::endl;
+
     // Read the first uint16 from the payload
     this->dataFields.BAT_VOLTAGE = p.getPayloadRow(0) | (p.getPayloadRow(1) << 8);
 

@@ -4,6 +4,7 @@
 
 #include "SerialIOController.h"
 #include "UARTIdentificationDictionary.h"
+#include "MBoxMainboardIOInfo.h"
 
 class SerialReader : public SerialIOController
 {
@@ -32,8 +33,10 @@ private:
 		if (queue.empty() == false)
 		{
 			this->msg = queue.front();
-			// insert UART Dictionary
+			// insert UART DictionarySerialSerial
 			Mailbox *mb = this->processDictionary.GetMailboxBySerial(this->msg.serialId);
+
+			MBoxMainboardIOInfo info(false, false, false);
 
 			Payload pl(msg.payload[0], msg.payload[1], msg.payload[2], msg.payload[3], msg.payload[4], msg.payload[5], msg.payload[6], msg.payload[7]);
 
