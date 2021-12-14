@@ -57,6 +57,7 @@ void SerialReader::SerialReadMsg()
             {
                 uint8_t val = (uint8_t)((uint8_t *)&messagePtr)[ii] & 0xFF;
                 printf("0x%02X \t", val);
+                //printf("0x%02X \t", (uint8_t)(buffer[ii] & 0xff));
             }
             printf("\n");
 
@@ -69,19 +70,19 @@ void SerialReader::SerialReadMsg()
                 // Implement Check to decide which serial addresses are of priotype
                 this->AddToMsgQueue(messagePtr, IsMsgPrioType(messagePtr.serialId));
 
-                // MBoxMainboardIOInfo a(false, false, false);
+                MBoxMainboardIOInfo a(false, false, false);
 
-                // Payload pl(
-                //     messagePtr.payload[0],
-                //     messagePtr.payload[1],
-                //     messagePtr.payload[2],
-                //     messagePtr.payload[3],
-                //     messagePtr.payload[4],
-                //     messagePtr.payload[5],
-                //     messagePtr.payload[6],
-                //     messagePtr.payload[7]);
+                Payload pl(
+                    messagePtr.payload[0],
+                    messagePtr.payload[1],
+                    messagePtr.payload[2],
+                    messagePtr.payload[3],
+                    messagePtr.payload[4],
+                    messagePtr.payload[5],
+                    messagePtr.payload[6],
+                    messagePtr.payload[7]);
 
-                // a.Read(pl);
+                a.Read(pl);
             }
             else
             {

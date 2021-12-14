@@ -26,6 +26,7 @@
 int run(int argc, char **argv)
 {
   MBoxMainboardIOInfo mBox(true, true, false);
+  SerialWriter writer; // The serial writer portion
 
   //ExROutputStructure a;
 
@@ -52,8 +53,6 @@ int run(int argc, char **argv)
   //mempcpy(&a, &pl, sizeof(a));
 
   //std::cout << "TEST: " << unsigned(a.BAT_VOLTAGE) << std::endl;
-
-  SerialWriter writer; // The serial writer portion
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
   writer.ProcessSerialMessageQueues();
 
@@ -74,8 +73,6 @@ int run(int argc, char **argv)
   //mBox.Read();
 
   MBoxMainboardIOInfo mBox_off(false, false, false);
-
-  SerialWriter writer; // The serial writer portion
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox_off.Write(), false);
   writer.ProcessSerialMessageQueues();
 
