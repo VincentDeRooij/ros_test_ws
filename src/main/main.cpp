@@ -21,59 +21,48 @@
 #include "ExRSerialDefinitions.h"
 //#include "ExRMsgStructures.h"
 
+// Mailboxes
 #include "MBoxMainboardIOInfo.h"
+
+#include "MBoxDriveSettings.h"
 
 int run(int argc, char **argv)
 {
-  MBoxMainboardIOInfo mBox(true, true, false);
+  std::cout << "Setting up the writer..." << std::endl;
+  // Serial writer
   SerialWriter writer; // The serial writer portion
 
-  //ExROutputStructure a;
+  std::cout << "Enabling lights" << std::endl;
 
-  // uint8_t bytes[2];
-  // uint16_t value;
-
-  // value = 0x1234;
-
-  // bytes[0] = *((uint8_t *)&(value) + 1); //high byte (0x12)
-  // bytes[1] = *((uint8_t *)&(value) + 0); //low byte  (0x34)
-
-  // Payload a;
-
-  // a.setPayloadRow(0, bytes[0]);
-  // a.setPayloadRow(1, bytes[1]);
-
-  // std::cout << "TEST: " << unsigned(value) << std::endl;
-
-  // //Payload pl = mBox.Write(); // initialize an empty
-
-  // pl.setPayloadRow(1, bytes[0]);
-  // pl.setPayloadRow(2, bytes[1]);
-
-  //mempcpy(&a, &pl, sizeof(a));
-
-  //std::cout << "TEST: " << unsigned(a.BAT_VOLTAGE) << std::endl;
+  // Set the lights and the engine io toggle
+  MBoxMainboardIOInfo mBox(true, true, true);
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  // SerialReader reader; // Needs to be run seperate
+  usleep(1000 * (3000)); // sleep for 1 second
 
-  usleep(2500 * (1000));
+  std::cout << "Disabling lights" << std::endl;
 
-  //reader.ProcessSerialMessageQueues();
-
-  // Payload p(reader.msg.payload[0],
-  //           reader.msg.payload[1],
-  //           reader.msg.payload[2],
-  //           reader.msg.payload[3],
-  //           reader.msg.payload[4],
-  //           reader.msg.payload[5],
-  //           reader.msg.payload[6],
-  //           reader.msg.payload[7]);
-  //mBox.Read();
-
-  MBoxMainboardIOInfo mBox_off(false, false, false);
+  MBoxMainboardIOInfo mBox_off(false, false, true);
   writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox_off.Write(), false);
+  writer.ProcessSerialMessageQueues();
+
+  usleep(1000 * (3000));
+
+  std::cout << "Enabling the motor-drivers" << std::endl;
+
+  MBoxDriveSettings settings(true);
+  writer.AddToMsgQueue(EX_MOTOR_LEFT_DRIVE_SETTINGS_SET_TYPE, settings.Write(), false);
+  writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings.Write(), false);
+  writer.ProcessSerialMessageQueues();
+
+  usleep(1000 * (10000)); // sleep for ten sec
+
+  std::cout << "Enabling the motor-drivers" << std::endl;
+
+  MBoxDriveSettings settings_dis(false);
+  writer.AddToMsgQueue(EX_MOTOR_LEFT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
+  writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
   writer.ProcessSerialMessageQueues();
 
   return 0;
