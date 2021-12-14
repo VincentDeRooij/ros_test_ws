@@ -25,19 +25,13 @@ Payload MBoxMainboardIOInfo::Write()
 void MBoxMainboardIOInfo::Read(Payload &p)
 {
     // Read the first uint16 from the payload
-    this->dataFields.BAT_VOLTAGE = p.getPayloadRow(0);
-    this->dataFields.BAT_VOLTAGE = this->dataFields.BAT_VOLTAGE << 8;
-    this->dataFields.BAT_VOLTAGE |= p.getPayloadRow(1);
+    this->dataFields.BAT_VOLTAGE = p.getPayloadRow(0) | (p.getPayloadRow(1) << 8);
 
     // Read the second uint16 from the payload
-    this->dataFields.BAT_CHARGE_PERCENTAGE = p.getPayloadRow(2);
-    this->dataFields.BAT_CHARGE_PERCENTAGE = this->dataFields.BAT_CHARGE_PERCENTAGE << 8;
-    this->dataFields.BAT_CHARGE_PERCENTAGE |= p.getPayloadRow(3);
+    this->dataFields.BAT_CHARGE_PERCENTAGE = p.getPayloadRow(2) | (p.getPayloadRow(3) << 8);
 
     // Read the third int16 from the payload
-    this->dataFields.BAT_AVR_CURRENT = p.getPayloadRow(4);
-    this->dataFields.BAT_AVR_CURRENT = this->dataFields.BAT_AVR_CURRENT << 8;
-    this->dataFields.BAT_AVR_CURRENT |= p.getPayloadRow(5);
+    this->dataFields.BAT_AVR_CURRENT = p.getPayloadRow(4) | (p.getPayloadRow(5) << 8);
 
     // lastly bind the fields of the two uint8 fields
     this->dataFields.MAINBOARD_INFO = p.getPayloadRow(6);

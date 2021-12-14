@@ -4,11 +4,11 @@ void MBoxMotherboardStatus::Read(Payload &p)
 {
     // Read the Low Nibble (4 bits)
     this->dataFields.SOFTWARE_TYPE = p.getPayloadRow(0);
-    this->dataFields.SOFTWARE_TYPE = this->dataFields.SOFTWARE_TYPE & 0xf0;
+    this->dataFields.SOFTWARE_TYPE |= this->dataFields.SOFTWARE_TYPE & 0xf0;
 
     // Read the High Nibble (4 bits) -
     this->dataFields.SOFTWARE_VERSION = p.getPayloadRow(0);
-    this->dataFields.SOFTWARE_VERSION = (this->dataFields.SOFTWARE_VERSION & 0xf0) >> 4;
+    this->dataFields.SOFTWARE_VERSION |= (this->dataFields.SOFTWARE_VERSION & 0xf0) >> 4;
 
     // Read the Software Subversion
     this->dataFields.SOFTWARE_SUBVERSION = p.getPayloadRow(1);

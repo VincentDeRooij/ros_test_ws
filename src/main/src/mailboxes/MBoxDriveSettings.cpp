@@ -55,13 +55,10 @@ Payload MBoxDriveSettings::Write()
 void MBoxDriveSettings::Read(Payload &p)
 {
     // first TRAJECTORY SPEED
-    this->dataFields.TRAJECT_SPEED = p.getPayloadRow(0);
-    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 8;
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(1);
-    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 16;
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(2);
-    this->dataFields.TRAJECT_SPEED = this->dataFields.TRAJECT_SPEED << 24;
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(3);
+    this->dataFields.TRAJECT_SPEED = p.getPayloadRow(3);
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(2) << 8;
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(1) << 16;
+    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(0) << 24;
 
     // second FIRMWARE VER
     this->dataFields.FIRMWARE_VER = p.getPayloadRow(4);
