@@ -8,13 +8,14 @@
 // Mailbox Write Interface
 #include "IMBoxWrite.h"
 
-class MBoxBandWidth : public Mailbox, public IMBoxWrite
+class MBoxBandWidth : public Mailbox
 {
 private:
 public:
 	MBoxBandWidth();
 	~MBoxBandWidth() = default;
 
-	virtual Payload Write() override;
+	Payload Write();
+	void Read(Payload &p);
 };
 #endif

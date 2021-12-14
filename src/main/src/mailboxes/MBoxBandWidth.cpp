@@ -10,3 +10,8 @@ Payload MBoxBandWidth::Write()
 
     return a;
 }
+
+void MBoxBandWidth::Read(Payload &p)
+{
+    // EMPTY
+}

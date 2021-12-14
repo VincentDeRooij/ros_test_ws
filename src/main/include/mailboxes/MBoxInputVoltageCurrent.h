@@ -8,7 +8,7 @@
 // Mailbox Read Interface
 #include "IMBoxRead.h"
 
-class MBoxInputVoltageCurrent : public Mailbox, public IMBoxRead //, ExROutput<ExRDataStructureTypeUInt[2]>
+class MBoxInputVoltageCurrent : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
 	struct MBoxOutStructureVCInfo
@@ -21,7 +21,8 @@ private:
 
 public:
 	// Overrides from Mailbox
-	virtual void Read(Payload &p) override;
+	Payload Write() override;
+	void Read(Payload &p) override;
 
 	MBoxInputVoltageCurrent() = default;
 	~MBoxInputVoltageCurrent() = default;

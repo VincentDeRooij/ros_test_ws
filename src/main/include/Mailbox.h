@@ -5,6 +5,8 @@
 #include <vector>
 #include <iostream>
 
+#include "Payload.h"
+
 class Mailbox
 {
 protected:
@@ -24,6 +26,9 @@ protected:
     }
 
 public:
+    virtual Payload Write() = 0;
+    virtual void Read(Payload &p) = 0; // pure virtual
+
     //USE VIRTUAL WHEN INHERITING THESE METHODS!!!!
     //std::vector<enum>
 };

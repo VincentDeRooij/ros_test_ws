@@ -11,7 +11,7 @@
 
 #pragma once
 
-class MBoxMainboardIOInfo : public Mailbox, public IMBoxRead, public IMBoxWrite
+class MBoxMainboardIOInfo : public Mailbox
 {
 private:
 	struct MBoxOutStructureMBIOInfo
@@ -34,7 +34,7 @@ public:
 	~MBoxMainboardIOInfo() = default;
 
 	// inherit the method from mailbox, allowing our own method implementations
-	virtual void Read(Payload &p) override;
-	virtual Payload Write() override;
+	void Read(Payload &p) override;
+	Payload Write() override;
 };
 #endif

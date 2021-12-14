@@ -14,3 +14,10 @@ void MBoxInputVoltageCurrent::Read(Payload &p)
     this->dataFields.IQREF_A |= p.getPayloadRow(2) << 16;
     this->dataFields.IQREF_A |= p.getPayloadRow(3) << 24;
 }
+
+Payload MBoxInputVoltageCurrent::Write()
+{
+    Payload a;
+
+    return a;
+}

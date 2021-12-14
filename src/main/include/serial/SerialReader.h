@@ -3,6 +3,7 @@
 #pragma once
 
 #include "SerialIOController.h"
+#include "UARTIdentificationDictionary.h"
 
 class SerialReader : public SerialIOController
 {
@@ -11,7 +12,7 @@ private:
 	void AddToMsgQueue(const ExRMessage &msg, const bool &isPrioType);
 
 public:
-	SerialReader() = default;
+	SerialReader(UARTIdentificationDictionary dict);
 	~SerialReader() = default;
 	void StartReaderProcess();
 
@@ -23,6 +24,7 @@ public:
  */
 private:
 	ExRMessage msg;
+	UARTIdentificationDictionary processDictionary;
 
 	void processItem(std::queue<ExRMessage> &queue)
 	{
@@ -31,6 +33,11 @@ private:
 		{
 			this->msg = queue.front();
 			// insert UART Dictionary
+			Mailbox *mb = this->processDictionary.GetMailboxBySerial(this->msg.serialId);
+
+			Payload pl(msg.payload[0], msg.payload[1], msg.payload[2], msg.payload[3], msg.payload[4], msg.payload[5], msg.payload[6], msg.payload[7]);
+
+			mb->Read(pl);
 
 			queue.pop(); // remove item from the list
 		}

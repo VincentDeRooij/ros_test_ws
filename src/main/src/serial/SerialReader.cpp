@@ -5,6 +5,11 @@
 #include "MBoxMainboardIOInfo.h"
 #include "MsgBuilder.h"
 
+SerialReader::SerialReader(UARTIdentificationDictionary dict)
+{
+    this->processDictionary = dict;
+}
+
 void SerialReader::StartReaderProcess()
 {
     while (1)

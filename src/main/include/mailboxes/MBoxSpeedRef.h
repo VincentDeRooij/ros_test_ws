@@ -11,7 +11,7 @@
 // Converter
 #include "Converter.h"
 
-class MBoxSpeedRef : public Mailbox, public IMBoxWrite
+class MBoxSpeedRef : public Mailbox
 {
 private:
 	int8_t right;
@@ -21,6 +21,7 @@ public:
 	MBoxSpeedRef(int8_t right, int8_t left);
 	~MBoxSpeedRef() = default;
 
-	virtual Payload Write() override;
+	Payload Write() override;
+	void Read(Payload &p) override;
 };
 #endif

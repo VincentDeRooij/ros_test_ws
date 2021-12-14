@@ -11,7 +11,7 @@
 
 #pragma once
 
-class MBoxDriveSettings : public Mailbox, public IMBoxRead, public IMBoxWrite //, ExROutput<ExRDataStructureTypeUInt>
+class MBoxDriveSettings : public Mailbox
 {
 private:
 	struct MBoxOutStructureDriveSettings
@@ -32,7 +32,7 @@ public:
 	~MBoxDriveSettings();
 
 	// inherit the method from mailbox, allowing our own method implementations
-	virtual void Read(Payload &p) override;
-	virtual Payload Write() override;
+	void Read(Payload &p) override;
+	Payload Write() override;
 };
 #endif

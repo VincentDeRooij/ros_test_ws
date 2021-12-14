@@ -11,7 +11,7 @@
 // Mailbox Write Interface
 #include "IMBoxWrite.h"
 
-class MBoxMotherboardStatus : public Mailbox, public IMBoxRead, public IMBoxWrite //, ExROutput<ExRDataStructureTypeUInt[2]>
+class MBoxMotherboardStatus : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
     struct MBoxOutStructureMBStatus
@@ -28,8 +28,8 @@ private:
 
 public:
     // Overrides from Mailbox
-    virtual void Read(Payload &p) override;
-    virtual Payload Write() override;
+    void Read(Payload &p)override;
+    Payload Write() override;
 
     MBoxMotherboardStatus() = default;
     ~MBoxMotherboardStatus() = default;

@@ -10,7 +10,7 @@
 // Mailbox Read Interface
 #include "IMBoxRead.h"
 
-class MBoxDriveSpeedTorque : public Mailbox, public IMBoxRead //, ExROutput<ExRDataStructureTypeUInt[2]>
+class MBoxDriveSpeedTorque : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
 	struct MBoxOutStructureSpeedTorque
@@ -23,7 +23,8 @@ private:
 
 public:
 	// Overrides from Mailbox
-	virtual void Read(Payload &p) override;
+	Payload Write() override;
+	void Read(Payload &p) override;
 
 	MBoxDriveSpeedTorque() = default;
 	~MBoxDriveSpeedTorque() = default;

@@ -8,7 +8,7 @@
 // Mailbox Read Interface
 #include "IMBoxRead.h"
 
-class MBoxTemperatures : public Mailbox, public IMBoxRead //, ExROutput<ExRDataStructureTypeUInt[2]>
+class MBoxTemperatures : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
     struct MBoxOutStructureTemp
@@ -20,9 +20,10 @@ private:
 
 public:
     // Overrides from Mailbox
-    virtual void Read(Payload &p) override;
+    Payload Write() override;
+    void Read(Payload &p) override;
 
-    MBoxTemperatures();
-    ~MBoxTemperatures();
+    MBoxTemperatures() = default;
+    ~MBoxTemperatures() = default;
 };
 #endif

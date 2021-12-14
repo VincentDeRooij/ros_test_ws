@@ -33,43 +33,16 @@ int run(int argc, char **argv)
   SerialWriter writer; // The serial writer portion
   writer.OpenSerialPortConnection();
 
-  std::cout << "Enabling lights" << std::endl;
+  MBoxMainboardIOInfo info_on(true, true, true);
+  MBoxMainboardIOInfo info_off(false, false, true);
 
-  // Set the lights and the engine io toggle
-  MBoxMainboardIOInfo mBox(true, true, true);
-  writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox.Write(), false);
+  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info_on.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * (300)); // sleep for 1 second
+  usleep(1000 * 100);
 
-  std::cout << "Disabling lights" << std::endl;
-
-  MBoxMainboardIOInfo mBox_off(false, false, true);
-  writer.AddToMsgQueue(EX_MOTHER_STATUS_SERIAL_ID_REQ_TYPE, mBox_off.Write(), false);
+  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info_off.Write(), false);
   writer.ProcessSerialMessageQueues();
-
-  usleep(1000 * (300));
-
-  std::cout << "Enabling the motor-drivers" << std::endl;
-
-  MBoxDriveSettings settings(true);
-  writer.AddToMsgQueue(EX_MOTOR_LEFT_DRIVE_SETTINGS_SET_TYPE, settings.Write(), false);
-  writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings.Write(), false);
-  writer.ProcessSerialMessageQueues();
-
-  usleep(1000 * (1000)); // sleep for ten sec
-
-  std::cout << "Enabling the motor-drivers" << std::endl;
-
-  MBoxDriveSettings settings_dis(false);
-  writer.AddToMsgQueue(EX_MOTOR_LEFT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
-  writer.AddToMsgQueue(EX_MOTOR_RIGHT_DRIVE_SETTINGS_SET_TYPE, settings_dis.Write(), false);
-  writer.ProcessSerialMessageQueues();
-
-  SerialReader r;
-  r.OpenSerialPortConnection();
-  r.StartReaderProcess();
-  r.CloseSerialPortConnection(); // never happens
 
   return 0;
 }

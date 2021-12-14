@@ -21,3 +21,10 @@ void MBoxDriveSpeedTorque::Read(Payload &p)
     this->dataFields.TORQUE_NEWTM |= p.getPayloadRow(1) << 16;
     this->dataFields.TORQUE_NEWTM |= p.getPayloadRow(0) << 24;
 }
+
+Payload MBoxDriveSpeedTorque::Write()
+{
+    Payload a;
+
+    return a;
+}

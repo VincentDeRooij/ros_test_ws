@@ -15,7 +15,7 @@ class ControllerIdentificationDictionairy
 private:
 	std::map<uint16_t, uint16_t> m = // sample for getting the motherboard information
 		{
-			{X, EX_MOTHER_PORT_OUTPUT_SET_TYPE} //DEFINITION FOR X BUTTON
+			{X, EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET} //DEFINITION FOR X BUTTON
 	};
 
 public:
