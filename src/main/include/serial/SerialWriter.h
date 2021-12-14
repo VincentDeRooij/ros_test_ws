@@ -6,9 +6,6 @@
 
 class SerialWriter : public SerialIOController
 {
-private:
-	void SerialWriteMsg();
-
 public:
 	SerialWriter() = default;
 	~SerialWriter() = default;
@@ -18,7 +15,6 @@ public:
 private:
 	void processItem(std::queue<ExRMessage> &queue)
 	{
-		this->uartCommunicator.open();
 		// check if the given queue is empty
 		if (queue.empty() == false) // loops while the message queue contains more messages
 		{
@@ -44,8 +40,6 @@ private:
 				std::cout << "SERIAL_PORT_UNAVAILABLE" << std::endl;
 			}
 			std::cout << "SERIAL_MSG_WRITTEN CLOSING PORT";
-			// closes port after processing the message
-			this->uartCommunicator.close();
 		}
 		std::cout << std::endl;
 	}

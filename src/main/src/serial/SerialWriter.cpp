@@ -3,10 +3,6 @@
 #include "SerialWriter.h"
 #include "MsgBuilder.h"
 
-void SerialWriter::SerialWriteMsg()
-{
-}
-
 /**
  * @brief 
  * Adds a new message ready for sending via Serial to the queue

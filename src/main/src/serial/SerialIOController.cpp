@@ -30,6 +30,15 @@ void SerialIOController::initSerialController()
 
     serial::Timeout t_out = serial::Timeout::simpleTimeout(EX_EXR_SERIAL_TMOUT_MS); // set time-out
     this->uartCommunicator.setTimeout(t_out);
+
+    this->uartCommunicator.open();
+
+    while (!IsSerialPortAvailable())
+    {
+        this->uartCommunicator.open();
+
+        usleep(1000 * 500); // try again after 500ms
+    }
 }
 
 /**
