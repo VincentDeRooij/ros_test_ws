@@ -1,4 +1,5 @@
 #include "MBoxDriveSettings.h"
+#include "Converter.h"
 
 MBoxDriveSettings::MBoxDriveSettings(const bool &engineEnabled)
 {
@@ -65,6 +66,8 @@ void MBoxDriveSettings::Read(Payload &p)
     this->dataFields.INFO_STATES = p.payFull[6];
     // fifth ENGINE STATE TOGGLES
     this->dataFields.ENGINE_STATE_TOGGLES = p.payFull[7];
+
+    dataFields.TRAJECT_SPEED = UInt32FixedToInt32(dataFields.TRAJECT_SPEED, IQ24);
 
     std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
     std::cout << "TRAJECT_SPEED:" << unsigned(this->dataFields.TRAJECT_SPEED) << std::endl;

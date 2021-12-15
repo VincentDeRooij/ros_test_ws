@@ -61,6 +61,14 @@ protected:
         data |= byte_1 << 24;
     }
 
+    void copyInt32ToByteBuffer(int32_t value, uint8_t *buffer)
+    {
+        buffer[3] = (value & 0x000000ff);
+        buffer[2] = (value & 0x0000ff00) >> 8;
+        buffer[1] = (value & 0x00ff0000) >> 16;
+        buffer[0] = (value & 0xff000000) >> 24;
+    }
+
 public:
     virtual Payload Write() = 0;
     virtual void Read(Payload &p) = 0; // pure virtual

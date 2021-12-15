@@ -1,4 +1,5 @@
 #include "MBoxDriveSpeedTorque.h"
+#include "Converter.h"
 
 // MBoxDriveSpeedTorque::MBoxDriveSpeedTorque()
 // {
@@ -15,6 +16,11 @@ void MBoxDriveSpeedTorque::Read(Payload &p)
 
     // second TORQUE_Newton Meter
     setBitsUInt32(this->dataFields.TORQUE_NEWTM, p.payFull[7], p.payFull[6], p.payFull[5], p.payFull[4]);
+
+    // CONVERTING TO IQ24
+
+    dataFields.SPEED_KRPM = UInt32FixedToInt32(dataFields.SPEED_KRPM, IQ24);
+    dataFields.TORQUE_NEWTM = UInt32FixedToInt32(dataFields.TORQUE_NEWTM, IQ20);
 
     std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
     std::cout << "SPEED_KRPM: " << unsigned(this->dataFields.SPEED_KRPM) << std::endl;
