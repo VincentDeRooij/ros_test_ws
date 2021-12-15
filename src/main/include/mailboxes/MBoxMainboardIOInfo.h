@@ -4,11 +4,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Read Interface
-#include "IMBoxRead.h"
-// Mailbox Write Interface
-#include "IMBoxWrite.h"
-
 #pragma once
 
 class MBoxMainboardIOInfo : public Mailbox
@@ -22,6 +17,13 @@ private:
 		uint8_t MAINBOARD_INFO;
 		uint8_t IO_EXPANDER_STATUS;
 	};
+
+	// struct ConstructorMainboardIOInfo
+	// {
+	// 	bool lightIOPortOneIsEnabled = false;
+	// 	bool lightIOPortTwoIsEnabled = false;
+	// 	bool engineIOPortIsEnabled = false;
+	// };
 
 	MBoxOutStructureMBIOInfo dataFields;
 

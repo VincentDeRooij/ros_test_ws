@@ -3,16 +3,18 @@
 void MBoxInputVoltageCurrent::Read(Payload &p)
 {
     // Read the first uint32 from the payload
-    this->dataFields.VDCBUS_KV = p.getPayloadRow(3);
-    this->dataFields.VDCBUS_KV |= p.getPayloadRow(2) << 8;
-    this->dataFields.VDCBUS_KV |= p.getPayloadRow(1) << 16;
-    this->dataFields.VDCBUS_KV |= p.getPayloadRow(0) << 24;
+    setBitsUInt32(this->dataFields.VDCBUS_KV, p.payFull[3], p.payFull[2], p.payFull[1], p.payFull[0]);
 
     // Read the second uint32 from the payload
-    this->dataFields.IQREF_A = p.getPayloadRow(0);
-    this->dataFields.IQREF_A |= p.getPayloadRow(1) << 8;
-    this->dataFields.IQREF_A |= p.getPayloadRow(2) << 16;
-    this->dataFields.IQREF_A |= p.getPayloadRow(3) << 24;
+    setBitsUInt32(this->dataFields.IQREF_A, p.payFull[7], p.payFull[6], p.payFull[5], p.payFull[4]);
+
+
+    //CONVERT TO IQ24
+
+
+    std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
+    std::cout << "VDCBUS_KV: " << unsigned(this->dataFields.VDCBUS_KV) << std::endl;
+    std::cout << "IQREF_A: " << unsigned(this->dataFields.IQREF_A) << std::endl;
 }
 
 Payload MBoxInputVoltageCurrent::Write()

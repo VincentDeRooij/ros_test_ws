@@ -28,7 +28,7 @@ Payload MBoxDriveSettings::Write()
         // BIT(0)=1   DRV_ENABLE
 
         // fill byte 7 with the required data to enable the Engine
-        payload.setPayloadRow(7, 0b00111111);
+        payload.payFull[7] = 0b00111111;
     }
     else
     {
@@ -55,17 +55,21 @@ Payload MBoxDriveSettings::Write()
 void MBoxDriveSettings::Read(Payload &p)
 {
     // first TRAJECTORY SPEED
-    this->dataFields.TRAJECT_SPEED = p.getPayloadRow(3);
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(2) << 8;
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(1) << 16;
-    this->dataFields.TRAJECT_SPEED |= p.getPayloadRow(0) << 24;
+    setBitsUInt32(this->dataFields.TRAJECT_SPEED, p.payFull[3], p.payFull[2], p.payFull[1], p.payFull[0]);
 
     // second FIRMWARE VER
-    this->dataFields.FIRMWARE_VER = p.getPayloadRow(4);
+    this->dataFields.FIRMWARE_VER = p.payFull[4];
     // third AMPERE RATING
-    this->dataFields.AMPERE_RATING = p.getPayloadRow(5);
+    this->dataFields.AMPERE_RATING = p.payFull[5];
     // fourth INFO STATE
-    this->dataFields.INFO_STATES = p.getPayloadRow(6);
+    this->dataFields.INFO_STATES = p.payFull[6];
     // fifth ENGINE STATE TOGGLES
-    this->dataFields.ENGINE_STATE_TOGGLES = p.getPayloadRow(7);
+    this->dataFields.ENGINE_STATE_TOGGLES = p.payFull[7];
+
+    std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
+    std::cout << "TRAJECT_SPEED:" << unsigned(this->dataFields.TRAJECT_SPEED) << std::endl;
+    std::cout << "FIRMWARE_VER:" << unsigned(this->dataFields.FIRMWARE_VER) << std::endl;
+    std::cout << "AMPERE_RATING:" << unsigned(this->dataFields.AMPERE_RATING) << std::endl;
+    std::cout << "INFO_STATES:" << unsigned(this->dataFields.INFO_STATES) << std::endl;
+    std::cout << "ENGINE_STATE_TOGGLES:" << unsigned(this->dataFields.ENGINE_STATE_TOGGLES) << std::endl;
 }

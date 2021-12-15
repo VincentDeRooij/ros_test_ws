@@ -25,6 +25,42 @@ protected:
         }
     }
 
+    void setLowNibbleBits(uint8_t &data, uint8_t &byteToNibble)
+    {
+        data |= byteToNibble & 0xf0;
+    }
+
+    void setHighNibbleBits(uint8_t &data, uint8_t &byteToNibble)
+    {
+        data |= (byteToNibble & 0xf0) >> 4;
+    }
+
+    void setBitsUInt16(uint16_t &data, uint8_t &byte_1, uint8_t &byte_2)
+    {
+        data = byte_1 | (byte_2 << 8);
+    }
+
+    void setBitsInt16(int16_t &data, uint8_t &byte_1, uint8_t &byte_2)
+    {
+        data = byte_1 | (byte_2 << 8);
+    }
+
+    void setBitsUInt32(uint32_t &data, uint8_t &byte_1, uint8_t &byte_2, uint8_t &byte_3, uint8_t &byte_4)
+    {
+        data = byte_4;
+        data |= byte_3 << 8;
+        data |= byte_2 << 16;
+        data |= byte_1 << 24;
+    }
+
+    void setBitsInt32(int32_t &data, uint8_t &byte_1, uint8_t &byte_2, uint8_t &byte_3, uint8_t &byte_4)
+    {
+        data = byte_4;
+        data |= byte_3 << 8;
+        data |= byte_2 << 16;
+        data |= byte_1 << 24;
+    }
+
 public:
     virtual Payload Write() = 0;
     virtual void Read(Payload &p) = 0; // pure virtual

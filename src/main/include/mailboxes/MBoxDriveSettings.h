@@ -4,11 +4,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Read Interface
-#include "IMBoxRead.h"
-// Mailbox Write Interface
-#include "IMBoxWrite.h"
-
 #pragma once
 
 class MBoxDriveSettings : public Mailbox

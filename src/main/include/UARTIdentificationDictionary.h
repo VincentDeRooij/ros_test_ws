@@ -16,6 +16,18 @@
 // Mailboxes
 #include "MBoxDriveSettings.h"
 
+// class UARTIDDictionaryEntry
+// {
+// public:
+// 	UARTIDDictionaryEntry() = default;
+// 	~UARTIDDictionaryEntry() = default;
+
+// private:
+// 	uint16_t address;
+// 	Mailbox &box;
+// 	bool isWriteType;
+// };
+
 //A class with all the UART messages defined, ready to sent when you call them.
 class UARTIdentificationDictionary
 {
@@ -24,7 +36,7 @@ private:
 	{
 		uint16_t address;
 		Mailbox *box;
-		bool isWriteType; // if type is of write = 1, if not = 0
+		bool isWriteType;
 	};
 
 	//In the map m you'll find the BITDATA that alligns with the Serial adress that's given.
@@ -34,7 +46,7 @@ public:
 	UARTIdentificationDictionary() = default;
 	~UARTIdentificationDictionary() = default;
 
-	void AddToMap(const uint16_t &sA, Mailbox *mBox, const bool &type);
-	Mailbox *GetMailboxBySerial(const uint16_t &sId);
+	void AddToMap(const uint16_t &sA, Mailbox &mBox, const bool &type);
+	Mailbox &GetMailboxBySerial(const uint16_t &sId);
 };
 #endif

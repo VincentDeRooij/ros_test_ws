@@ -7,9 +7,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Read Interface
-#include "IMBoxRead.h"
-
 class MBoxDriveSpeedTorque : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:

@@ -68,20 +68,6 @@ void SerialReader::SerialReadMsg()
                 this->AddToMsgQueue(messagePtr, IsMsgPrioType(messagePtr.serialId));
 
                 this->processItem(this->std_queue);
-
-                // MBoxMainboardIOInfo a(false, false, false);
-
-                // Payload pl(
-                //     messagePtr.payload[0],
-                //     messagePtr.payload[1],
-                //     messagePtr.payload[2],
-                //     messagePtr.payload[3],
-                //     messagePtr.payload[4],
-                //     messagePtr.payload[5],
-                //     messagePtr.payload[6],
-                //     messagePtr.payload[7]);
-
-                // a.Read(pl);
             }
             else
             {

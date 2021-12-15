@@ -5,12 +5,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Read Interface
-#include "IMBoxRead.h"
-
-// Mailbox Write Interface
-#include "IMBoxWrite.h"
-
 class MBoxMotherboardStatus : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
@@ -28,7 +22,7 @@ private:
 
 public:
     // Overrides from Mailbox
-    void Read(Payload &p)override;
+    void Read(Payload &p) override;
     Payload Write() override;
 
     MBoxMotherboardStatus() = default;

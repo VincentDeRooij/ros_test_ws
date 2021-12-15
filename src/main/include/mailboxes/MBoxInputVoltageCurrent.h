@@ -5,8 +5,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Read Interface
-#include "IMBoxRead.h"
 
 class MBoxInputVoltageCurrent : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {

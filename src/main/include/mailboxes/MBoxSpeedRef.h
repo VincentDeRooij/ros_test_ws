@@ -5,9 +5,6 @@
 // Mailbox class
 #include "Mailbox.h"
 
-// Mailbox Write Interface
-#include "IMBoxWrite.h"
-
 // Converter
 #include "Converter.h"
 

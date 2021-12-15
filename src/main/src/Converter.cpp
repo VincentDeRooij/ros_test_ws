@@ -7,6 +7,12 @@ uint32_fixed_t IntToFixed(int32_t inputValue, std::uint8_t iqValue)
 {
     //int32_t limitValue = (1 << (32 - iqValue - 1)) * 1000;
 
+    int32_t limit = (1 << (32 - iqValue - 1)) * 1000;
+    if (inputValue > (limit - 1))
+        inputValue = (limit - 1);
+    else if (inputValue < -limit)
+        inputValue = -limit;
+
     double value = (double)inputValue / 1000.0;
     return (uint32_fixed_t)inputValue * (1 << iqValue);
 }

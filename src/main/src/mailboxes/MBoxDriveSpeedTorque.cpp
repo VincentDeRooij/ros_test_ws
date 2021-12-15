@@ -11,15 +11,14 @@
 void MBoxDriveSpeedTorque::Read(Payload &p)
 {
     // first SPEED_Kilo RPM
-    this->dataFields.SPEED_KRPM = p.getPayloadRow(3);
-    this->dataFields.SPEED_KRPM |= p.getPayloadRow(2) << 8;
-    this->dataFields.SPEED_KRPM |= p.getPayloadRow(1) << 16;
-    this->dataFields.SPEED_KRPM |= p.getPayloadRow(0) << 24;
+    setBitsUInt32(this->dataFields.SPEED_KRPM, p.payFull[3], p.payFull[2], p.payFull[1], p.payFull[0]);
+
     // second TORQUE_Newton Meter
-    this->dataFields.TORQUE_NEWTM = p.getPayloadRow(3);
-    this->dataFields.TORQUE_NEWTM |= p.getPayloadRow(2) << 8;
-    this->dataFields.TORQUE_NEWTM |= p.getPayloadRow(1) << 16;
-    this->dataFields.TORQUE_NEWTM |= p.getPayloadRow(0) << 24;
+    setBitsUInt32(this->dataFields.TORQUE_NEWTM, p.payFull[7], p.payFull[6], p.payFull[5], p.payFull[4]);
+
+    std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
+    std::cout << "SPEED_KRPM: " << unsigned(this->dataFields.SPEED_KRPM) << std::endl;
+    std::cout << "TORQUE_NEWTM: " << unsigned(this->dataFields.TORQUE_NEWTM) << std::endl;
 }
 
 Payload MBoxDriveSpeedTorque::Write()

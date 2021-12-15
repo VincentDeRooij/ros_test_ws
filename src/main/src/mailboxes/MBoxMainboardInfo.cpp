@@ -24,24 +24,23 @@ Payload MBoxMainboardIOInfo::Write()
 
 void MBoxMainboardIOInfo::Read(Payload &p)
 {
-    std::cout << "HELLO THERE! IAM DEBUG" << std::endl;
-
     // Read the first uint16 from the payload
-    this->dataFields.BAT_VOLTAGE = p.getPayloadRow(0) | (p.getPayloadRow(1) << 8);
+    setBitsUInt16(this->dataFields.BAT_VOLTAGE, p.payFull[0], p.payFull[1]);
 
     // Read the second uint16 from the payload
-    this->dataFields.BAT_CHARGE_PERCENTAGE = p.getPayloadRow(2) | (p.getPayloadRow(3) << 8);
+    setBitsUInt16(this->dataFields.BAT_CHARGE_PERCENTAGE, p.payFull[2], p.payFull[3]);
 
     // Read the third int16 from the payload
-    this->dataFields.BAT_AVR_CURRENT = p.getPayloadRow(4) | (p.getPayloadRow(5) << 8);
+    setBitsInt16(this->dataFields.BAT_AVR_CURRENT, p.payFull[4], p.payFull[5]);
 
     // lastly bind the fields of the two uint8 fields
-    this->dataFields.MAINBOARD_INFO = p.getPayloadRow(6);
-    this->dataFields.IO_EXPANDER_STATUS = p.getPayloadRow(7);
+    this->dataFields.MAINBOARD_INFO = p.payFull[6];
+    this->dataFields.IO_EXPANDER_STATUS = p.payFull[7];
 
-    std::cout << "Volt:" << unsigned(this->dataFields.BAT_VOLTAGE) << std::endl;
-    std::cout << "Charge:" << unsigned(this->dataFields.BAT_CHARGE_PERCENTAGE) << std::endl;
-    std::cout << "AVR_C:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
-    std::cout << "Info:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
-    std::cout << "Expander:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
+    std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
+    std::cout << "BAT_VOLTAGE:" << unsigned(this->dataFields.BAT_VOLTAGE) << std::endl;
+    std::cout << "BAT_CHARGE_PERCENTAGE:" << unsigned(this->dataFields.BAT_CHARGE_PERCENTAGE) << std::endl;
+    std::cout << "BAT_AVR_CURRENT:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
+    std::cout << "MAINBOARD_INFO:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
+    std::cout << "IO_EXPANDER_STATUS:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
 }
