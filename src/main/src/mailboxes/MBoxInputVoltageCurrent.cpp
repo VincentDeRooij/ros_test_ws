@@ -1,5 +1,6 @@
 #include "MBoxInputVoltageCurrent.h"
 #include "Converter.h"
+#include "NotImplementedException.h"
 
 void MBoxInputVoltageCurrent::Read(Payload &p)
 {
@@ -20,7 +21,10 @@ void MBoxInputVoltageCurrent::Read(Payload &p)
 
 Payload MBoxInputVoltageCurrent::Write()
 {
-    Payload a;
+    throw NotImplementedException();
+}
 
-    return a;
+void MBoxInputVoltageCurrent::Set(void *dynamicMBoxStruct)
+{
+    throw NotImplementedException();
 }

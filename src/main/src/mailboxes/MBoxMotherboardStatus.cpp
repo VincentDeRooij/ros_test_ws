@@ -1,4 +1,5 @@
 #include "MBoxMotherboardStatus.h"
+#include "NotImplementedException.h"
 
 void MBoxMotherboardStatus::Read(Payload &p)
 {
@@ -30,4 +31,9 @@ Payload MBoxMotherboardStatus::Write()
 {
     // Write empty payload
     return Payload();
+}
+
+void MBoxMotherboardStatus::Set(void *dynamicMBoxStruct)
+{
+    throw NotImplementedException();
 }

@@ -1,4 +1,5 @@
 #include "MBoxTemperatures.h"
+#include "NotImplementedException.h"
 
 void MBoxTemperatures::Read(Payload &p)
 {
@@ -10,7 +11,10 @@ void MBoxTemperatures::Read(Payload &p)
 
 Payload MBoxTemperatures::Write()
 {
-    Payload a;
+    throw NotImplementedException();
+}
 
-    return a;
+void MBoxTemperatures::Set(void *dynamicMBoxStruct)
+{
+    throw NotImplementedException();
 }

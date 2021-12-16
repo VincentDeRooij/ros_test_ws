@@ -1,14 +1,6 @@
 #include "MBoxDriveSpeedTorque.h"
 #include "Converter.h"
 
-// MBoxDriveSpeedTorque::MBoxDriveSpeedTorque()
-// {
-// }
-
-// MBoxDriveSpeedTorque::~MBoxDriveSpeedTorque()
-// {
-// }
-
 void MBoxDriveSpeedTorque::Read(Payload &p)
 {
     // first SPEED_Kilo RPM
@@ -29,7 +21,19 @@ void MBoxDriveSpeedTorque::Read(Payload &p)
 
 Payload MBoxDriveSpeedTorque::Write()
 {
-    Payload a;
+    Payload pl;
 
-    return a;
+    copyInt32ToByteBuffer(this->maxAccelKRPM, &pl.payFull[0]);
+    copyInt32ToByteBuffer(this->maxAccelKRPM, &pl.payFull[4]);
+
+    return pl;
+}
+
+void MBoxDriveSpeedTorque::Set(void *dynamicMBoxStruct)
+{
+    DynamicAccelJerkPayload *dynamicPayload = (DynamicAccelJerkPayload *)dynamicMBoxStruct;
+
+    // TIM CHECK REQUIRED?
+    this->maxAccelKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_ACCEL_KRPM, IQ24);
+    this->maxJerkKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_JERK_KRPM, IQ20);
 }

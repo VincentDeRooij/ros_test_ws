@@ -1,19 +1,12 @@
 #include "MBoxMainboardIOInfo.h"
 
-MBoxMainboardIOInfo::MBoxMainboardIOInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort)
-{
-    this->engineIOPortIsEnabled = engineIOPort;
-    this->lightIOPortOneIsEnabled = lightIOPortOne;
-    this->lightIOPortTwoIsEnabled = lightIOPortTwo;
-}
-
 Payload MBoxMainboardIOInfo::Write()
 {
     uint8_t byte = 0;
 
-    setBitOnPos(byte, 0, this->lightIOPortOneIsEnabled);
-    setBitOnPos(byte, 1, this->lightIOPortTwoIsEnabled);
-    setBitOnPos(byte, 7, this->engineIOPortIsEnabled);
+    setBitOnPos(byte, 0, this->ioExpanderP0Light1);
+    setBitOnPos(byte, 1, this->ioExpanderP1Light2);
+    setBitOnPos(byte, 7, this->ioExpanderP7Motor);
 
     Payload payload(0, 0, 0, 0, 0, 0, 0, byte);
 
@@ -31,7 +24,9 @@ void MBoxMainboardIOInfo::Read(Payload &p)
     setBitsUInt16(this->dataFields.BAT_CHARGE_PERCENTAGE, p.payFull[2], p.payFull[3]);
 
     // Read the third int16 from the payload
-    setBitsInt16(this->dataFields.BAT_AVR_CURRENT, p.payFull[4], p.payFull[5]);
+    //setBitsInt16(this->dataFields.BAT_AVR_CURRENT, p.payFull[4], p.payFull[5]);
+
+    this->dataFields.BAT_AVR_CURRENT = (int16_t)((uint16_t)p.payFull[4] | ((uint16_t)p.payFull[5] << 8));
 
     // lastly bind the fields of the two uint8 fields
     this->dataFields.MAINBOARD_INFO = p.payFull[6];
@@ -43,4 +38,13 @@ void MBoxMainboardIOInfo::Read(Payload &p)
     std::cout << "BAT_AVR_CURRENT:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
     std::cout << "MAINBOARD_INFO:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
     std::cout << "IO_EXPANDER_STATUS:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
+}
+
+void MBoxMainboardIOInfo::Set(void *dynamicMBoxStruct)
+{
+    DynamicMainboardIOInfoPayload *dynamicPayload = (DynamicMainboardIOInfoPayload *)dynamicMBoxStruct;
+
+    this->ioExpanderP7Motor = dynamicPayload->IO_Expander_P0_7_MOTOR;
+    this->ioExpanderP1Light2 = dynamicPayload->IO_Expander_P0_1_LIGHT_2;
+    this->ioExpanderP0Light1 = dynamicPayload->IO_Expander_P0_0_LIGHT_1;
 }

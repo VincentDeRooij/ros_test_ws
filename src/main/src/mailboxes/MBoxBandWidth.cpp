@@ -1,5 +1,6 @@
 #include "MBoxBandWidth.h"
 #include "Converter.h"
+#include "NotImplementedException.h"
 
 MBoxBandWidth::MBoxBandWidth()
 {
@@ -8,8 +9,8 @@ MBoxBandWidth::MBoxBandWidth()
 Payload MBoxBandWidth::Write()
 {
     Payload pl;
-    int32_t bwCurrent = 0;
-    int32_t controlBw = 20;
+    int32_t bwCurrent = this->maxCurrent;
+    int32_t controlBw = this->controlBandwidth;
 
     uint32_t bwCurrentConv = Int32ToUInt32Fixed(bwCurrent, IQ24);
     uint32_t controlBwConv = Int32ToUInt32Fixed(controlBw, IQ20);
@@ -23,4 +24,15 @@ Payload MBoxBandWidth::Write()
 void MBoxBandWidth::Read(Payload &p)
 {
     // EMPTY
+    throw NotImplementedException();
+}
+
+void MBoxBandWidth::Set(void *dynamicMBoxStruct)
+{
+    // convert the void pointer type to the structure required
+    DynamicBandwidthPayload *dynamicPayload = (DynamicBandwidthPayload *)dynamicMBoxStruct;
+
+    // assign the values
+    this->maxCurrent = dynamicPayload->MAX_CURRENT;
+    this->controlBandwidth = dynamicPayload->CONTROL_BANDWIDTH;
 }

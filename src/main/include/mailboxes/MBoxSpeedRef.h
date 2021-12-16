@@ -11,14 +11,21 @@
 class MBoxSpeedRef : public Mailbox
 {
 private:
-	int8_t right;
-	int8_t left;
+	int8_t rightMotorDrive; //SPEEDREF LEFT USING IQ24 VALUE -4 to +4
+	int8_t leftMotorDrive;	//SPEEDREF RIGHT USING IQ24 VALUE -4 to +4
 
 public:
-	MBoxSpeedRef(int8_t right, int8_t left);
+	struct DynamicSpeedRefPayload
+	{
+		int8_t RIGHT_MOTOR_DRIVE; // MAX ALLOWED RANGE -4 <> 4
+		int8_t LEFT_MOTOR_DRIVE;  // MAX ALLOWED RANGE -4 <> 4
+	};
+
+	MBoxSpeedRef() = default;
 	~MBoxSpeedRef() = default;
 
 	Payload Write() override;
 	void Read(Payload &p) override;
+	void Set(void *structure);
 };
 #endif

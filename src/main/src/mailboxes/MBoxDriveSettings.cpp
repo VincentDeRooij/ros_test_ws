@@ -1,54 +1,24 @@
 #include "MBoxDriveSettings.h"
 #include "Converter.h"
 
-MBoxDriveSettings::MBoxDriveSettings(const bool &engineEnabled)
-{
-    this->engineIsEnabled = engineEnabled;
-}
-
-MBoxDriveSettings::~MBoxDriveSettings()
-{
-}
-
 Payload MBoxDriveSettings::Write()
 {
     Payload payload;
+    //>> Not relevant
+    // BIT(7)=0   I2T FILTER
+    // BIT(6)=0   POWERWARP
 
-    if (this->engineIsEnabled == true)
-    {
-        //>> Not relevant
-        // BIT(7)=0   I2T FILTER
-        // BIT(6)=0   POWERWARP
+    //>> important
+    // BIT(5)=1   ENABLE_OFFSET_CALC
+    // BIT(4)=1   ENABLE_FORCE_ANGLE
+    // BIT(3)=1   ENABLE_RS_RECALC
+    // BIT(2)=1   ENABLE_USER_PARAM
+    // BIT(1)=1   DRV_INDENTIFY
+    // BIT(0)=1   DRV_ENABLE
 
-        //>> important
-        // BIT(5)=1   ENABLE_OFFSET_CALC
-        // BIT(4)=1   ENABLE_FORCE_ANGLE
-        // BIT(3)=1   ENABLE_RS_RECALC
-        // BIT(2)=1   ENABLE_USER_PARAM
-        // BIT(1)=1   DRV_INDENTIFY
-        // BIT(0)=1   DRV_ENABLE
+    // fill byte 7 with the required data to enable the Engine
 
-        // fill byte 7 with the required data to enable the Engine
-        payload.payFull[7] = 0b00111111;
-    }
-    else
-    {
-        //>> Not relevant
-        // BIT(7)=0   I2T FILTER
-        // BIT(6)=0   POWERWARP
-
-        //>> important
-        // BIT(5)=0   ENABLE_OFFSET_CALC
-        // BIT(4)=0   ENABLE_FORCE_ANGLE
-        // BIT(3)=0   ENABLE_RS_RECALC
-        // BIT(2)=0   ENABLE_USER_PARAM
-        // BIT(1)=0   DRV_INDENTIFY
-        // BIT(0)=0   DRV_ENABLE
-
-        Payload payload(0, 0, 0, 0, 0, 0, 0, 0); // set payload to all zero's and reserved space
-    }
-
-    payload.PrintPayload();
+    setBitsOnByte(payload.payFull[7], this->drvEnable, this->drvIdentity, this->enableUserParam, this->enableRSRecalc, this->enableForceAngle, this->enableOffsetCalc, false, false);
 
     return payload;
 }
@@ -75,4 +45,16 @@ void MBoxDriveSettings::Read(Payload &p)
     std::cout << "AMPERE_RATING:" << unsigned(this->dataFields.AMPERE_RATING) << std::endl;
     std::cout << "INFO_STATES:" << unsigned(this->dataFields.INFO_STATES) << std::endl;
     std::cout << "ENGINE_STATE_TOGGLES:" << unsigned(this->dataFields.ENGINE_STATE_TOGGLES) << std::endl;
+}
+
+void MBoxDriveSettings::Set(void *dynamicMBoxStruct)
+{
+    DynamicDriveSettingsPayload *dynamicPayload = (DynamicDriveSettingsPayload *)dynamicMBoxStruct;
+
+    this->enableOffsetCalc = dynamicPayload->ENABLE_OFFSET_CALC;
+    this->enableForceAngle = dynamicPayload->ENABLE_FORCE_ANGLE;
+    this->enableRSRecalc = dynamicPayload->ENABLE_RS_RECALC;
+    this->enableUserParam = dynamicPayload->ENABLE_USER_PARAM;
+    this->drvIdentity = dynamicPayload->DRV_IDENTIFY;
+    this->drvEnable = dynamicPayload->DRV_ENABLE;
 }

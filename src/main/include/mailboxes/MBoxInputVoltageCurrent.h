@@ -11,8 +11,8 @@ class MBoxInputVoltageCurrent : public Mailbox //, ExROutput<ExRDataStructureTyp
 private:
 	struct MBoxOutStructureVCInfo
 	{
-		uint32_t VDCBUS_KV;
-		uint32_t IQREF_A;
+		uint32_t VDCBUS_KV; //VOLTAGE IN kV
+		uint32_t IQREF_A; //CURENT IN A
 	};
 
 	MBoxOutStructureVCInfo dataFields;
@@ -21,6 +21,7 @@ public:
 	// Overrides from Mailbox
 	Payload Write() override;
 	void Read(Payload &p) override;
+	void Set(void *structure);
 
 	MBoxInputVoltageCurrent() = default;
 	~MBoxInputVoltageCurrent() = default;

@@ -24,6 +24,7 @@ public:
     // Overrides from Mailbox
     void Read(Payload &p) override;
     Payload Write() override;
+    void Set(void *structure);
 
     MBoxMotherboardStatus() = default;
     ~MBoxMotherboardStatus() = default;
