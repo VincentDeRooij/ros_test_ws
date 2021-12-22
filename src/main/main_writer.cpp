@@ -43,6 +43,7 @@ int run(int argc, char **argv)
 
   pl.IO_Expander_P0_0_LIGHT_1 = true;
   pl.IO_Expander_P0_1_LIGHT_2 = true;
+  pl.IO_Expander_P0_7_MOTOR = true;
   info.Set(&pl);
   writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info.Write(), false);
   writer.ProcessSerialMessageQueues();

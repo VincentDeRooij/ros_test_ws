@@ -1,5 +1,12 @@
 #include "MBoxMainboardIOInfo.h"
 
+// Insert comment "/**"
+
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload Payload MainboardInfo
+ */
 Payload MBoxMainboardIOInfo::Write()
 {
     uint8_t byte = 0;
@@ -15,6 +22,11 @@ Payload MBoxMainboardIOInfo::Write()
     return payload;
 }
 
+/**
+ * @brief Reading the datafields and saving them in the right struct
+ * 
+ * @param p Payload received from Serial port
+ */
 void MBoxMainboardIOInfo::Read(Payload &p)
 {
     // Read the first uint16 from the payload
@@ -24,9 +36,7 @@ void MBoxMainboardIOInfo::Read(Payload &p)
     setBitsUInt16(this->dataFields.BAT_CHARGE_PERCENTAGE, p.payFull[2], p.payFull[3]);
 
     // Read the third int16 from the payload
-    //setBitsInt16(this->dataFields.BAT_AVR_CURRENT, p.payFull[4], p.payFull[5]);
-
-    this->dataFields.BAT_AVR_CURRENT = (int16_t)((uint16_t)p.payFull[4] | ((uint16_t)p.payFull[5] << 8));
+    setBitsInt16(this->dataFields.BAT_AVR_CURRENT, p.payFull[4], p.payFull[5]);
 
     // lastly bind the fields of the two uint8 fields
     this->dataFields.MAINBOARD_INFO = p.payFull[6];
@@ -35,7 +45,7 @@ void MBoxMainboardIOInfo::Read(Payload &p)
     std::cout << "<<<<<READER VALUES>>>>>" << std::endl;
     std::cout << "BAT_VOLTAGE:" << unsigned(this->dataFields.BAT_VOLTAGE) << std::endl;
     std::cout << "BAT_CHARGE_PERCENTAGE:" << unsigned(this->dataFields.BAT_CHARGE_PERCENTAGE) << std::endl;
-    std::cout << "BAT_AVR_CURRENT:" << unsigned(this->dataFields.BAT_AVR_CURRENT) << std::endl;
+    std::cout << "BAT_AVR_CURRENT:" << (this->dataFields.BAT_AVR_CURRENT) << std::endl;
     std::cout << "MAINBOARD_INFO:" << unsigned(this->dataFields.MAINBOARD_INFO) << std::endl;
     std::cout << "IO_EXPANDER_STATUS:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
 }
