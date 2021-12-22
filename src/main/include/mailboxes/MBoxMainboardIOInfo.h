@@ -15,11 +15,11 @@ private:
 
 	struct MBoxOutStructureMBIOInfo
 	{
-		uint16_t BAT_VOLTAGE; //BATTERY VOLTAGE 0 to 43200 mV
+		uint16_t BAT_VOLTAGE;			//BATTERY VOLTAGE 0 to 43200 mV
 		uint16_t BAT_CHARGE_PERCENTAGE; //BATTERY PERCENTAGE 0 to 100%
-		int16_t BAT_AVR_CURRENT; // BATTERY CURRENT -32k to 32k mA
-		uint8_t MAINBOARD_INFO; // BMS STATUS. 00 to 11 = 00 NORMAL, 01 WARNING, 10 TEMPORARY TRIPPED, 11 PERMANENTLY TRIPPED
-		uint8_t IO_EXPANDER_STATUS; //
+		int16_t BAT_AVR_CURRENT;		// BATTERY CURRENT -32k to 32k mA
+		uint8_t MAINBOARD_INFO;			// BMS STATUS. 00 to 11 = 00 NORMAL, 01 WARNING, 10 TEMPORARY TRIPPED, 11 PERMANENTLY TRIPPED
+		uint8_t IO_EXPANDER_STATUS;		//
 	};
 	MBoxOutStructureMBIOInfo dataFields;
 
@@ -31,12 +31,12 @@ public:
 		bool IO_Expander_P0_0_LIGHT_1;
 	};
 
-	MBoxMainboardIOInfo(const bool &lightIOPortOne, const bool &lightIOPortTwo, const bool &engineIOPort);
+	MBoxMainboardIOInfo() = default;
 	~MBoxMainboardIOInfo() = default;
 
 	// inherit the method from mailbox, allowing our own method implementations
 	virtual void Read(Payload &p);
 	virtual Payload Write();
-	void Set(void *structure);
+	void Set(void *dynamicMBoxStruct);
 };
 #endif

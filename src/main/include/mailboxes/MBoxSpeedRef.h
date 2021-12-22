@@ -26,6 +26,6 @@ public:
 
 	Payload Write() override;
 	void Read(Payload &p) override;
-	void Set(void *structure);
+	void Set(void *dynamicMBoxStruct);
 };
 #endif

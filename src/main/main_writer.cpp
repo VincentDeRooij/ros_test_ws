@@ -35,20 +35,27 @@ int run(int argc, char **argv)
   SerialWriter writer; // The serial writer portion
   writer.OpenSerialPortConnection();
 
-  MBoxMainboardIOInfo info_on(true, true, true);
-  MBoxMainboardIOInfo info_off(false, false, true);
+  MBoxMainboardIOInfo info;
 
   MBoxMotherboardStatus status;
 
-  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info_on.Write(), false);
+  MBoxMainboardIOInfo::DynamicMainboardIOInfoPayload pl;
+
+  pl.IO_Expander_P0_0_LIGHT_1 = true;
+  pl.IO_Expander_P0_1_LIGHT_2 = true;
+  info.Set(&pl);
+  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * 100);
+  usleep(1000 * (1000));
 
-  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info_off.Write(), false);
+  pl.IO_Expander_P0_0_LIGHT_1 = false;
+  pl.IO_Expander_P0_1_LIGHT_2 = false;
+  info.Set(&pl);
+  writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  usleep(1000 * 100);
+  usleep(1000 * (1000));
 
   writer.AddToMsgQueue(EX_MAINBOARD_STATUS_TYPE_SET, status.Write(), false);
   writer.ProcessSerialMessageQueues();

@@ -44,6 +44,6 @@ public:
 	// inherit the method from mailbox, allowing our own method implementations
 	void Read(Payload &p) override;
 	Payload Write() override;
-	void Set(void *structure);
+	void Set(void *dynamicMBoxStruct);
 };
 #endif

@@ -23,6 +23,6 @@ public:
 
 	Payload Write();
 	void Read(Payload &p);
-	void Set(void *structure);
+	void Set(void *dynamicMBoxStruct);
 };
 #endif

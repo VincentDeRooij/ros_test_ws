@@ -38,12 +38,12 @@ int run(int argc, char **argv)
   UARTIdentificationDictionary idDict;
 
   MBoxBandWidth bwMb;
-  MBoxDriveSettings dsMb(true);
+  MBoxDriveSettings dsMb;
   MBoxDriveSpeedTorque dstMb;
   MBoxInputVoltageCurrent iVCMb;
-  MBoxMainboardIOInfo mIIMb(false, false, true);
+  MBoxMainboardIOInfo mIIMb;
   MBoxMotherboardStatus msMb;
-  MBoxSpeedRef srMb(1, 1);
+  MBoxSpeedRef srMb;
   MBoxTemperatures tMb;
 
   idDict.AddToMap(EX_DRIVE_LEFT_BANDW_TYPE_SET, bwMb, true);

@@ -21,7 +21,7 @@ public:
 	// Overrides from Mailbox
 	Payload Write() override;
 	void Read(Payload &p) override;
-	void Set(void *structure);
+	void Set(void *dynamicMBoxStruct);
 
 	MBoxInputVoltageCurrent() = default;
 	~MBoxInputVoltageCurrent() = default;
