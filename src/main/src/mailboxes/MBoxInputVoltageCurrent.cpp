@@ -2,6 +2,11 @@
 #include "Converter.h"
 #include "NotImplementedException.h"
 
+/**
+ * @brief Reading the datafields and saving them in the right struct
+ * 
+ * @param p Payload received from Serial port
+ */
 void MBoxInputVoltageCurrent::Read(Payload &p)
 {
     // Read the first uint32 from the payload
@@ -19,11 +24,21 @@ void MBoxInputVoltageCurrent::Read(Payload &p)
     std::cout << "IQREF_A: " << unsigned(this->dataFields.IQREF_A) << std::endl;
 }
 
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
 Payload MBoxInputVoltageCurrent::Write()
 {
     throw NotImplementedException();
 }
 
+/**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
 void MBoxInputVoltageCurrent::Set(void *dynamicMBoxStruct)
 {
     throw NotImplementedException();

@@ -1,6 +1,11 @@
 #include "MBoxDriveSettings.h"
 #include "Converter.h"
 
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
 Payload MBoxDriveSettings::Write()
 {
     Payload payload;
@@ -23,6 +28,11 @@ Payload MBoxDriveSettings::Write()
     return payload;
 }
 
+/**
+ * @brief Reading the datafields and saving them in the right struct
+ * 
+ * @param p Payload received from Serial port
+ */
 void MBoxDriveSettings::Read(Payload &p)
 {
     // first TRAJECTORY SPEED
@@ -47,6 +57,11 @@ void MBoxDriveSettings::Read(Payload &p)
     std::cout << "ENGINE_STATE_TOGGLES:" << unsigned(this->dataFields.ENGINE_STATE_TOGGLES) << std::endl;
 }
 
+/**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
 void MBoxDriveSettings::Set(void *dynamicMBoxStruct)
 {
     DynamicDriveSettingsPayload *dynamicPayload = (DynamicDriveSettingsPayload *)dynamicMBoxStruct;

@@ -1,6 +1,11 @@
 #include "MBoxDriveSpeedTorque.h"
 #include "Converter.h"
 
+/**
+ * @brief Reading the datafields and saving them in the right struct
+ * 
+ * @param p Payload received from Serial port
+ */
 void MBoxDriveSpeedTorque::Read(Payload &p)
 {
     // first SPEED_Kilo RPM
@@ -19,6 +24,11 @@ void MBoxDriveSpeedTorque::Read(Payload &p)
     std::cout << "TORQUE_NEWTM: " << unsigned(this->dataFields.TORQUE_NEWTM) << std::endl;
 }
 
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
 Payload MBoxDriveSpeedTorque::Write()
 {
     Payload pl;
@@ -29,6 +39,11 @@ Payload MBoxDriveSpeedTorque::Write()
     return pl;
 }
 
+/**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
 void MBoxDriveSpeedTorque::Set(void *dynamicMBoxStruct)
 {
     DynamicAccelJerkPayload *dynamicPayload = (DynamicAccelJerkPayload *)dynamicMBoxStruct;

@@ -6,6 +6,11 @@ MBoxBandWidth::MBoxBandWidth()
 {
 }
 
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
 Payload MBoxBandWidth::Write()
 {
     Payload pl;
@@ -21,12 +26,22 @@ Payload MBoxBandWidth::Write()
     return pl;
 }
 
+/**
+ * @brief Reading the datafields and saving them in the right struct
+ * 
+ * @param p Payload received from Serial port
+ */
 void MBoxBandWidth::Read(Payload &p)
 {
     // EMPTY
     throw NotImplementedException();
 }
 
+/**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
 void MBoxBandWidth::Set(void *dynamicMBoxStruct)
 {
     // convert the void pointer type to the structure required

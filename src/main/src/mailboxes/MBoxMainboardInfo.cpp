@@ -5,7 +5,7 @@
 /**
  * @brief Returns a payload object belonging to the MBOX with correct bytecode
  * 
- * @return Payload Payload MainboardInfo
+ * @return Payload with the bytecode for this MBOX
  */
 Payload MBoxMainboardIOInfo::Write()
 {
@@ -50,6 +50,11 @@ void MBoxMainboardIOInfo::Read(Payload &p)
     std::cout << "IO_EXPANDER_STATUS:" << unsigned(this->dataFields.IO_EXPANDER_STATUS) << std::endl;
 }
 
+/**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
 void MBoxMainboardIOInfo::Set(void *dynamicMBoxStruct)
 {
     DynamicMainboardIOInfoPayload *dynamicPayload = (DynamicMainboardIOInfoPayload *)dynamicMBoxStruct;
