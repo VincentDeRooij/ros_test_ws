@@ -11,6 +11,12 @@
 // debug
 #include "Debugging.h" // include > enables the ifdef DEBUG
 
+/**
+ * @brief Construct a new Msg Builder:: Msg Builder object
+ * 
+ * @param serialId The Serial ID where the message needs to be sent
+ * @param payload  The payload object that needs to be sent
+ */
 MsgBuilder::MsgBuilder(const uint16_t &serialId, const Payload &payload)
 {
     // fill the headers
@@ -32,6 +38,11 @@ MsgBuilder::MsgBuilder(const uint16_t &serialId, const Payload &payload)
     }
 }
 
+/**
+ * @brief Call the built message
+ * 
+ * @return ExRMessage Message ready for sending
+ */
 ExRMessage MsgBuilder::GetExRMessage()
 {
 #ifdef DEBUG // debugging enable / disable

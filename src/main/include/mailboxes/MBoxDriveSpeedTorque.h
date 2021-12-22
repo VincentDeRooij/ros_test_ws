@@ -13,6 +13,10 @@ private:
 	int32_t maxAccelKRPM; // uint32_t for the fixed type conversion
 	int32_t maxJerkKRPM;  // uint32_t for the fixed type conversion
 
+/**
+ * @brief Output structure for this MBOX
+ * 
+ */
 	struct MBoxOutStructureSpeedTorque
 	{
 		uint32_t SPEED_KRPM;   //MOTOR SPEED IN KRPM

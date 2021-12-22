@@ -13,6 +13,10 @@ private:
 	bool ioExpanderP1Light2 = false;
 	bool ioExpanderP0Light1 = false;
 
+/**
+ * @brief Output structure for this MBOX
+ * 
+ */
 	struct MBoxOutStructureMBIOInfo
 	{
 		uint16_t BAT_VOLTAGE;			//BATTERY VOLTAGE 0 to 43200 mV

@@ -8,6 +8,10 @@
 class MBoxTemperatures : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
+/**
+ * @brief Output structure for this MBOX
+ * 
+ */
     struct MBoxOutStructureTemp
     {
         uint16_t MOSFET_TEMP; //MOSFET TEMPERATURE SENSOR ADC VALUE 0 to 65535

@@ -8,6 +8,10 @@
 class MBoxMotherboardStatus : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
+/**
+ * @brief Output structure for this MBOX
+ * 
+ */
     struct MBoxOutStructureMBStatus
     {
         uint8_t SOFTWARE_TYPE;       // Development or Production

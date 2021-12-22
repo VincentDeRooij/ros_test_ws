@@ -9,6 +9,10 @@
 class MBoxInputVoltageCurrent : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
+/**
+ * @brief Output structure for this MBOX
+ * 
+ */
 	struct MBoxOutStructureVCInfo
 	{
 		uint32_t VDCBUS_KV; //VOLTAGE IN kV
