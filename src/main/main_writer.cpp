@@ -86,7 +86,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_DRIVE_RIGHT_SETTINGS_TYPE_SET, settings.Write(), false);
   writer.ProcessSerialMessageQueues();
 
-  pl_bw.CONTROL_BANDWIDTH = 21;
+  pl_bw.CONTROL_BANDWIDTH = 20;
   pl_bw.MAX_CURRENT = 0;
   bw.Set(&pl_bw);
 

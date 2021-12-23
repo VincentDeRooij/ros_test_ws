@@ -25,7 +25,7 @@ public:
 	MBoxBandWidth() = default;
 	~MBoxBandWidth() = default;
 
-	const char *what(void *payloadType) throw();
+	const char *FailSafeSet(void *payloadType) throw();
 
 	// inherit the method from mailbox, allowing our own method implementations
 	void Read(Payload &p) override;

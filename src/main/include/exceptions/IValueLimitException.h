@@ -6,7 +6,7 @@
 class IValueLimitException : public std::exception
 {
 public:
-    virtual const char *what(void *payloadType) throw() = 0;
+    virtual const char *FailSafeSet(void *payloadType) throw() = 0;
 };
 
 #endif // __VALUELIMITEXCEPTION_H__

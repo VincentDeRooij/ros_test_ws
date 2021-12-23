@@ -15,7 +15,7 @@
  * @param payloadType The same dynamic payload type (void*)  
  * @return const char* The return message of the exception
  */
-const char *MBoxBandWidth::what(void *payloadType) throw()
+const char *MBoxBandWidth::FailSafeSet(void *payloadType) throw()
 {
     std::cout << "Value incorrect/unsafe! Adjusting to fail-safe values..." << std::endl;
     DynamicBandwidthPayload *dynamicPayload = (DynamicBandwidthPayload *)payloadType;
@@ -68,9 +68,10 @@ void MBoxBandWidth::Set(void *dynamicMBoxStruct)
     }
     catch (const IValueLimitException &e)
     {
-        std::cerr << what(&dynamicPayload) << '\n';
+        std::cerr << FailSafeSet(&dynamicPayload) << '\n';
     }
 
+    std::cout << "Values correct, continuing program..." << std::endl;
     // assign the values
     this->maxCurrent = dynamicPayload->MAX_CURRENT;
     this->controlBandwidth = dynamicPayload->CONTROL_BANDWIDTH;
