@@ -8,7 +8,7 @@
 class MBoxMotherboardStatus : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
-/**
+    /**
  * @brief Output structure for this MBOX
  * 
  */
@@ -25,12 +25,12 @@ private:
     MBoxOutStructureMBStatus dataFields;
 
 public:
-    // Overrides from Mailbox
-    void Read(Payload &p) override;
-    Payload Write() override;
-    void Set(void *dynamicMBoxStruct);
-
     MBoxMotherboardStatus() = default;
     ~MBoxMotherboardStatus() = default;
+
+    // inherit the method from mailbox, allowing our own method implementations
+    void Read(Payload &p) override;
+    void Set(void *dynamicMBoxStruct) override;
+    Payload Write() override;
 };
 #endif

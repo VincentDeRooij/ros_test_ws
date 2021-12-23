@@ -2,33 +2,6 @@
 #include "Converter.h"
 
 /**
- * @brief Returns a payload object belonging to the MBOX with correct bytecode
- * 
- * @return Payload with the bytecode for this MBOX
- */
-Payload MBoxDriveSettings::Write()
-{
-    Payload payload;
-    //>> Not relevant
-    // BIT(7)=0   I2T FILTER
-    // BIT(6)=0   POWERWARP
-
-    //>> important
-    // BIT(5)=1   ENABLE_OFFSET_CALC
-    // BIT(4)=1   ENABLE_FORCE_ANGLE
-    // BIT(3)=1   ENABLE_RS_RECALC
-    // BIT(2)=1   ENABLE_USER_PARAM
-    // BIT(1)=1   DRV_INDENTIFY
-    // BIT(0)=1   DRV_ENABLE
-
-    // fill byte 7 with the required data to enable the Engine
-
-    setBitsOnByte(payload.payFull[7], this->drvEnable, this->drvIdentity, this->enableUserParam, this->enableRSRecalc, this->enableForceAngle, this->enableOffsetCalc, false, false);
-
-    return payload;
-}
-
-/**
  * @brief Reading the datafields and saving them in the right struct
  * 
  * @param p Payload received from Serial port
@@ -72,4 +45,31 @@ void MBoxDriveSettings::Set(void *dynamicMBoxStruct)
     this->enableUserParam = dynamicPayload->ENABLE_USER_PARAM;
     this->drvIdentity = dynamicPayload->DRV_IDENTIFY;
     this->drvEnable = dynamicPayload->DRV_ENABLE;
+}
+
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
+Payload MBoxDriveSettings::Write()
+{
+    Payload payload;
+    //>> Not relevant
+    // BIT(7)=0   I2T FILTER
+    // BIT(6)=0   POWERWARP
+
+    //>> important
+    // BIT(5)=1   ENABLE_OFFSET_CALC
+    // BIT(4)=1   ENABLE_FORCE_ANGLE
+    // BIT(3)=1   ENABLE_RS_RECALC
+    // BIT(2)=1   ENABLE_USER_PARAM
+    // BIT(1)=1   DRV_INDENTIFY
+    // BIT(0)=1   DRV_ENABLE
+
+    // fill byte 7 with the required data to enable the Engine
+
+    setBitsOnByte(payload.payFull[7], this->drvEnable, this->drvIdentity, this->enableUserParam, this->enableRSRecalc, this->enableForceAngle, this->enableOffsetCalc, false, false);
+
+    return payload;
 }

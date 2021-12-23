@@ -16,18 +16,6 @@
 // Mailboxes
 #include "MBoxDriveSettings.h"
 
-// class UARTIDDictionaryEntry
-// {
-// public:
-// 	UARTIDDictionaryEntry() = default;
-// 	~UARTIDDictionaryEntry() = default;
-
-// private:
-// 	uint16_t address;
-// 	Mailbox &box;
-// 	bool isWriteType;
-// };
-
 //A class with all the UART messages defined, ready to sent when you call them.
 class UARTIdentificationDictionary
 {

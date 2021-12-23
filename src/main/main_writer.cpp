@@ -52,6 +52,7 @@ int run(int argc, char **argv)
   SerialWriter writer; // The serial writer portion
   writer.OpenSerialPortConnection();
 
+  // Testing the lights of the ExR1 (also enabling the GPIO Drive pin)
   pl_info.IO_Expander_P0_0_LIGHT_1 = true;
   pl_info.IO_Expander_P0_1_LIGHT_2 = true;
   pl_info.IO_Expander_P0_7_MOTOR = true;
@@ -59,6 +60,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info.Write(), false);
   writer.ProcessSerialMessageQueues();
 
+  // Shutting down the lights
   usleep(1000 * (1000));
 
   pl_info.IO_Expander_P0_0_LIGHT_1 = false;
@@ -67,6 +69,7 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_MAINBOARD_OUTPUTSETTINGS_TYPE_SET, info.Write(), false);
   writer.ProcessSerialMessageQueues();
 
+  // Setting the Engine up for use
   usleep(1000 * (1000));
 
   writer.AddToMsgQueue(EX_MAINBOARD_STATUS_TYPE_SET, status.Write(), false);
@@ -82,6 +85,10 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_DRIVE_LEFT_SETTINGS_TYPE_SET, settings.Write(), false);
   writer.AddToMsgQueue(EX_DRIVE_RIGHT_SETTINGS_TYPE_SET, settings.Write(), false);
   writer.ProcessSerialMessageQueues();
+
+  pl_bw.CONTROL_BANDWIDTH = 21;
+  pl_bw.MAX_CURRENT = 0;
+  bw.Set(&pl_bw);
 
   // enter the ACCEL / JERK SETUP
   // usleep(1000 * (1000));
@@ -123,6 +130,6 @@ int main(int argc, char **argv)
   }
   catch (std::exception &e)
   {
-    std::cerr << "Unhandled Exception: " << e.what() << std::endl;
+    std::cerr << "Unhandled Exception OR Unrecoverable Exception encountered!: " << e.what() << std::endl;
   }
 }

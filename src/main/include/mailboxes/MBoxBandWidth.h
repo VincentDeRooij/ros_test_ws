@@ -4,25 +4,32 @@
 
 // Mailbox class
 #include "Mailbox.h"
+#include "IValueLimitException.h"
 
-class MBoxBandWidth : public Mailbox
+class MBoxBandWidth : public Mailbox, public IValueLimitException
 {
 private:
+	// attributes
 	uint8_t maxCurrent;
 	uint8_t controlBandwidth;
 
 public:
-	MBoxBandWidth();
-	~MBoxBandWidth() = default;
-
+	// dynamic payload struct
 	struct DynamicBandwidthPayload
 	{
 		uint8_t MAX_CURRENT;	   //SET MAX CURRENT IN A (Leave at value of 0)
 		uint8_t CONTROL_BANDWIDTH; // SET CONTROL BANDWIDTH (Leave at value of 20)
 	};
 
-	Payload Write();
-	void Read(Payload &p);
-	void Set(void *dynamicMBoxStruct);
+	// constructors
+	MBoxBandWidth() = default;
+	~MBoxBandWidth() = default;
+
+	const char *what(void *payloadType) throw();
+
+	// inherit the method from mailbox, allowing our own method implementations
+	void Read(Payload &p) override;
+	void Set(void *dynamicMBoxStruct) override;
+	Payload Write() override;
 };
 #endif

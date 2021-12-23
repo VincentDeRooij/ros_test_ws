@@ -32,6 +32,7 @@ private:
 	MBoxOutStructureDriveSettings dataFields;
 
 public:
+	// dynamic payload struct
 	struct DynamicDriveSettingsPayload
 	{
 		bool ENABLE_OFFSET_CALC; //OFFSET RECALCULATION ENABLED
@@ -47,7 +48,7 @@ public:
 
 	// inherit the method from mailbox, allowing our own method implementations
 	void Read(Payload &p) override;
+	void Set(void *dynamicMBoxStruct) override;
 	Payload Write() override;
-	void Set(void *dynamicMBoxStruct);
 };
 #endif

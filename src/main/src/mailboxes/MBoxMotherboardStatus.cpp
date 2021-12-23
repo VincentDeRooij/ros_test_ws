@@ -33,6 +33,16 @@ void MBoxMotherboardStatus::Read(Payload &p)
 }
 
 /**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
+void MBoxMotherboardStatus::Set(void *dynamicMBoxStruct)
+{
+    throw NotImplementedException();
+}
+
+/**
  * @brief Returns a payload object belonging to the MBOX with correct bytecode
  * 
  * @return Payload with the bytecode for this MBOX
@@ -41,14 +51,4 @@ Payload MBoxMotherboardStatus::Write()
 {
     // Write empty payload
     return Payload();
-}
-
-/**
- * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
- * 
- * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
- */
-void MBoxMotherboardStatus::Set(void *dynamicMBoxStruct)
-{
-    throw NotImplementedException();
 }

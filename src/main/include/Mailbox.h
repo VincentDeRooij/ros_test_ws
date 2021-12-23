@@ -10,9 +10,9 @@
 class Mailbox
 {
 public:
-    virtual Payload Write() = 0;
     virtual void Read(Payload &p) = 0; // pure virtual
     virtual void Set(void *structure) = 0;
+    virtual Payload Write() = 0;
 
 protected:
     /**

@@ -1,27 +1,5 @@
 #include "MBoxMainboardIOInfo.h"
 
-// Insert comment "/**"
-
-/**
- * @brief Returns a payload object belonging to the MBOX with correct bytecode
- * 
- * @return Payload with the bytecode for this MBOX
- */
-Payload MBoxMainboardIOInfo::Write()
-{
-    uint8_t byte = 0;
-
-    setBitOnPos(byte, 0, this->ioExpanderP0Light1);
-    setBitOnPos(byte, 1, this->ioExpanderP1Light2);
-    setBitOnPos(byte, 7, this->ioExpanderP7Motor);
-
-    Payload payload(0, 0, 0, 0, 0, 0, 0, byte);
-
-    payload.PrintPayload();
-
-    return payload;
-}
-
 /**
  * @brief Reading the datafields and saving them in the right struct
  * 
@@ -62,4 +40,24 @@ void MBoxMainboardIOInfo::Set(void *dynamicMBoxStruct)
     this->ioExpanderP7Motor = dynamicPayload->IO_Expander_P0_7_MOTOR;
     this->ioExpanderP1Light2 = dynamicPayload->IO_Expander_P0_1_LIGHT_2;
     this->ioExpanderP0Light1 = dynamicPayload->IO_Expander_P0_0_LIGHT_1;
+}
+
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
+Payload MBoxMainboardIOInfo::Write()
+{
+    uint8_t byte = 0;
+
+    setBitOnPos(byte, 0, this->ioExpanderP0Light1);
+    setBitOnPos(byte, 1, this->ioExpanderP1Light2);
+    setBitOnPos(byte, 7, this->ioExpanderP7Motor);
+
+    Payload payload(0, 0, 0, 0, 0, 0, 0, byte);
+
+    payload.PrintPayload();
+
+    return payload;
 }

@@ -25,6 +25,20 @@ void MBoxDriveSpeedTorque::Read(Payload &p)
 }
 
 /**
+ * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
+ * 
+ * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
+ */
+void MBoxDriveSpeedTorque::Set(void *dynamicMBoxStruct)
+{
+    DynamicAccelJerkPayload *dynamicPayload = (DynamicAccelJerkPayload *)dynamicMBoxStruct;
+
+    // TIM CHECK REQUIRED?
+    this->maxAccelKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_ACCEL_KRPM, IQ24);
+    this->maxJerkKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_JERK_KRPM, IQ20);
+}
+
+/**
  * @brief Returns a payload object belonging to the MBOX with correct bytecode
  * 
  * @return Payload with the bytecode for this MBOX
@@ -37,18 +51,4 @@ Payload MBoxDriveSpeedTorque::Write()
     copyInt32ToByteBuffer(this->maxAccelKRPM, &pl.payFull[4]);
 
     return pl;
-}
-
-/**
- * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
- * 
- * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
- */
-void MBoxDriveSpeedTorque::Set(void *dynamicMBoxStruct)
-{
-    DynamicAccelJerkPayload *dynamicPayload = (DynamicAccelJerkPayload *)dynamicMBoxStruct;
-
-    // TIM CHECK REQUIRED?
-    this->maxAccelKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_ACCEL_KRPM, IQ24);
-    this->maxJerkKRPM = Int32ToUInt32Fixed(dynamicPayload->MAX_JERK_KRPM, IQ20);
 }

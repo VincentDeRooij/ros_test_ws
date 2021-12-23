@@ -13,7 +13,7 @@ private:
 	int32_t maxAccelKRPM; // uint32_t for the fixed type conversion
 	int32_t maxJerkKRPM;  // uint32_t for the fixed type conversion
 
-/**
+	/**
  * @brief Output structure for this MBOX
  * 
  */
@@ -32,12 +32,12 @@ public:
 		int32_t MAX_JERK_KRPM;	// SET MAX JERK IN M/S^3 0 to 750
 	};
 
-	// Overrides from Mailbox
-	Payload Write() override;
-	void Read(Payload &p) override;
-	void Set(void *dynamicMBoxStruct);
-
 	MBoxDriveSpeedTorque() = default;
 	~MBoxDriveSpeedTorque() = default;
+
+	// inherit the method from mailbox, allowing our own method implementations
+	void Read(Payload &p) override;
+	void Set(void *dynamicMBoxStruct) override;
+	Payload Write() override;
 };
 #endif

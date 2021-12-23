@@ -13,7 +13,7 @@ private:
 	bool ioExpanderP1Light2 = false;
 	bool ioExpanderP0Light1 = false;
 
-/**
+	/**
  * @brief Output structure for this MBOX
  * 
  */
@@ -39,8 +39,8 @@ public:
 	~MBoxMainboardIOInfo() = default;
 
 	// inherit the method from mailbox, allowing our own method implementations
-	virtual void Read(Payload &p);
-	virtual Payload Write();
-	void Set(void *dynamicMBoxStruct);
+	void Read(Payload &p) override;
+	void Set(void *dynamicMBoxStruct) override;
+	Payload Write() override;
 };
 #endif

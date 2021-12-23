@@ -15,21 +15,21 @@ void MBoxTemperatures::Read(Payload &p)
 }
 
 /**
- * @brief Returns a payload object belonging to the MBOX with correct bytecode
- * 
- * @return Payload with the bytecode for this MBOX
- */
-Payload MBoxTemperatures::Write()
-{
-    throw NotImplementedException();
-}
-
-/**
  * @brief The dynamic variables put into the Payload allowing dynamic changing of the payload
  * 
  * @param dynamicMBoxStruct The dynamic variables that need to be put in the payload
  */
 void MBoxTemperatures::Set(void *dynamicMBoxStruct)
+{
+    throw NotImplementedException();
+}
+
+/**
+ * @brief Returns a payload object belonging to the MBOX with correct bytecode
+ * 
+ * @return Payload with the bytecode for this MBOX
+ */
+Payload MBoxTemperatures::Write()
 {
     throw NotImplementedException();
 }

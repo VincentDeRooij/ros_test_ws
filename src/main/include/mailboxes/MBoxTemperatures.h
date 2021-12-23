@@ -8,7 +8,7 @@
 class MBoxTemperatures : public Mailbox //, ExROutput<ExRDataStructureTypeUInt[2]>
 {
 private:
-/**
+    /**
  * @brief Output structure for this MBOX
  * 
  */
@@ -20,12 +20,12 @@ private:
     MBoxOutStructureTemp dataFields;
 
 public:
-    // Overrides from Mailbox
-    Payload Write() override;
-    void Read(Payload &p) override;
-    void Set(void *dynamicMBoxStruct);
-
     MBoxTemperatures() = default;
     ~MBoxTemperatures() = default;
+
+    // inherit the method from mailbox, allowing our own method implementations
+    void Read(Payload &p) override;
+    void Set(void *dynamicMBoxStruct) override;
+    Payload Write() override;
 };
 #endif

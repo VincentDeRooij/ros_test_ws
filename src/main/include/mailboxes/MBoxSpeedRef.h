@@ -24,8 +24,9 @@ public:
 	MBoxSpeedRef() = default;
 	~MBoxSpeedRef() = default;
 
-	Payload Write() override;
+	// inherit the method from mailbox, allowing our own method implementations
 	void Read(Payload &p) override;
-	void Set(void *dynamicMBoxStruct);
+	void Set(void *dynamicMBoxStruct) override;
+	Payload Write() override;
 };
 #endif
