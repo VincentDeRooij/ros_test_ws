@@ -4,13 +4,18 @@
 // created includes
 #include "UARTIdentificationDictionary.h"
 
-void UARTIdentificationDictionary::AddToMap(const uint16_t &sA, Mailbox &mBox, const bool &type)
+/**
+ * @brief Adds a entry to the Dictonairy 
+ * 
+ * @param sA Serial Adress
+ * @param mBox The fitting Mailbox for the Serial Adress
+ */
+void UARTIdentificationDictionary::AddToMap(const uint16_t &sA, Mailbox &mBox)
 {
     UARTIDDictionaryEntry a;
 
     a.address = sA;
     a.box = &mBox;
-    a.isWriteType = type;
 
     m.push_back(a);
 

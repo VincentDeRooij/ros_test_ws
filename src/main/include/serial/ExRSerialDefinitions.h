@@ -37,7 +37,6 @@
 #define EX_DRIVE_LEFT_MOSFETTEMP_TYPE_RESPONSE 0x132    // serial address to request the actual temperature of the mosfet sensor of the left motor
 // EXR DEFINITIONS - MOTOR-LEFT - PARAMETER SETTERS
 #define EX_DRIVE_LEFT_SETTINGS_TYPE_SET 0x100       // serial address to set the various settings for the left motor of the EXR, this is required to prepare the motor
-#define EX_DRIVE_LEFT_SPEEDREF_TYPE_SET 0x110       // serial address to set the speed to given value of the left motot
 #define EX_DRIVE_LEFT_MAX_ACCEL_JERK_TYPE_SET 0x120 // serial address to set the max acceleration and jerk of the left motor
 #define EX_DRIVE_LEFT_BANDW_TYPE_SET 0x130          // serial address to set the bandwidth value of the left motor
 
@@ -48,8 +47,9 @@
 #define EX_DRIVE_RIGHT_MOSFETTEMP_TYPE_RESPONSE 0x133    // serial address to request the actual temperature of the mosfet sensor of the left motor
 // EXR DEFINITIONS - MOTOR-RIGHT - PARAMETER SETTERS
 #define EX_DRIVE_RIGHT_SETTINGS_TYPE_SET 0x101       // serial address to set the various settings for the left motor of the EXR, this is required to prepare the motor
-#define EX_DRIVE_RIGHT_SPEEDREF_TYPE_SET 0x111       // serial address to set the speed to given value of the left motot
 #define EX_DRIVE_RIGHT_MAX_ACCEL_JERK_TYPE_SET 0x121 // serial address to set the max acceleration and jerk of the left motor
 #define EX_DRIVE_RIGHT_BANDW_TYPE_SET 0x131          // serial address to set the bandwidth value of the left motor
 
-#endif // end region of the include guard
+// EXR DEFINITIONS - MOTOR DRIVES
+#define EX_DRIVE_SPEEDREF_TYPE_SET 0x111 // serial address to set the speed to given value of the left motot
+#endif                                   // end region of the include guard

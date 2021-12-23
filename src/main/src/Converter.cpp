@@ -3,6 +3,21 @@
 // created includes
 #include "Converter.h"
 
+int32_t VolatileInt32ToUInt32Fixed(int32_t &inputValue, const std::uint8_t &iqValue)
+{
+    int32_t limit = (1 << (32 - iqValue - 1)) * 1000;
+    if (inputValue > (limit - 1))
+        inputValue = (limit - 1);
+    else if (inputValue < -limit)
+        inputValue = -limit;
+
+    // calculate the fixed point number value
+    uint32_t iq = 1 << iqValue;
+    double value = (inputValue / 1000.0);
+    int32_t val = value * iq;
+    return val;
+}
+
 /**
  * @brief Converts a INT32 to a UINT32 Fixed
  * 

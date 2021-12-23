@@ -11,6 +11,9 @@
 
 typedef std::uint32_t uint32_fixed_t;
 
+// Method which is used temporary
+int32_t VolatileInt32ToUInt32Fixed(int32_t &inputValue, const std::uint8_t &iqValue);
+
 //convert int32 to fixed point (uint32) (assuming a ratio of 1000)
 uint32_fixed_t Int32ToUInt32Fixed(int32_t &inputValue, const std::uint8_t &iqValue);
 

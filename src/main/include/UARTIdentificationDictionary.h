@@ -46,7 +46,7 @@ public:
 	UARTIdentificationDictionary() = default;
 	~UARTIdentificationDictionary() = default;
 
-	void AddToMap(const uint16_t &sA, Mailbox &mBox, const bool &type);
+	void AddToMap(const uint16_t &sA, Mailbox &mBox);
 	Mailbox &GetMailboxBySerial(const uint16_t &sId);
 };
 #endif

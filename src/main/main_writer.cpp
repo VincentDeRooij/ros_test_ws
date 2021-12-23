@@ -25,20 +25,32 @@
 #include "MBoxMainboardIOInfo.h"
 #include "MBoxDriveSettings.h"
 #include "MBoxMotherboardStatus.h"
+#include "MBoxDriveSpeedTorque.h"
+#include "MBoxBandWidth.h"
+#include "MBoxSpeedRef.h"
 
 int run(int argc, char **argv)
 {
   std::cout << "Setting up the writer..." << std::endl;
+
+  // Mailboxes
+  MBoxMotherboardStatus status;
+  MBoxDriveSettings settings;
+  MBoxDriveSpeedTorque sptrq;
+  MBoxMainboardIOInfo info;
+  MBoxBandWidth bw;
+  MBoxSpeedRef spRef;
+
+  // Dynamic Payloads
+  MBoxDriveSettings::DynamicDriveSettingsPayload pl_settings;
+  MBoxMainboardIOInfo::DynamicMainboardIOInfoPayload pl_info;
+  MBoxDriveSpeedTorque::DynamicAccelJerkPayload pl_sptrq;
+  MBoxBandWidth::DynamicBandwidthPayload pl_bw;
+  MBoxSpeedRef::DynamicSpeedRefPayload pl_spRef;
+
   // Serial writer
   SerialWriter writer; // The serial writer portion
   writer.OpenSerialPortConnection();
-
-  MBoxMainboardIOInfo info;
-  MBoxMotherboardStatus status;
-  MBoxDriveSettings settings;
-
-  MBoxDriveSettings::DynamicDriveSettingsPayload pl_settings;
-  MBoxMainboardIOInfo::DynamicMainboardIOInfoPayload pl_info;
 
   pl_info.IO_Expander_P0_0_LIGHT_1 = true;
   pl_info.IO_Expander_P0_1_LIGHT_2 = true;
@@ -70,6 +82,35 @@ int run(int argc, char **argv)
   writer.AddToMsgQueue(EX_DRIVE_LEFT_SETTINGS_TYPE_SET, settings.Write(), false);
   writer.AddToMsgQueue(EX_DRIVE_RIGHT_SETTINGS_TYPE_SET, settings.Write(), false);
   writer.ProcessSerialMessageQueues();
+
+  // enter the ACCEL / JERK SETUP
+  // usleep(1000 * (1000));
+
+  // pl_sptrq.MAX_ACCEL_KRPM = 8;
+  // pl_sptrq.MAX_JERK_KRPM = 80;
+  // sptrq.Set(&pl_sptrq);
+  // writer.AddToMsgQueue(EX_DRIVE_LEFT_MAX_ACCEL_JERK_TYPE_SET, sptrq.Write(), false);
+  // writer.AddToMsgQueue(EX_DRIVE_RIGHT_MAX_ACCEL_JERK_TYPE_SET, sptrq.Write(), false);
+  // writer.ProcessSerialMessageQueues();
+
+  // enter the BANDWIDTH SETUP
+  //usleep(1000 * (1000));
+
+  // pl_bw.CONTROL_BANDWIDTH = 0;
+  // pl_bw.MAX_CURRENT = 20;
+  // bw.Set(&pl_bw);
+  // writer.AddToMsgQueue(EX_DRIVE_LEFT_BANDW_TYPE_SET, bw.Write(), false);
+  // writer.AddToMsgQueue(EX_DRIVE_RIGHT_BANDW_TYPE_SET, bw.Write(), false);
+  // writer.ProcessSerialMessageQueues();
+
+  // enter the SPEED SETUP
+  //usleep(1000 * (1000));
+
+  // pl_spRef.LEFT_MOTOR_DRIVE = 0.5;
+  // pl_spRef.RIGHT_MOTOR_DRIVE = 0.5;
+  // spRef.Set(&pl_spRef);
+  // writer.AddToMsgQueue(EX_DRIVE_SPEEDREF_TYPE_SET, spRef.Write(), false);
+  // writer.ProcessSerialMessageQueues();
 
   return 0;
 }
