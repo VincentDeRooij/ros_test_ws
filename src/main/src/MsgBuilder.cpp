@@ -29,7 +29,7 @@ MsgBuilder::MsgBuilder(const uint16_t &serialId, const Payload &payload)
 
     this->msg.serialId = serialId;
 
-    mempcpy(&this->msg.payload, &payload, sizeof(PAYLOAD_MSG_SIZE)); // copies the data from payload to the msgbuilder struct // returns pointer of destination
+    mempcpy(&this->msg.payload, &payload.payFull, sizeof(PAYLOAD_MSG_SIZE)); // copies the data from payload to the msgbuilder struct // returns pointer of destination
 
     // uses call-by-ref to calc, and bind/check the crc field
     if (CalcCRCFromExRMessage(this->msg) == true)
