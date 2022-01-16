@@ -1,0 +1,15 @@
+digraph "D:/School/Minor Robotica/ExR1 Project/ros_test_ws/src"
+{
+ // LATEX_PDF_SIZE
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  compound=true
+  subgraph clusterdir_99d166a3b72a87a917c74641df233ab3 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,dashed,", label="ros_test_ws", fontname="Helvetica", fontsize="10", URL="dir_99d166a3b72a87a917c74641df233ab3.html"]
+  subgraph clusterdir_bf3cb9e2b25cebea33b597a28a1c29e9 {
+    graph [ bgcolor="#edf0f7", pencolor="grey25", style="filled,bold,", label="", fontname="Helvetica", fontsize="10", URL="dir_bf3cb9e2b25cebea33b597a28a1c29e9.html"]
+    dir_bf3cb9e2b25cebea33b597a28a1c29e9 [shape=plaintext, label="src"];
+  dir_d7884ea80f5778bf482ebc77aa8ccade [shape=box, label="main", style="filled,", fillcolor="#a2b4d6", color="grey25", URL="dir_d7884ea80f5778bf482ebc77aa8ccade.html"];
+  }
+  }
+}
